@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: socialMedia
+instructions: null
+name: 'Reseaux Sociaux'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - d4597144-81d0-4a72-af9c-d7a544da4ee2 # Réseaux Sociaux
+        -
+          - group
+          - Général
+  includeTableView: false
+  maxEntries: 4
+  minEntries: 1
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

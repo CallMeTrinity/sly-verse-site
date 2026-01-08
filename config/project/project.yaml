@@ -1,0 +1,54 @@
+dateModified: 1767909161
+email:
+  fromEmail: anteur.ap@gmail.com
+  fromName: sly-verse
+  transportType: craft\mail\transportadapters\Sendmail
+fs:
+  uploads:
+    hasUrls: true
+    name: uploads
+    settings:
+      path: '@webroot/uploads'
+    type: craft\fs\Local
+    url: '@web/uploads'
+meta:
+  __names__:
+    3a16fde8-1283-4270-9152-47a67599c43b: Images # Images
+    17d2cdef-6126-4860-b9b7-efd2fd907c7c: Simple # Simple
+    23f8f2ea-3312-4fde-b78f-91af2c6b4d08: Lien # Lien
+    36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
+    137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
+    571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
+    698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
+    0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
+    6436a9a5-863e-44e1-88b4-477f06146ed4: 'Page Accueil' # Page Accueil
+    9080e8ef-3d35-4a29-929f-cd4d82c30e6b: 'Public Schema' # Public Schema
+    a393ad5e-193d-4947-b8a4-8c76a120412c: sly-verse # sly-verse
+    d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
+    ff2f36b2-53d4-4ffa-94bc-dafac093ba77: 'Titre Hero' # Titre Hero
+plugins:
+  admin-bar:
+    edition: lite
+    enabled: true
+    schemaVersion: 3.1.0
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+system:
+  edition: solo
+  live: true
+  name: sly-verse
+  schemaVersion: 5.8.0.3
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

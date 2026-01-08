@@ -1,0 +1,11 @@
+{% import '_includes/macros' as macros %}
+
+{% set asset = block.image.one %}
+
+{% set transform = {
+	width: 1920
+} %}
+
+<div class="container mx-auto px-6 py-10 lg:py-20">
+	{{ macros.image(asset, transform, '') }}
+</div>

@@ -1,0 +1,13 @@
+{% import '_includes/macros' as macros %}
+
+{% extends '_layout' %}
+
+{% block content %}
+	<div class="container prose mx-auto p-5 text-center lg:py-32">
+		<h1 class="h1">
+			{{ error404.heading404 }}
+		</h1>
+
+		{{ error404.text404 }}
+	</div>
+{% endblock %}

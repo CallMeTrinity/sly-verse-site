@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+
+@source '../../';
+
+@plugin '@tailwindcss/forms';
+
+@theme {
+	--font-*: initial;
+	--font-sans: Unbounded;
+}
+
+/* ? See https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer for details on why these are split into base/components/utilities */
+/* ? Useful: If you include classes inside the @layers, they will automatically be removed from compiled CSS if they aren't used in the HTML */
+@layer base {
+	/* ? x-cloak stops elements flashing in before Alpine.js loads */
+	[x-cloak] {
+		display: none;
+	}
+
+	.h1,
+	.prose h1 {
+		@apply mb-[0.5em] text-5xl leading-[1.2] font-semibold last:mb-0 lg:text-6xl;
+	}
+	.h2,
+	.prose h2 {
+		@apply mb-[0.5em] text-4xl leading-[1.3] font-semibold last:mb-0 lg:text-5xl;
+	}
+	.h3,
+	.prose h3 {
+		@apply mb-[0.5em] text-3xl leading-[1.4] font-semibold last:mb-0 lg:text-4xl;
+	}
+	.h4,
+	.prose h4 {
+		@apply mb-[0.5em] text-2xl leading-[1.4] font-semibold last:mb-0 lg:text-3xl;
+	}
+	.h5,
+	.prose h5 {
+		@apply mb-[0.5em] text-xl leading-[1.5] font-semibold last:mb-0 lg:text-2xl;
+	}
+	.h6,
+	.prose h6 {
+		@apply mb-[0.5em] text-lg leading-[1.5] font-semibold last:mb-0 lg:text-xl;
+	}
+	.p,
+	.prose p {
+		@apply mb-10 text-base leading-[1.8] last:mb-0 lg:text-lg lg:leading-[1.8];
+	}
+
+	/* Use pointer for buttons */
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+}
+
+@layer components {
+	.btn {
+		/* ? Remember to use focus-visible: for states instead of focus: */
+		/* ? This means once you click on a button, it doesn't keep the :focus state */
+		@apply inline-block rounded-md border-2 border-black px-10 py-2 hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white focus-visible:outline-hidden;
+	}
+
+	.prose {
+		/* * Prose /*
+		/* Imitates Tailwind's Typography plugin without all the extra stuff */
+		& ul {
+			@apply mb-10 list-disc pl-8 text-base last:mb-0 lg:text-lg;
+		}
+		& ol {
+			@apply mb-10 list-decimal pl-8 text-base last:mb-0 lg:text-lg;
+		}
+		& li {
+			@apply mb-2;
+		}
+		& hr {
+			@apply mb-4 border border-neutral-400 last:mb-0;
+		}
+		& .table {
+			@apply mb-4 w-full table-auto border-collapse;
+		}
+		& table {
+			@apply mb-4 w-full table-auto border-collapse;
+		}
+		& table td {
+			@apply border border-neutral-300 p-2;
+		}
+		& table th {
+			@apply border border-neutral-300 p-2;
+		}
+		& table th {
+			@apply bg-neutral-100;
+		}
+		& blockquote {
+			@apply mb-5 border-l-4 pl-4 italic;
+		}
+	}
+
+	.field-instructions p {
+		@apply text-sm;
+	}
+
+	/* make select dropdowns readable on windows */
+	form select option {
+		@apply bg-white text-black;
+	}
+}

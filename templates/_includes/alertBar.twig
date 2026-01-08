@@ -1,0 +1,7 @@
+{% if alertBar is defined and alertBar.alertBarStartDate < now and alertBar.alertBarEndDate > now %}
+	<div class="bg-blue py-2 text-center text-white">
+		<article class="prose mx-auto">
+			{{ alertBar.alertBarText }}
+		</article>
+	</div>
+{% endif %}

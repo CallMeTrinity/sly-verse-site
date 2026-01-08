@@ -1,0 +1,38 @@
+{
+	"name": "boilerplate-tailwind",
+	"version": "1.0.0",
+	"description": "Boilerplate - Craft CMS website",
+	"homepage": "https://codeknight.co.uk",
+	"type": "module",
+	"author": {
+		"email": "daryl@codeknight.co.uk",
+		"name": "Daryl Knight",
+		"url": "https://codeknight.co.uk"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/darylknight/boilerplate-tailwind"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build"
+	},
+	"dependencies": {
+		"@alpinejs/focus": "^3.13.10",
+		"@tailwindcss/vite": "^4.0.5",
+		"alpinejs": "^3.9.6"
+	},
+	"devDependencies": {
+		"@prettier/plugin-php": "^0.22.3",
+		"@tailwindcss/forms": "^0.5.10",
+		"@zackad/prettier-plugin-twig": "^0.14.1",
+		"prettier": "^3.2.5",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"tailwindcss": "^4.0.0",
+		"vite": "^6.0.0",
+		"vite-plugin-restart": "^0.4.2"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	}
+}

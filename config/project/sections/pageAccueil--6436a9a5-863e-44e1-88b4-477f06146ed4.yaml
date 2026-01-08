@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 0895fb55-d909-451b-af8b-ec803acc70d3 # Page Accueil
+handle: pageAccueil
+maxAuthors: 1
+name: 'Page Accueil'
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: homepage.twig
+    uriFormat: __home__
+type: single

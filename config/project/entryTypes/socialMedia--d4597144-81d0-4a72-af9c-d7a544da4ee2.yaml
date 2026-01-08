@@ -1,0 +1,57 @@
+color: null
+description: 'Liens et images pour les réseaux sociaux'
+fieldLayouts:
+  c137e9ba-acc6-4bdb-a8ca-25b169fc52cd:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-01-08T21:10:45+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 23f8f2ea-3312-4fde-b78f-91af2c6b4d08 # Lien
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ab7242bf-c25a-4bcd-b45d-d8d974246eb2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-08T21:10:45+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e # Image Lien
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1fea3d09-628d-4047-87bd-d0a5b71a7394
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: f71e7054-f93e-4840-9ca1-c275f24528da
+        userCondition: null
+handle: socialMedia
+hasTitleField: false
+icon: null
+name: 'Réseaux Sociaux'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

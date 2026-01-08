@@ -1,0 +1,25 @@
+# CRAFT ENVIRONMENT
+.env.php
+.env.sh
+.env
+
+# COMPOSER
+/vendor
+
+# ASSETS
+/public/uploads/*
+/web/uploads/*
+
+# UPLOADS
+/web/uploads/*
+
+# BUILD FILES
+/bower_components/*
+/node_modules/*
+/build/*
+/yarn-error.log
+
+# MISC FILES
+.cache
+.DS_Store
+/config/license.key

@@ -1,0 +1,9 @@
+baseUrl: $PRIMARY_SITE_URL
+enabled: true
+handle: default
+hasUrls: true
+language: fr
+name: 'Sly Wresling Universe'
+primary: true
+siteGroup: a393ad5e-193d-4947-b8a4-8c76a120412c # sly-verse
+sortOrder: 1

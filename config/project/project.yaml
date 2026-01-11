@@ -1,4 +1,4 @@
-dateModified: 1767909161
+dateModified: 1768167085
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -14,6 +14,7 @@ fs:
 meta:
   __names__:
     3a16fde8-1283-4270-9152-47a67599c43b: Images # Images
+    6da1a3b6-9cc2-475e-b48e-c326a587677e: Superstars # Superstars
     17d2cdef-6126-4860-b9b7-efd2fd907c7c: Simple # Simple
     23f8f2ea-3312-4fde-b78f-91af2c6b4d08: Lien # Lien
     36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
@@ -21,6 +22,7 @@ meta:
     571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
+    4479b21e-82c5-4ad9-b095-a75b4b1e09a3: Superstar # Superstar
     6436a9a5-863e-44e1-88b4-477f06146ed4: 'Page Accueil' # Page Accueil
     9080e8ef-3d35-4a29-929f-cd4d82c30e6b: 'Public Schema' # Public Schema
     a393ad5e-193d-4947-b8a4-8c76a120412c: sly-verse # sly-verse

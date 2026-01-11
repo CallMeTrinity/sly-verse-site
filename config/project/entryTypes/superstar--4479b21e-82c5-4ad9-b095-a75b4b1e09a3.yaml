@@ -1,0 +1,53 @@
+color: red
+description: null
+fieldLayouts:
+  4a101325-607d-44c3-aaf8-ba9ec71bf125:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-01-11T21:18:22+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 45e0d705-739e-407c-8915-6235cbcd82a1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 233e13ae-eb12-4f96-8e70-208c07365a59
+        userCondition: null
+handle: superstar
+hasTitleField: true
+icon: user
+name: Superstar
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

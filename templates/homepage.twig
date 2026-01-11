@@ -18,9 +18,9 @@
 	{# Social Media Section - Card-based layout #}
 	<section class="bg-neutral-950 px-4 py-16 lg:py-24">
 		<div class="container mx-auto max-w-7xl">
-			<h2 class="h2 mb-12 text-center text-white uppercase">Connect With Us</h2>
+			<h2 class="h2 mb-12 text-center text-white uppercase">Les liens</h2>
 
-			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-6">
+			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-6">
 				{% for social in entry.socialMedia.all() %}
 					{% set image = social.linkImage.one() %}
 					{% if image %}

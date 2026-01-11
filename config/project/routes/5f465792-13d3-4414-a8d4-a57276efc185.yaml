@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 1
+template: _pages/superstars/index
+uriParts:
+  - superstars
+uriPattern: superstars

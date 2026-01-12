@@ -1,4 +1,4 @@
-dateModified: 1768167085
+dateModified: 1768228088
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -13,11 +13,13 @@ fs:
     url: '@web/uploads'
 meta:
   __names__:
+    2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf: 'Contenu riche' # Contenu riche
     3a16fde8-1283-4270-9152-47a67599c43b: Images # Images
     6da1a3b6-9cc2-475e-b48e-c326a587677e: Superstars # Superstars
     17d2cdef-6126-4860-b9b7-efd2fd907c7c: Simple # Simple
     23f8f2ea-3312-4fde-b78f-91af2c6b4d08: Lien # Lien
     36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
+    83c8b547-d334-479b-8790-6073227cf239: 'Date et heure' # Date et heure
     137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
     571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
@@ -25,8 +27,15 @@ meta:
     4479b21e-82c5-4ad9-b095-a75b4b1e09a3: Superstar # Superstar
     6436a9a5-863e-44e1-88b4-477f06146ed4: 'Page Accueil' # Page Accueil
     9080e8ef-3d35-4a29-929f-cd4d82c30e6b: 'Public Schema' # Public Schema
+    9981bc2e-03e8-4889-ab40-96ddc496edd2: 'Lien externe' # Lien externe
+    156177ef-b718-4dfe-9d8b-dcd8eb5f98af: 'Description Courte' # Description Courte
     a393ad5e-193d-4947-b8a4-8c76a120412c: sly-verse # sly-verse
+    af31a34b-be53-40aa-bd12-bc660d90950e: "Galerie d'images" # Galerie d'images
+    b9f994df-9b3e-4505-a43b-0124c057887e: 'Statut actif/inactif' # Statut actif/inactif
+    c469f72b-bb7d-4fb3-b855-ed34ccd6f73b: 'Image de profil' # Image de profil
+    d135e597-391a-47a4-a188-9f9a0ae11542: 'Lien vidéo externe' # Lien vidéo externe
     d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
+    f4857798-fbf9-40c6-9e25-be024d571f66: 'Photo Principale' # Photo Principale
     ff2f36b2-53d4-4ffa-94bc-dafac093ba77: 'Titre Hero' # Titre Hero
 plugins:
   admin-bar:

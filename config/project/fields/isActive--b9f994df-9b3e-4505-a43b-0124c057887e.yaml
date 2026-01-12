@@ -1,0 +1,12 @@
+columnSuffix: null
+handle: isActive
+instructions: null
+name: 'Statut actif/inactif'
+searchable: false
+settings:
+  default: true
+  offLabel: Inactif
+  onLabel: Actif
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

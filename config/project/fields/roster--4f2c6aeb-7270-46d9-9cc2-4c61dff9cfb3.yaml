@@ -1,0 +1,96 @@
+columnSuffix: null
+handle: roster
+instructions: null
+name: Roster
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Raw
+        -
+          - value
+          - raw
+        -
+          - icon
+          - circle-r
+        -
+          - color
+          - '#ff0000'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - SmackDown
+        -
+          - value
+          - smackdown
+        -
+          - icon
+          - circle-s
+        -
+          - color
+          - '#0000a0'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - NXT
+        -
+          - value
+          - nxt
+        -
+          - icon
+          - circle-n
+        -
+          - color
+          - '#ffff00'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - AEW
+        -
+          - value
+          - aew
+        -
+          - icon
+          - circle-a
+        -
+          - color
+          - '#ff8040'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Free Agent'
+        -
+          - value
+          - freeAgent
+        -
+          - icon
+          - circle-f
+        -
+          - color
+          - ''
+        -
+          - default
+          - '1'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

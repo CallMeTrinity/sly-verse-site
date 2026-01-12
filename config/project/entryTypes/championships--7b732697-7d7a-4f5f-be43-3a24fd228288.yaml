@@ -1,0 +1,74 @@
+color: null
+description: null
+fieldLayouts:
+  058ed099-ef3a-463e-9814-c9567e5a478b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-01-12T14:41:28+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: d3567cd9-d874-4dcf-a4ad-9a2745ddee1a # Nom du titre
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5c7f8716-3eaf-44d5-b85e-ef28803492ab
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:41:28+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 2268121f-f160-477f-a8dd-097ac58ac120 # Nombre de règnes
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: af655362-8a55-4687-b101-fed6e47914f8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:41:28+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 83c8b547-d334-479b-8790-6073227cf239 # Date et heure
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Date de gain'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cd83fc3f-a9c0-4d33-8779-b35f92b6d574
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 8485ff01-dd06-43b6-945c-d2b22b1d688d
+        userCondition: null
+handle: championships
+hasTitleField: false
+icon: medal
+name: Palmarès
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

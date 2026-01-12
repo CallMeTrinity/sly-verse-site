@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: duration
+instructions: null
+name: 'Durée estimée'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: 'Ex : 3h00'
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

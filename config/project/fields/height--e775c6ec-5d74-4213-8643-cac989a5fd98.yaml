@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: height
+instructions: 'Taille en cm'
+name: Taille
+searchable: true
+settings:
+  decimals: 0
+  defaultValue: 173
+  max: null
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: none
+  size: null
+  step: 1
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

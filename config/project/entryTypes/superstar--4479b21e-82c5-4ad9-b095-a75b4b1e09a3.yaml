@@ -8,32 +8,246 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
-            autocapitalize: true
-            autocomplete: false
-            autocorrect: true
-            class: null
-            dateAdded: '2026-01-11T21:18:22+00:00'
-            disabled: false
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
             elementCondition: null
-            id: null
+            fieldUid: 3e1c5ada-e455-476e-a1c9-8f739eeb9dce # Nom de ring
+            handle: null
             includeInCards: false
-            inputType: null
             instructions: null
             label: null
-            max: null
-            min: null
-            name: null
-            orientation: null
-            placeholder: null
             providesThumbs: false
-            readonly: false
-            required: true
-            size: null
-            step: null
+            required: false
             tip: null
-            title: null
-            type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 45e0d705-739e-407c-8915-6235cbcd82a1
+            type: craft\fieldlayoutelements\CustomField
+            uid: c8b55f78-db43-4cdb-8e1c-4cdd61216b64
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: c469f72b-bb7d-4fb3-b855-ed34ccd6f73b # Image de profil
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 405e7560-a7c0-4924-b519-06d8a0305287
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 9d4ead9a-be68-4068-8951-d44d1242f7f6 # Ville d'origine
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 860d8e36-9538-4803-98a8-ebfd1a6cd65b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3835ca37-9fef-4fd0-b183-3837223d3c71 # Pays d'origine
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d61f49dd-453b-4ce0-92d1-79dc0448b692
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e775c6ec-5d74-4213-8643-cac989a5fd98 # Taille
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8a15b560-4674-451e-aea2-741c609c51a8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: cf8271af-e15e-4b59-b37f-6067d46f7d7c # Poids
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: be367206-e8b8-40eb-9763-86595c899962
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 156177ef-b718-4dfe-9d8b-dcd8eb5f98af # Description Courte
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 73149d10-3bca-4ecd-9a08-b1998c40ac95
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Info de base'
+        uid: 0343444e-dcec-4767-b0f5-92ae62c23dcc
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: af31a34b-be53-40aa-bd12-bc660d90950e # Galerie d'images
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c267daf9-ad4b-4799-aeb7-560b907a14d6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf # Contenu riche
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: Biographie
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 368797fc-2ca1-4b9a-9db1-95e495f2d79f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: b786d593-d6e5-4df6-8f84-d6b51b741daa # Finisher
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0c850137-faf3-455a-a8f2-419d3b824cd4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3 # Roster
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e45f62d4-75d3-4fc8-a869-711ead364cd2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 235945f3-c99a-4e44-972a-2e56c18f7843 # Status (Face/Heel)
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: db727574-30ce-48ac-a5c7-19441469426c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e04677af-3be7-4c6e-9e90-a8d20033b7db # Palmarès
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 12438ee4-d719-4563-b5e0-8093fd1e0d1c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:57:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: b9f994df-9b3e-4505-a43b-0124c057887e # Statut actif/inactif
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d06bd127-28c2-4183-a57f-28b44140fc1e
             userCondition: null
             warning: null
             width: 100
@@ -41,7 +255,7 @@ fieldLayouts:
         uid: 233e13ae-eb12-4f96-8e70-208c07365a59
         userCondition: null
 handle: superstar
-hasTitleField: true
+hasTitleField: false
 icon: user
 name: Superstar
 showSlugField: true

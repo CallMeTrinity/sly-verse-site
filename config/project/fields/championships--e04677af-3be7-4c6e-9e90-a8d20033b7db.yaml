@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: championships
+instructions: null
+name: Palmarès
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 7b732697-7d7a-4f5f-be43-3a24fd228288 # Palmarès
+        -
+          - group
+          - Général
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

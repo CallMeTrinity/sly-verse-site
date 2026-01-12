@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: matchCard
+instructions: null
+name: 'Cartes des matchs'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - d84ac3fa-7b19-4233-8929-20ca20accc37 # Carte des matchs
+        -
+          - group
+          - Général
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

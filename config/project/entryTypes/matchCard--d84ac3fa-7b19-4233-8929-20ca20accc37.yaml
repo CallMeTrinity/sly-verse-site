@@ -1,47 +1,17 @@
 color: null
 description: null
 fieldLayouts:
-  3e0d7325-aa5f-4918-9754-47224996ce6a:
+  9544e824-71ea-44fe-8a76-08cf2715dbb7:
     cardThumbAlignment: end
     tabs:
       -
         elementCondition: null
         elements:
           -
-            autocapitalize: true
-            autocomplete: false
-            autocorrect: true
-            class: null
-            dateAdded: '2026-01-08T16:10:04+00:00'
-            disabled: false
-            elementCondition: null
-            id: null
-            includeInCards: false
-            inputType: null
-            instructions: null
-            label: null
-            max: null
-            min: null
-            name: null
-            orientation: null
-            placeholder: null
-            providesThumbs: false
-            readonly: false
-            required: true
-            size: null
-            step: null
-            tip: null
-            title: null
-            type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 4c887764-9c33-4b69-b237-d030b020c64b
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: '2026-01-08T21:11:54+00:00'
+            dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: ff2f36b2-53d4-4ffa-94bc-dafac093ba77 # Titre Hero
+            fieldUid: 3da03560-0cdd-49dd-841c-1f93fed92c25 # Titre du match
             handle: null
             includeInCards: false
             instructions: null
@@ -50,15 +20,15 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 893f58be-a3ca-4f36-9d8d-ca1bab748a4a
+            uid: 8c82ce11-2d1a-4a7d-8079-9aadcd496799
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2026-01-08T21:11:54+00:00'
+            dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: 698c46e3-2baa-4914-9a5b-0c7f94fdc345 # Description Hero
+            fieldUid: e4ab6bc4-aab9-4263-815b-238aba267fb5 # Participants
             handle: null
             includeInCards: false
             instructions: null
@@ -67,15 +37,15 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 310b199d-0cfc-487d-9dac-564811246ca6
+            uid: dbadec90-9a4c-4384-8e6b-8c8898e2f876
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2026-01-12T14:52:56+00:00'
+            dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: f4857798-fbf9-40c6-9e25-be024d571f66 # Photo Principale
+            fieldUid: 9ed251ed-f16f-42d7-8807-5ad4e2143b12 # Type de match
             handle: null
             includeInCards: false
             instructions: null
@@ -84,15 +54,15 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 7b963818-a01e-4295-b237-e51c97fe5139
+            uid: 24644810-e46b-4075-abd4-9150cb641cb6
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2026-01-08T21:11:54+00:00'
+            dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: 137b7ddb-c95b-4e06-8cfc-1aa66be68441 # Reseaux Sociaux
+            fieldUid: f86e6bc1-0aef-44f6-a0c1-83f69929d250 # Stipulation
             handle: null
             includeInCards: false
             instructions: null
@@ -101,21 +71,55 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 54c136bd-8e5d-4df4-96d6-38828f52850a
+            uid: 1a6f1a53-cd7b-4953-a233-dd18ad4f5f25
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:50:29+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 5f2cb259-f127-4914-9959-1be5198ce79c # Resultat
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cddf8e05-2249-43dd-860b-bcc324ead743
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T14:50:29+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 950e9bc0-fd03-413f-a144-64e282958f13 # Vainqueur
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c18c9b8b-e624-4360-999d-41c751c15bd0
             userCondition: null
             warning: null
             width: 100
         name: Contenu
-        uid: 0ee87cec-2290-46d6-80aa-79b3f2796984
+        uid: c9a689e0-8c61-4a7f-a827-726e3052dcc2
         userCondition: null
-handle: pageAccueil
-hasTitleField: true
-icon: house
-name: 'Page Accueil'
+handle: matchCard
+hasTitleField: false
+icon: null
+name: 'Carte des matchs'
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: null
+titleFormat: '{matchTitle}'
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

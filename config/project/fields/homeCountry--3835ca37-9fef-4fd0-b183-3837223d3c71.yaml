@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: homeCountry
+instructions: null
+name: "Pays d'origine"
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: 'Ex : "France"'
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: d34dead9-c601-418a-b86a-9becaab8b175 # howTo
+handle: howToParticipate
+maxAuthors: 1
+name: 'Comment participer'
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: _page/participate
+    uriFormat: comment-participer
+type: single

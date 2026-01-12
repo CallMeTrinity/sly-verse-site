@@ -266,7 +266,7 @@ chmod 755 web/uploads
 
 ---
 
-**Ticket #8 (modifié) : Créer la section "Shows" (Channel)**
+### Ticket #8 (modifié) : Créer la section "Shows" (Channel)\*\*
 
 **Actions :**
 
@@ -292,7 +292,7 @@ chmod 755 web/uploads
 - Vidéo du show (utiliser : `videoUrl`)
 - Lien stream (utiliser : `twitchLink`)
 
-   ***
+---
 
 ### Ticket #10 : Créer la section "Médiathèque" (Channel)
 

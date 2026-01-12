@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 3d7f00c7-52ff-4d8d-9751-516d1d2031e3 # Shows
+handle: shows
+maxAuthors: 1
+name: Shows
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: _pages/shows/_entry.twig
+    uriFormat: 'shows/{slug}'
+type: channel

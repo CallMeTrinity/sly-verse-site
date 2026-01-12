@@ -1,0 +1,45 @@
+columnSuffix: null
+handle: showStatus
+instructions: null
+name: 'Statut du show'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'A venir'
+        -
+          - value
+          - aVenir
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Terminé
+        -
+          - value
+          - termine
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

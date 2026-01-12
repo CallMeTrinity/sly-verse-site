@@ -1,0 +1,40 @@
+color: null
+description: null
+fieldLayouts:
+  111c5983-e02f-4f24-af99-85950de82213:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-01-12T15:31:17+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 7c15e95d-31ed-4f61-9610-77235b8dcad7 # Prochains Streams
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7ee77fab-2c27-4721-80ec-0f9ba08455e4
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 8edbe7d9-5775-4a67-b5d0-c75225218d2d
+        userCondition: null
+handle: streamSchedule
+hasTitleField: false
+icon: null
+name: 'Planning de stream'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

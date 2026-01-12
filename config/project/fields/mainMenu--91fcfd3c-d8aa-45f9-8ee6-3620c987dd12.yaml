@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: mainMenu
+instructions: null
+name: 'Menu principal'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 58492aea-1965-4454-a046-cd0abbafab76 # Menu principale
+        -
+          - group
+          - Général
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

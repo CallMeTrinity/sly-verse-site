@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 0b13dee1-11a9-4890-9396-d9d8ebabaeb1 # Planning de stream
+handle: streamSchedule
+maxAuthors: 1
+name: 'Planning Streams'
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: _pages/schedule
+    uriFormat: planning
+type: single

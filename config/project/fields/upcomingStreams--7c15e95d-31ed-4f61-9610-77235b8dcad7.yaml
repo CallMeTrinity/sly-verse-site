@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: upcomingStreams
+instructions: null
+name: 'Prochains Streams'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 03997ee4-22b0-493c-a976-adce138d48aa # Prochain streams
+        -
+          - group
+          - Général
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

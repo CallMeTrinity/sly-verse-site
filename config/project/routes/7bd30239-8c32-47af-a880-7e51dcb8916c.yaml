@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 2
+template: _pages/shows/index
+uriParts:
+  - shows
+uriPattern: shows

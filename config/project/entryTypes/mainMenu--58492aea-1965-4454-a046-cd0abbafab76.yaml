@@ -1,0 +1,115 @@
+color: null
+description: null
+fieldLayouts:
+  bcac427e-da08-4db7-a9a0-2a8c9e3b4e82:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-01-12T15:36:38+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: a349698f-8a90-4500-a74f-9fe7f44ac901 # Libellé
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c9ff616d-7fb0-486b-8c03-9de62666d8a9
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-01-12T15:36:38+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 46fbcf79-d0f1-4aad-a7c9-b699f446122c # Type de lien
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 965eabc1-aae1-4fe5-9c43-a654e79c8951
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-01-12T15:38:38+00:00'
+            editCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: 46fbcf79-d0f1-4aad-a7c9-b699f446122c # Type de lien
+                  layoutElementUid: 965eabc1-aae1-4fe5-9c43-a654e79c8951
+                  operator: in
+                  uid: 0f03ad05-e9f7-4a07-9d4f-0284218634bc
+                  values:
+                    - entry
+              elementType: craft\elements\Entry
+              fieldContext: global
+            fieldUid: 9d821b57-8cd2-4cac-8997-29b5d7fe1d72 # Lien interne
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3d8fbf52-4a21-41f0-a6a6-69534a07930e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-01-12T15:36:38+00:00'
+            editCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: 46fbcf79-d0f1-4aad-a7c9-b699f446122c # Type de lien
+                  layoutElementUid: 965eabc1-aae1-4fe5-9c43-a654e79c8951
+                  operator: in
+                  uid: cc985048-fb77-4f25-b45e-8cc0e21d6de5
+                  values:
+                    - externalUrl
+              elementType: craft\elements\Entry
+              fieldContext: global
+            fieldUid: 9981bc2e-03e8-4889-ab40-96ddc496edd2 # Lien externe
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b79b9725-9693-417d-be5c-9b49aee27581
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 0454fe8f-e31e-4232-aa94-5524929ec6fe
+        userCondition: null
+handle: mainMenu
+hasTitleField: false
+icon: null
+name: 'Menu principale'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

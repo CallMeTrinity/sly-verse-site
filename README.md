@@ -266,53 +266,33 @@ chmod 755 web/uploads
 
 ---
 
-### Ticket #8 : Créer la section "Shows passés" (Channel)
-
-**Objectif :** Archiver les résultats des shows
+**Ticket #8 (modifié) : Créer la section "Shows" (Channel)**
 
 **Actions :**
 
 - Paramètres → Entrées → Nouvelle section
-   - **Nom :** Shows Passés
-   - **Identificateur :** pastShows
+   - **Nom :** Shows
+   - **Identificateur :** shows
    - **Type :** Canal
-   - **Format d'URI :** `resultats/{slug}`
-   - **Template :** `_pages/shows/_past`
+   - **Format d'URI :** `shows/{slug}`
+   - **Template :** `_pages/shows/_entry`
 
 **Modèle de champs :**
 
+- **Statut du show** (Liste déroulante) - nouveau champ : `showStatus`
+   - Options :
+      - À venir
+      - Terminé
+      - En cours (optionnel)
 - Date du show (utiliser : `eventDateTime`)
 - Type de show (utiliser : `showType`)
 - Image principale (utiliser : `mainImage`)
 - Description (utiliser : `richContent`)
 - Carte des matchs (utiliser : `matchCard`)
 - Vidéo du show (utiliser : `videoUrl`)
-
----
-
-### Ticket #9 : Créer la section "Shows à venir" (Channel)
-
-**Objectif :** Annoncer les prochains shows
-
-**Actions :**
-
-- Paramètres → Entrées → Nouvelle section
-   - **Nom :** Shows À Venir
-   - **Identificateur :** upcomingShows
-   - **Type :** Canal
-   - **Format d'URI :** `shows-a-venir/{slug}`
-   - **Template :** `_pages/shows/_upcoming`
-
-**Modèle de champs :**
-
-- Date du show (utiliser : `eventDateTime`)
-- Type de show (utiliser : `showType`)
-- Image principale (utiliser : `mainImage`)
-- Description (utiliser : `shortDescription`)
-- Carte annoncée (utiliser : `matchCard` - sans résultats)
 - Lien stream (utiliser : `twitchLink`)
 
----
+   ***
 
 ### Ticket #10 : Créer la section "Médiathèque" (Channel)
 

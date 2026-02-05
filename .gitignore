@@ -8,7 +8,7 @@
 
 # ASSETS
 /public/uploads/*
-/web/uploads/*
+/web/dist/*
 
 # UPLOADS
 /web/uploads/*

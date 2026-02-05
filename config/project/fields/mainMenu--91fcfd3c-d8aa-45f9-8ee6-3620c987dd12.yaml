@@ -12,18 +12,18 @@ settings:
       __assoc__:
         -
           - uid
-          - 58492aea-1965-4454-a046-cd0abbafab76 # Menu principale
+          - 58492aea-1965-4454-a046-cd0abbafab76 # Menu principal
         -
           - group
           - Général
   includeTableView: false
   maxEntries: null
   minEntries: null
-  pageSize: 50
+  pageSize: null
   propagationKeyFormat: null
   propagationMethod: all
   showCardsInGrid: false
-  viewMode: cards
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

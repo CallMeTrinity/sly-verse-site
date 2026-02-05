@@ -1,0 +1,126 @@
+{% extends '_layout' %}
+
+{% block content %}
+	{% import '_includes/macros' as macros %}
+	{% set image = entry.mainImage.one() %}
+
+	{# Hero Section #}
+	<section class="relative bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
+		{% if image %}
+			<div class="absolute inset-0 overflow-hidden">
+				{{ macros.image(image, { width: 1920 }, 'h-full w-full object-cover opacity-20') }}
+				<div class="absolute inset-0 bg-linear-to-t from-black via-black/80 to-black/50"></div>
+			</div>
+		{% endif %}
+		<div class="grid-container relative">
+			{# Badges #}
+			<div class="mb-4 flex flex-wrap gap-2">
+				{% if entry.showType.value ?? null %}
+					<span class="rounded-sm bg-red-600 px-3 py-1 text-xs font-bold uppercase">
+						{{ entry.showType.label }}
+					</span>
+				{% endif %}
+				{% if entry.showStatus.value ?? null %}
+					<span class="rounded-sm bg-neutral-700 px-3 py-1 text-xs font-bold uppercase">
+						{{ entry.showStatus.label }}
+					</span>
+				{% endif %}
+			</div>
+
+			<h1 class="h1 mb-4 tracking-tight uppercase">{{ entry.title }}</h1>
+
+			{% if entry.eventDateTime %}
+				<p class="mb-6 text-lg text-neutral-300">
+					{{ entry.eventDateTime | date('l d F Y \\à H\\hi', 'Europe/Paris') }}
+				</p>
+			{% endif %}
+
+			{# Stream / Video links #}
+			{% if entry.externalLink or entry.videoUrl %}
+				<div class="flex flex-wrap gap-3">
+					{% if entry.externalLink %}
+						<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn border-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700">
+							Regarder le stream
+						</a>
+					{% endif %}
+					{% if entry.videoUrl %}
+						<a href="{{ entry.videoUrl }}" target="_blank" rel="noopener noreferrer" class="btn border-white/30 text-white hover:bg-white hover:text-black">
+							Voir la vid&eacute;o
+						</a>
+					{% endif %}
+				</div>
+			{% endif %}
+		</div>
+	</section>
+
+	{# Description #}
+	{% if entry.richContent | length %}
+		<section class="bg-neutral-950 py-12 text-white lg:py-20">
+			<div class="grid-container">
+				<div class="prose prose-invert max-w-none text-neutral-300">
+					{{ entry.richContent }}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# Match Card #}
+	{% set matches = entry.matchCard.all() %}
+	{% if matches | length %}
+		<section class="bg-black py-12 text-white lg:py-20">
+			<div class="grid-container">
+				<h2 class="h3 mb-8 uppercase">Carte des matchs</h2>
+				<div class="space-y-4">
+					{% for match in matches %}
+						<div class="rounded-lg border border-white/10 bg-neutral-900 p-6">
+							<div class="mb-3 flex flex-wrap items-center gap-2">
+								{% if match.matchType %}
+									<span class="rounded-sm bg-neutral-800 px-2 py-1 text-xs font-semibold uppercase text-neutral-400">
+										{{ match.matchType }}
+									</span>
+								{% endif %}
+								{% if match.stipulation %}
+									<span class="rounded-sm bg-red-900/50 px-2 py-1 text-xs font-semibold uppercase text-red-400">
+										{{ match.stipulation }}
+									</span>
+								{% endif %}
+							</div>
+							<h3 class="h5 mb-3 text-white">{{ match.matchTitle ?? match.title }}</h3>
+
+							{# Fighters #}
+							{% set fighters = match.fighters.all() %}
+							{% if fighters | length %}
+								<div class="mb-3 flex flex-wrap gap-2">
+									{% for fighter in fighters %}
+										<a href="{{ fighter.url }}" class="rounded-full bg-neutral-800 px-3 py-1 text-sm text-white transition-colors hover:bg-neutral-700">
+											{{ fighter.title }}
+										</a>
+									{% endfor %}
+								</div>
+							{% endif %}
+
+							{# Result #}
+							{% if match.results | length %}
+								<div class="mt-4 border-t border-white/10 pt-4">
+									<span class="mb-2 block text-xs font-semibold tracking-wider text-neutral-500 uppercase">R&eacute;sultat</span>
+									<div class="prose prose-invert text-sm text-neutral-300">
+										{{ match.results }}
+									</div>
+								</div>
+							{% endif %}
+
+							{# Winner #}
+							{% set winner = match.vainqueur.one() ?? null %}
+							{% if winner %}
+								<div class="mt-3">
+									<span class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Vainqueur :</span>
+									<a href="{{ winner.url }}" class="ml-1 font-semibold text-red-500 hover:text-red-400">{{ winner.title }}</a>
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}

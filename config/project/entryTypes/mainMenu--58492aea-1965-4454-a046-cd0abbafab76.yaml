@@ -105,7 +105,7 @@ fieldLayouts:
 handle: mainMenu
 hasTitleField: false
 icon: null
-name: 'Menu principale'
+name: 'Menu principal'
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null

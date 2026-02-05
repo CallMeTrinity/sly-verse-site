@@ -1,1 +1,125 @@
-superstars/index.twig
+{% extends '_layout' %}
+
+{% block content %}
+	{% set superstars = craft.entries.section('superstars').orderBy('title asc').all() %}
+
+	{# Page Header #}
+	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
+		<div class="grid-container">
+			<h1 class="h1 text-center tracking-tight uppercase">Superstars</h1>
+		</div>
+	</section>
+
+	{# Superstars Grid with Search & Sort #}
+	<section
+		class="bg-black py-12 lg:py-20"
+		x-data="{
+			search: '',
+			roster: '',
+			sortBy: 'name-asc',
+
+			isVisible(el) {
+				const name = el.dataset.name
+				const roster = el.dataset.roster
+				const searchMatch = !this.search || name.includes(this.search.toLowerCase())
+				const rosterMatch = !this.roster || roster === this.roster
+				return searchMatch && rosterMatch
+			},
+
+			getOrder(el) {
+				const items = [...this.$refs.grid.querySelectorAll('[data-name]')]
+				const sorted = items.slice().sort((a, b) => {
+					if (this.sortBy === 'name-asc') return a.dataset.name.localeCompare(b.dataset.name)
+					if (this.sortBy === 'name-desc') return b.dataset.name.localeCompare(a.dataset.name)
+					if (this.sortBy === 'note-desc') return Number(b.dataset.note) - Number(a.dataset.note)
+					if (this.sortBy === 'note-asc') return Number(a.dataset.note) - Number(b.dataset.note)
+					return 0
+				})
+				return sorted.indexOf(el)
+			},
+
+			get visibleCount() {
+				if (!this.$refs.grid) return 0
+				return [...this.$refs.grid.querySelectorAll('[data-name]')].filter(el => this.isVisible(el)).length
+			}
+		}"
+	>
+		<div class="grid-container">
+			{% if superstars | length %}
+				{# Search & Filters Bar #}
+				<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+					{# Search #}
+					<div class="relative w-full sm:max-w-xs">
+						<svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+						</svg>
+						<input
+							type="text"
+							x-model.debounce.200ms="search"
+							placeholder="Rechercher une superstar..."
+							class="w-full rounded-lg border border-white/10 bg-neutral-900 py-2 pr-4 pl-10 text-sm text-white placeholder-neutral-500 outline-none transition-colors focus:border-white/30"
+						/>
+					</div>
+
+					<div class="flex flex-wrap items-center gap-3">
+						{# Roster Filter #}
+						<select
+							x-model="roster"
+							class="rounded-lg border border-white/10 bg-neutral-900 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-white/30"
+						>
+							<option value="">Tous les rosters</option>
+							<option value="raw">Raw</option>
+							<option value="smackdown">SmackDown</option>
+							<option value="nxt">NXT</option>
+							<option value="bcw">BCW</option>
+							<option value="aew">AEW</option>
+							<option value="freeAgent">Free Agent</option>
+							<option value="hallOfFamer">Hall Of Famer</option>
+						</select>
+
+						{# Sort #}
+						<select
+							x-model="sortBy"
+							class="rounded-lg border border-white/10 bg-neutral-900 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-white/30"
+						>
+							<option value="name-asc">Nom A-Z</option>
+							<option value="name-desc">Nom Z-A</option>
+							<option value="note-desc">Note &#8595;</option>
+							<option value="note-asc">Note &#8593;</option>
+						</select>
+					</div>
+				</div>
+
+				{# Results count #}
+				<p class="mb-4 text-sm text-neutral-500" x-text="visibleCount + ' superstar' + (visibleCount !== 1 ? 's' : '')"></p>
+
+				{# Grid #}
+				<div class="grid-row" x-ref="grid">
+					{% for superstar in superstars %}
+						<div
+							class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mb-6 transition-opacity duration-200"
+							data-name="{{ superstar.title | lower }}"
+							data-roster="{{ superstar.roster.value ?? '' }}"
+							data-note="{{ superstar.general ?? 0 }}"
+							x-show="isVisible($el)"
+							x-bind:style="'order: ' + getOrder($el)"
+						>
+							{% include '_includes/_superstar-card' with { superstar: superstar } only %}
+						</div>
+					{% endfor %}
+				</div>
+
+				{# Empty search state #}
+				<p
+					class="py-12 text-center text-neutral-500"
+					x-show="visibleCount === 0"
+					x-cloak
+				>
+					Aucune superstar ne correspond &agrave; votre recherche.
+				</p>
+			{% else %}
+				<p class="text-center text-neutral-500">Aucune superstar pour le moment.</p>
+			{% endif %}
+		</div>
+	</section>
+{% endblock %}

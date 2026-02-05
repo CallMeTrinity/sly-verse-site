@@ -4,7 +4,7 @@ instructions: null
 name: 'Lien interne'
 searchable: false
 settings:
-  fullGraphqlData: true
+  fullGraphqlData: false
   maxLength: 255
   showLabelField: false
   typeSettings:
@@ -22,8 +22,22 @@ settings:
             -
               - showUnpermittedEntries
               - ''
+      -
+        - url
+        -
+          __assoc__:
+            -
+              - allowRootRelativeUrls
+              - '1'
+            -
+              - allowAnchors
+              - ''
+            -
+              - allowCustomSchemes
+              - ''
   types:
     - entry
+    - url
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Link

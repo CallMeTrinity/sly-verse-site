@@ -1,0 +1,70 @@
+{# Superstar Card - WWE 2K game card style #}
+{# Expects a `superstar` variable (entry from superstars section) #}
+{% import '_includes/macros' as macros %}
+
+{% set image = superstar.profileImage.one() %}
+
+{% set rosterColors = {
+	'raw': 'bg-[#ff0000]',
+	'smackdown': 'bg-[#0000a0]',
+	'nxt': 'bg-[#ffff00] text-black',
+	'bcw': 'bg-[#8000ff]',
+	'aew': 'bg-[#ff8040]',
+	'freeAgent': 'bg-neutral-600',
+	'hallOfFamer': 'bg-[#400040]',
+} %}
+
+<a href="{{ superstar.url }}" class="group relative block overflow-hidden rounded-lg bg-neutral-900 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-white/5">
+	{# Image #}
+	<div class="relative aspect-[3/4] overflow-hidden bg-neutral-800">
+		{% if image %}
+			{{ macros.image(image, { width: 600, height: 800 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
+		{% else %}
+			<div class="flex h-full w-full items-center justify-center text-neutral-600">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+				</svg>
+			</div>
+		{% endif %}
+
+		{# Overlay gradient #}
+		<div class="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent"></div>
+
+		{# Overall Rating (Note) - top left corner #}
+		{% if superstar.general is not null %}
+			<div class="absolute top-0 left-0 flex h-14 w-14 items-center justify-center bg-black/80 text-2xl font-black leading-none text-white">
+				{{ superstar.general | number_format(0) }}
+			</div>
+		{% endif %}
+
+		{# Roster badge - top right #}
+		{% if superstar.roster.value ?? null %}
+			<span class="absolute top-3 right-3 rounded-sm px-2 py-1 text-[10px] font-bold tracking-wider uppercase {{ rosterColors[superstar.roster.value] ?? 'bg-neutral-600' }}">
+				{{ superstar.roster.label }}
+			</span>
+		{% endif %}
+
+		{# Bottom overlay info - name + alignment #}
+		<div class="absolute right-0 bottom-0 left-0 p-4">
+			{# Alignment badge #}
+			{% if superstar.alignment.value ?? null %}
+				{% set alignmentColors = {
+					'face': 'bg-green-600',
+					'heel': 'bg-red-600',
+					'tweener': 'bg-neutral-500',
+				} %}
+				<span class="mb-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase {{ alignmentColors[superstar.alignment.value] ?? 'bg-neutral-500' }}">
+					{{ superstar.alignment.label }}
+				</span>
+			{% endif %}
+
+			<h3 class="text-lg font-bold leading-tight text-white transition-colors group-hover:text-red-500">
+				{{ superstar.title }}
+			</h3>
+
+			{% if superstar.finisher %}
+				<p class="mt-1 text-xs italic text-neutral-400">{{ superstar.finisher }}</p>
+			{% endif %}
+		</div>
+	</div>
+</a>

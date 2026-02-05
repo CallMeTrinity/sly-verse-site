@@ -1,0 +1,46 @@
+{% extends '_layout' %}
+
+{% block content %}
+	{# Page Header #}
+	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
+		<div class="grid-container">
+			<h1 class="h1 text-center tracking-tight uppercase">{{ entry.title }}</h1>
+		</div>
+	</section>
+
+	{# Instructions #}
+	{% if entry.richContent | length %}
+		<section class="bg-neutral-950 py-12 text-white lg:py-20">
+			<div class="grid-container">
+				<h2 class="h3 mb-8 uppercase">Instructions</h2>
+				<div class="prose prose-invert max-w-none text-neutral-300">
+					{{ entry.richContent }}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# Rules #}
+	{% if entry.getFieldValue('richContent2') | length %}
+		<section class="bg-black py-12 text-white lg:py-20">
+			<div class="grid-container">
+				<h2 class="h3 mb-8 uppercase">R&egrave;gles</h2>
+				<div class="prose prose-invert max-w-none text-neutral-300">
+					{{ entry.getFieldValue('richContent2') }}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# Contact Link #}
+	{% if entry.externalLink %}
+		<section class="bg-neutral-950 py-12 text-white lg:py-20">
+			<div class="grid-container text-center">
+				<h2 class="h3 mb-6 uppercase">Envie de participer ?</h2>
+				<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn border-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700">
+					Nous contacter
+				</a>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}

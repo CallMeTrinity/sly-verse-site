@@ -1,4 +1,4 @@
-dateModified: 1768232410
+dateModified: 1768337238
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -38,6 +38,8 @@ meta:
     91fcfd3c-d8aa-45f9-8ee6-3620c987dd12: 'Menu principal' # Menu principal
     137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
     320b0998-4777-4f7d-a3cf-657b89946d28: 'Type de show' # Type de show
+    421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
+    435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
     571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
@@ -83,6 +85,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 3.0.0.0
+  feed-me:
+    edition: standard
+    enabled: true
+    schemaVersion: 5.14.0
   vite:
     edition: standard
     enabled: true

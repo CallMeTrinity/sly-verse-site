@@ -25,6 +25,23 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: '2026-01-13T14:03:38+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 421b99f8-110b-4e5f-9fcb-dd00a1b61d41 # Genre
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3682149a-c564-4d41-8afc-57c13f17d7e1
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-01-12T14:57:17+00:00'
             editCondition: null
             elementCondition: null
@@ -251,6 +268,23 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: '2026-01-13T20:44:56+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 435eaa9f-6b5b-4f4d-84eb-d1504c07dd73 # Note
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 99fc557b-16cc-4863-8f73-68329eed14e0
+            userCondition: null
+            warning: null
+            width: 100
         name: Contenu
         uid: 233e13ae-eb12-4f96-8e70-208c07365a59
         userCondition: null
@@ -262,6 +296,6 @@ showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: null
+titleFormat: '{ringName}'
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

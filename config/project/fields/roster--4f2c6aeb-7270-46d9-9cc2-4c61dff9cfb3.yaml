@@ -61,6 +61,23 @@ settings:
       __assoc__:
         -
           - label
+          - BCW
+        -
+          - value
+          - bcw
+        -
+          - icon
+          - circle-b
+        -
+          - color
+          - '#8000ff'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
           - AEW
         -
           - value
@@ -91,6 +108,23 @@ settings:
         -
           - default
           - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Hall Of Famer'
+        -
+          - value
+          - hallOfFamer
+        -
+          - icon
+          - circle-h
+        -
+          - color
+          - '#400040'
+        -
+          - default
+          - ''
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Dropdown

@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: general
+instructions: null
+name: Note
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: 100
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  step: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

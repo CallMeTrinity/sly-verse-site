@@ -17,7 +17,7 @@ settings:
           - group
           - Général
   includeTableView: false
-  maxEntries: 4
+  maxEntries: 5
   minEntries: 1
   pageSize: null
   propagationKeyFormat: null

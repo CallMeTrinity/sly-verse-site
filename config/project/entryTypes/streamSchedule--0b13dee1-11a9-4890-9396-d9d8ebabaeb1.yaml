@@ -13,10 +13,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 7c15e95d-31ed-4f61-9610-77235b8dcad7 # Prochains Streams
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

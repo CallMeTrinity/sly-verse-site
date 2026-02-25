@@ -3,6 +3,10 @@
 {# So keeping them in here keeps them out of the build process. The files are kept in src/public, which means #}
 {# Vite will copy them into web/dist when you run `npm run build` #}
 
+{# Preload critical fonts to avoid FOUT #}
+<link rel="preload" href="/dist/fonts/unbounded-v7-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/dist/fonts/unbounded-v7-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+
 {# prettier-ignore-start #}
 <style>
 /* unbounded-regular - latin */

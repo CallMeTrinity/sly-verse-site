@@ -3,6 +3,10 @@ description: null
 fieldLayouts:
   058ed099-ef3a-463e-9814-c9567e5a478b:
     cardThumbAlignment: end
+    cardView:
+      - 'layoutElement:5c7f8716-3eaf-44d5-b85e-ef28803492ab'
+      - 'layoutElement:af655362-8a55-4687-b101-fed6e47914f8'
+      - 'layoutElement:cd83fc3f-a9c0-4d33-8779-b35f92b6d574'
     tabs:
       -
         elementCondition: null
@@ -13,10 +17,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: d3567cd9-d874-4dcf-a4ad-9a2745ddee1a # Nom du titre
             handle: null
-            includeInCards: true
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -30,10 +32,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 2268121f-f160-477f-a8dd-097ac58ac120 # Nombre de règnes
             handle: null
-            includeInCards: true
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -47,10 +47,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 83c8b547-d334-479b-8790-6073227cf239 # Date et heure
             handle: null
-            includeInCards: true
             instructions: null
             label: 'Date de gain'
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

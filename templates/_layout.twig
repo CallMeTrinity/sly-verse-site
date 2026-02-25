@@ -4,15 +4,25 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+		{# SEOmatic meta tags #}
+		{% hook 'seomaticRender' %}
+
 		{# Include local fonts #}
 		{% include '_includes/fonts' %}
+
+		{# Preconnect hints for external resources #}
+		<link rel="preconnect" href="https://www.youtube.com" />
+		<link rel="dns-prefetch" href="https://www.youtube.com" />
 
 		{# Adds JS and CSS processed with Vite #}
 		{# ? https://nystudio107.com/docs/vite/#the-script-function #}
 		{# The false argument here disables async CSS to prevent FOUT #}
 		{{ craft.vite.script('src/js/app.js', false) }}
 
-		{# TODO: Add favicon here #}
+		{# Favicon #}
+		<link rel="icon" href="/SWU.jpg" type="image/jpgokay" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="theme-color" content="#0C0C0C" />
 	</head>
 
 	<body>
@@ -29,11 +39,11 @@
 		{% include '_includes/alertBar' %}
 		{% include '_includes/header' %}
 
-		<div role="main" id="main">
+		<main id="main">
 			{% block content %}
 
 			{% endblock %}
-		</div>
+		</main>
 		{% include '_includes/footer' %}
 	</body>
 </html>

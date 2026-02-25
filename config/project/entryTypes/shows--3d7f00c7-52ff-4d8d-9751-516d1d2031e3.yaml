@@ -16,7 +16,6 @@ fieldLayouts:
             disabled: false
             elementCondition: null
             id: null
-            includeInCards: false
             inputType: null
             instructions: null
             label: null
@@ -25,7 +24,6 @@ fieldLayouts:
             name: null
             orientation: null
             placeholder: null
-            providesThumbs: false
             readonly: false
             required: true
             size: null
@@ -43,10 +41,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: bd4c2f9c-ea7f-4ef7-8dfe-9d091b5db3f0 # Statut du show
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -60,10 +56,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 83c8b547-d334-479b-8790-6073227cf239 # Date et heure
             handle: null
-            includeInCards: false
             instructions: null
             label: 'Date du show'
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -77,10 +71,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 320b0998-4777-4f7d-a3cf-657b89946d28 # Type de show
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -94,10 +86,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: f4857798-fbf9-40c6-9e25-be024d571f66 # Photo Principale
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -111,10 +101,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf # Contenu riche
             handle: null
-            includeInCards: false
             instructions: null
             label: Description
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -134,10 +122,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 6ee001c3-016d-4f6e-af69-22fcf05a862a # Cartes des matchs
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -157,10 +143,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: d135e597-391a-47a4-a188-9f9a0ae11542 # Lien vidéo externe
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -174,10 +158,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 9981bc2e-03e8-4889-ab40-96ddc496edd2 # Lien externe
             handle: null
-            includeInCards: false
             instructions: null
             label: 'Lien du stream'
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

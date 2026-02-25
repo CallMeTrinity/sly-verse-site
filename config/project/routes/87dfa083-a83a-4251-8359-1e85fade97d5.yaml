@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 3
+template: _pages/shows/past-index
+uriParts:
+  - resultats
+uriPattern: resultats

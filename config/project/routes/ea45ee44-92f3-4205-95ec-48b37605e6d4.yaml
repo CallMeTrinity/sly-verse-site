@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 4
+template: _pages/media/index
+uriParts:
+  - mediatheque
+uriPattern: mediatheque

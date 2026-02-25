@@ -1,0 +1,78 @@
+{% set nav = craft.app.globals.getSetByHandle('navigation') %}
+{% set homepage = craft.entries.section('pageAccueil').one() %}
+
+<footer class="border-t border-white/5 bg-neutral-950 text-white">
+	<div class="grid-container py-12 lg:py-16" x-data x-reveal>
+		<div class="grid-row">
+			{# Logo + tagline #}
+			<div class="grid-col mb-8 w-full lg:mb-0 lg:w-4/12">
+				<a href="/" class="text-2xl font-black tracking-wider uppercase">SWU</a>
+				<p class="mt-3 max-w-xs text-sm leading-relaxed text-neutral-500">
+					Sly Wrestling Universe — L'univers du catch virtuel sur WWE 2K.
+				</p>
+			</div>
+
+			{# Quick Links #}
+			{% if nav %}
+				<div class="grid-col mb-8 w-full sm:w-1/2 lg:mb-0 lg:w-4/12">
+					<h3 class="mb-4 text-xs font-semibold tracking-widest text-neutral-400 uppercase">Navigation</h3>
+					<ul class="space-y-2">
+						{% for item in nav.mainMenu.all() %}
+							{% if item.typeDeLien.value == 'entry' and item.internalLink.url ?? null %}
+								<li>
+									<a href="{{ item.internalLink.url }}" class="text-sm text-neutral-400 transition-colors hover:text-white">
+										{{ item.label }}
+									</a>
+								</li>
+							{% elseif item.typeDeLien.value == 'externalUrl' and item.externalLink ?? null %}
+								<li>
+									<a href="{{ item.externalLink }}" target="_blank" rel="noopener noreferrer" class="text-sm text-neutral-400 transition-colors hover:text-white">
+										{{ item.label }}
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+
+			{# Social Links #}
+			{% if homepage %}
+				{% set socials = homepage.socialMedia.all() %}
+				{% if socials | length %}
+					<div class="grid-col w-full sm:w-1/2 lg:w-4/12">
+						<h3 class="mb-4 text-xs font-semibold tracking-widest text-neutral-400 uppercase">Suivez-nous</h3>
+						<div class="flex flex-wrap gap-3">
+							{% for social in socials %}
+								{% set image = social.linkImage.one() %}
+								<a
+									href="{{ social.basicLink.value }}"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-neutral-800 transition-all hover:scale-110 hover:bg-neutral-700"
+									title="{{ image.title ?? social.title ?? '' }}"
+								>
+									{% if image %}
+										<img src="{{ image.url }}" alt="{{ image.title ?? '' }}" class="h-full w-full object-cover" loading="lazy" />
+									{% endif %}
+								</a>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+
+	{# Bottom bar #}
+	<div class="border-t border-white/5">
+		<div class="grid-container flex flex-col items-center justify-between gap-3 py-6 sm:flex-row">
+			<p class="text-xs text-neutral-600">
+				&copy; {{ now | date('Y') }} SWU — Sly Wrestling Universe. Tous droits réservés.
+			</p>
+			<p class="text-xs text-neutral-700">
+				Propulsé par Craft CMS
+			</p>
+		</div>
+	</div>
+</footer>

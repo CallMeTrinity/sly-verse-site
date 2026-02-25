@@ -2,10 +2,10 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    uid: d34dead9-c601-418a-b86a-9becaab8b175 # howTo
-handle: howToParticipate
+    uid: 394ef542-7e6c-467e-a8b2-c825583a7602 # Médiathèque
+handle: media
 maxAuthors: 1
-name: 'Comment participer'
+name: Mediathèque
 previewTargets:
   -
     label: 'Page d‘entrée primaire'
@@ -16,6 +16,6 @@ siteSettings:
   571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
     enabledByDefault: true
     hasUrls: true
-    template: _pages/participate
-    uriFormat: comment-participer
-type: single
+    template: _pages/media/_entry.twig
+    uriFormat: 'mediatheque/{slug}'
+type: channel

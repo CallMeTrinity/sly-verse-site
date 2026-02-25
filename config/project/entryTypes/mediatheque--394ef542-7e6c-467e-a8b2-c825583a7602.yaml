@@ -1,113 +1,138 @@
 color: null
 description: null
 fieldLayouts:
-  9544e824-71ea-44fe-8a76-08cf2715dbb7:
+  dc2160d8-bd3a-4f5e-9b10-1e5eff68b352:
     cardThumbAlignment: end
     tabs:
       -
         elementCondition: null
         elements:
           -
-            dateAdded: '2026-01-12T14:50:29+00:00'
-            editCondition: null
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-02-25T11:39:15+00:00'
+            disabled: false
             elementCondition: null
-            fieldUid: 3da03560-0cdd-49dd-841c-1f93fed92c25 # Titre du match
-            handle: null
+            id: null
+            inputType: null
             instructions: null
             label: null
-            required: false
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
             tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 8c82ce11-2d1a-4a7d-8079-9aadcd496799
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: b3c5739c-4dcc-45ac-a7fc-07819bfbf6dc
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2026-01-12T14:50:29+00:00'
+            dateAdded: '2026-02-25T11:41:56+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: e4ab6bc4-aab9-4263-815b-238aba267fb5 # Participants
+            fieldUid: 5dd8b7cd-49eb-45ee-8908-71aa8d1af97b # Type de media
             handle: null
             instructions: null
             label: null
-            required: false
+            required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: dbadec90-9a4c-4384-8e6b-8c8898e2f876
+            uid: a39190e1-2684-4895-9e64-c1124f96fe23
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2026-01-12T14:50:29+00:00'
+            dateAdded: '2026-02-25T11:41:56+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: 9ed251ed-f16f-42d7-8807-5ad4e2143b12 # Type de match
+            fieldUid: 156177ef-b718-4dfe-9d8b-dcd8eb5f98af # Description Courte
             handle: null
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 24644810-e46b-4075-abd4-9150cb641cb6
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: '2026-01-12T14:50:29+00:00'
-            editCondition: null
-            elementCondition: null
-            fieldUid: f86e6bc1-0aef-44f6-a0c1-83f69929d250 # Stipulation
-            handle: null
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 1a6f1a53-cd7b-4953-a233-dd18ad4f5f25
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: '2026-01-12T14:50:29+00:00'
-            editCondition: null
-            elementCondition: null
-            fieldUid: 5f2cb259-f127-4914-9959-1be5198ce79c # Resultat
-            handle: null
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: cddf8e05-2249-43dd-860b-bcc324ead743
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: '2026-01-12T14:50:29+00:00'
-            editCondition: null
-            elementCondition: null
-            fieldUid: 950e9bc0-fd03-413f-a144-64e282958f13 # Vainqueur
-            handle: null
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: c18c9b8b-e624-4360-999d-41c751c15bd0
+            uid: 0f44180a-0c49-4da6-9bab-d1ef247cd9c3
             userCondition: null
             warning: null
             width: 100
         name: Contenu
-        uid: c9a689e0-8c61-4a7f-a827-726e3052dcc2
+        uid: b2298069-cf92-4836-94f0-d2ed3b338710
         userCondition: null
-handle: matchCard
-hasTitleField: false
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-02-25T11:41:56+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: af31a34b-be53-40aa-bd12-bc660d90950e # Galerie d'images
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c91840af-eb07-4461-8833-1a69929c2790
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-02-25T11:41:56+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: d135e597-391a-47a4-a188-9f9a0ae11542 # Lien vidéo externe
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 862206e8-27e7-45d0-9642-3bdaec5bf500
+            userCondition: null
+            warning: null
+            width: 100
+        name: Media
+        uid: a76d44e9-1e76-4b7f-b386-f4aee6db555a
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-02-25T11:41:56+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 1d063901-7cb3-4c79-915e-22ba059582e9 # Show associé
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1c9bed61-cb9e-45ca-a5f0-6970de19373e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Relation
+        uid: 1cd5f0eb-d27a-493f-ad1d-8c54b1389897
+        userCondition: null
+handle: mediatheque
+hasTitleField: true
 icon: null
-name: 'Carte des matchs'
+name: Médiathèque
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: '{matchTitle}'
+titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

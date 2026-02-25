@@ -6,7 +6,7 @@
 
 	{# Hero Section #}
 	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-20 text-white lg:py-32">
-		<div class="grid-container">
+		<div class="grid-container" x-data x-reveal>
 			<h1 class="h1 mb-6 text-center tracking-tight uppercase">{{ entry.heroTitle }}</h1>
 			{% if entry.heroDescription %}
 				<p class="mx-auto max-w-3xl text-center text-xl leading-relaxed text-neutral-300 lg:text-2xl">
@@ -21,7 +21,7 @@
 	{% if superstars | length %}
 		<section class="bg-neutral-950 py-12 text-white lg:py-20">
 			<div class="grid-container">
-				<div class="mb-8 flex items-end justify-between">
+				<div class="mb-8 flex items-end justify-between" x-data x-reveal>
 					<h2 class="h3 uppercase">Superstars</h2>
 					<a href="/superstars" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
 						Voir toutes &rarr;
@@ -29,7 +29,7 @@
 				</div>
 				<div class="grid-row">
 					{% for superstar in superstars %}
-						<div class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mb-6">
+						<div class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
 							{% include '_includes/_superstar-card' with { superstar: superstar } only %}
 						</div>
 					{% endfor %}
@@ -43,7 +43,7 @@
 	{% if upcomingShows | length %}
 		<section class="bg-black py-12 text-white lg:py-20">
 			<div class="grid-container">
-				<div class="mb-8 flex items-end justify-between">
+				<div class="mb-8 flex items-end justify-between" x-data x-reveal>
 					<h2 class="h3 uppercase">Prochains shows</h2>
 					<a href="/shows" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
 						Voir tous &rarr;
@@ -52,7 +52,7 @@
 				<div class="grid-row">
 					{% for show in upcomingShows %}
 						{% set image = show.mainImage.one() %}
-						<div class="grid-col mb-4 w-full md:w-1/2 lg:w-1/3 lg:mb-6">
+						<div class="grid-col mb-4 w-full md:w-1/2 lg:w-1/3 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
 							<a href="{{ show.url }}" class="group block overflow-hidden rounded-lg bg-neutral-900 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
 								<div class="relative aspect-video overflow-hidden bg-neutral-800">
 									{% if image %}
@@ -83,7 +83,7 @@
 	{% if socials | length %}
 		<section class="bg-neutral-950 py-12 lg:py-20">
 			<div class="grid-container">
-				<h2 class="h3 mb-8 text-center text-white uppercase">Nos liens</h2>
+				<h2 class="h3 mb-8 text-center text-white uppercase" x-data x-reveal>Nos liens</h2>
 				<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-6">
 					{% for social in socials %}
 						{% set image = social.linkImage.one() %}
@@ -93,6 +93,8 @@
 								class="group relative aspect-square overflow-hidden rounded-lg bg-neutral-900 shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white/10"
 								target="_blank"
 								rel="noopener noreferrer"
+								x-data x-reveal.delay
+								style="--i: {{ loop.index }}"
 							>
 								<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-40"></div>
 								<img

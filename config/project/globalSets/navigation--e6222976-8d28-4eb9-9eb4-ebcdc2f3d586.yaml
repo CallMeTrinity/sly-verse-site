@@ -11,10 +11,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 91fcfd3c-d8aa-45f9-8ee6-3620c987dd12 # Menu principal
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

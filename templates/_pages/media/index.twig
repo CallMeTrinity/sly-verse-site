@@ -1,0 +1,277 @@
+{% extends '_layout' %}
+
+{% block content %}
+	{% import '_includes/macros' as macros %}
+	{% set mediaEntries = craft.entries.section('media').orderBy('dateCreated desc').all() %}
+
+	{# Page Header #}
+	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
+		<div class="grid-container">
+			<h1 class="h1 text-center tracking-tight uppercase">Médiathèque</h1>
+			<p class="mt-4 text-center text-neutral-400">Photos, vidéos et galeries du SWU</p>
+		</div>
+	</section>
+
+	{# Media Grid with filters + lightbox #}
+	<section
+		class="bg-black py-12 text-white lg:py-20"
+		x-data="{
+			filter: '',
+			lightbox: false,
+			lightboxImages: [],
+			lightboxIndex: 0,
+
+			openLightbox(images, index) {
+				this.lightboxImages = images
+				this.lightboxIndex = index || 0
+				this.lightbox = true
+			},
+
+			closeLightbox() {
+				this.lightbox = false
+				this.lightboxImages = []
+				this.lightboxIndex = 0
+			},
+
+			prev() {
+				this.lightboxIndex = (this.lightboxIndex - 1 + this.lightboxImages.length) % this.lightboxImages.length
+			},
+
+			next() {
+				this.lightboxIndex = (this.lightboxIndex + 1) % this.lightboxImages.length
+			},
+
+			get currentImage() {
+				return this.lightboxImages[this.lightboxIndex] || {}
+			},
+
+			isVisible(type) {
+				return !this.filter || type === this.filter
+			},
+
+			get visibleCount() {
+				if (!this.$refs.grid) return 0
+				return [...this.$refs.grid.querySelectorAll('[data-type]')].filter(el => this.isVisible(el.dataset.type)).length
+			}
+		}"
+		@keydown.escape.window="closeLightbox()"
+		@keydown.left.window="lightbox && prev()"
+		@keydown.right.window="lightbox && next()"
+	>
+		<div class="grid-container">
+			{% if mediaEntries | length %}
+				{# Filter Tabs #}
+				<div class="mb-8 flex flex-wrap gap-2">
+					<button
+						@click="filter = ''"
+						:class="!filter ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-white'"
+						class="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
+					>
+						Tout
+					</button>
+					<button
+						@click="filter = 'photo'"
+						:class="filter === 'photo' ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-white'"
+						class="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
+					>
+						Photos
+					</button>
+					<button
+						@click="filter = 'video'"
+						:class="filter === 'video' ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-white'"
+						class="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
+					>
+						Vidéos
+					</button>
+					<button
+						@click="filter = 'galerie'"
+						:class="filter === 'galerie' ? 'bg-red-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-white'"
+						class="rounded-full px-4 py-2 text-sm font-semibold transition-colors"
+					>
+						Galeries
+					</button>
+				</div>
+
+				{# Count #}
+				<p class="mb-4 text-sm text-neutral-500" x-text="visibleCount + ' média' + (visibleCount !== 1 ? 's' : '')"></p>
+
+				{# Grid #}
+				<div class="grid-row" x-ref="grid">
+					{% for media in mediaEntries %}
+						{% set mediaType = media.mediaType.value ?? 'photo' %}
+						{% set thumbnail = media.imageGallery.one() %}
+						{% set gallery = media.imageGallery.all() %}
+
+						<div
+							class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mb-6 transition-opacity duration-200"
+							data-type="{{ mediaType }}"
+							x-show="isVisible('{{ mediaType }}')"
+						>
+							{# Photo: open lightbox directly #}
+							{% if mediaType == 'photo' and gallery | length %}
+								<div
+									class="group relative cursor-pointer overflow-hidden rounded-lg bg-neutral-800 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+									@click="openLightbox([
+										{% for img in gallery %}
+											{ src: '{{ img.url({ width: 1600 }) }}', alt: '{{ img.alt | e('js') }}' }{{ not loop.last ? ',' : '' }}
+										{% endfor %}
+									], 0)"
+								>
+									<div class="relative aspect-square overflow-hidden">
+										{% if thumbnail %}
+											{{ macros.image(thumbnail, { width: 400, height: 400 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
+										{% endif %}
+										<div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+										{# Photo icon overlay #}
+										<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+											</svg>
+										</div>
+									</div>
+									<div class="p-3">
+										<h3 class="text-sm font-semibold text-white">{{ media.title }}</h3>
+										{% if media.shortDescription %}
+											<p class="mt-1 text-xs text-neutral-500 line-clamp-2">{{ media.shortDescription }}</p>
+										{% endif %}
+									</div>
+								</div>
+
+							{# Video: link to entry or external URL #}
+							{% elseif mediaType == 'video' %}
+								<a
+									href="{{ media.videoUrl ?? media.url }}"
+									{% if media.videoUrl %}target="_blank" rel="noopener noreferrer"{% endif %}
+									class="group relative block overflow-hidden rounded-lg bg-neutral-800 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+								>
+									<div class="relative aspect-square overflow-hidden">
+										{% if thumbnail %}
+											{{ macros.image(thumbnail, { width: 400, height: 400 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
+										{% else %}
+											<div class="flex h-full w-full items-center justify-center bg-neutral-900">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-neutral-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+												</svg>
+											</div>
+										{% endif %}
+										<div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+										{# Play icon #}
+										<div class="absolute inset-0 flex items-center justify-center">
+											<div class="flex h-14 w-14 items-center justify-center rounded-full bg-red-600/90 transition-transform group-hover:scale-110">
+												<svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+													<path d="M8 5v14l11-7z" />
+												</svg>
+											</div>
+										</div>
+									</div>
+									<div class="p-3">
+										<h3 class="text-sm font-semibold text-white">{{ media.title }}</h3>
+										{% if media.shortDescription %}
+											<p class="mt-1 text-xs text-neutral-500 line-clamp-2">{{ media.shortDescription }}</p>
+										{% endif %}
+									</div>
+								</a>
+
+							{# Gallery: link to entry detail #}
+							{% else %}
+								<a
+									href="{{ media.url }}"
+									class="group relative block overflow-hidden rounded-lg bg-neutral-800 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+								>
+									<div class="relative aspect-square overflow-hidden">
+										{% if thumbnail %}
+											{{ macros.image(thumbnail, { width: 400, height: 400 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
+										{% endif %}
+										<div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+										{# Gallery count badge #}
+										{% if gallery | length > 1 %}
+											<div class="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-black/70 px-2 py-1 text-xs font-semibold text-white">
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+												</svg>
+												{{ gallery | length }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="p-3">
+										<h3 class="text-sm font-semibold text-white transition-colors group-hover:text-red-500">{{ media.title }}</h3>
+										{% if media.shortDescription %}
+											<p class="mt-1 text-xs text-neutral-500 line-clamp-2">{{ media.shortDescription }}</p>
+										{% endif %}
+									</div>
+								</a>
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+
+				{# Empty filter state #}
+				<p
+					class="py-12 text-center text-neutral-500"
+					x-show="visibleCount === 0"
+					x-cloak
+				>
+					Aucun média dans cette catégorie.
+				</p>
+			{% else %}
+				<p class="py-12 text-center text-neutral-500">La médiathèque est vide pour le moment.</p>
+			{% endif %}
+		</div>
+
+		{# Lightbox overlay #}
+		<template x-teleport="body">
+			<div
+				x-show="lightbox"
+				x-transition:enter="transition ease-out duration-200"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="transition ease-in duration-150"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+				class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+				@click.self="closeLightbox()"
+			>
+				{# Close button #}
+				<button @click="closeLightbox()" class="absolute top-4 right-4 text-white/70 transition-colors hover:text-white">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+
+				{# Prev button #}
+				<button
+					x-show="lightboxImages.length > 1"
+					@click="prev()"
+					class="absolute left-4 text-white/70 transition-colors hover:text-white"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+				</button>
+
+				{# Image #}
+				<img
+					:src="currentImage.src"
+					:alt="currentImage.alt"
+					class="max-h-[85vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+				/>
+
+				{# Next button #}
+				<button
+					x-show="lightboxImages.length > 1"
+					@click="next()"
+					class="absolute right-4 text-white/70 transition-colors hover:text-white"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+					</svg>
+				</button>
+
+				{# Counter #}
+				<div x-show="lightboxImages.length > 1" class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-3 py-1 text-sm text-white/70">
+					<span x-text="(lightboxIndex + 1) + ' / ' + lightboxImages.length"></span>
+				</div>
+			</div>
+		</template>
+	</section>
+{% endblock %}

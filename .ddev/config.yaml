@@ -1,34 +1,34 @@
 name: sly-verse-site
 type: craftcms
 docroot: web
-php_version: '8.3'
+php_version: "8.2"
 webserver_type: nginx-fpm
-router_http_port: '8080'
-router_https_port: '8443'
+router_http_port: "8080"
+router_https_port: "8443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-   type: mysql
-   version: '8.0'
+    type: mariadb
+    version: "10.11"
 hooks:
-   post-start:
-      - exec: npm install
-      - exec: npm run build
-      - exec: composer install
-      - exec: npm run dev
+    post-start:
+        - exec: npm install
+        - exec: npm run build
+        - exec: composer install
+        - exec: npm run dev
 upload_dirs:
-   - uploads
+    - uploads
 webimage_extra_packages: [build-essential]
 use_dns_when_possible: true
-composer_version: '2'
+composer_version: "2"
 web_environment: []
 corepack_enable: false
 web_extra_exposed_ports:
-   - name: vite
-     container_port: 3000
-     http_port: 3001
-     https_port: 3000
+    - name: vite
+      container_port: 3000
+      http_port: 3001
+      https_port: 3000
 
 # Key features of DDEV's config.yaml:
 

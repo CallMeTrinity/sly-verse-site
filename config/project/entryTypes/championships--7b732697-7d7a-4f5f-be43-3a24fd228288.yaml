@@ -1,28 +1,28 @@
+allowLineBreaksInTitles: false
 color: null
 description: null
 fieldLayouts:
   058ed099-ef3a-463e-9814-c9567e5a478b:
     cardThumbAlignment: end
     cardView:
-      - 'layoutElement:5c7f8716-3eaf-44d5-b85e-ef28803492ab'
-      - 'layoutElement:af655362-8a55-4687-b101-fed6e47914f8'
       - 'layoutElement:cd83fc3f-a9c0-4d33-8779-b35f92b6d574'
     tabs:
       -
         elementCondition: null
         elements:
           -
-            dateAdded: '2026-01-12T14:41:28+00:00'
+            dateAdded: '2026-02-28T17:28:52+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: d3567cd9-d874-4dcf-a4ad-9a2745ddee1a # Nom du titre
+            elementEditCondition: null
+            fieldUid: 7995da79-9780-4f46-8c81-13d8219eed0c # Ceinture
             handle: null
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5c7f8716-3eaf-44d5-b85e-ef28803492ab
+            uid: 5178e065-702c-4e37-bd65-f380374f8908
             userCondition: null
             warning: null
             width: 100
@@ -30,25 +30,11 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:41:28+00:00'
             editCondition: null
             elementCondition: null
-            fieldUid: 2268121f-f160-477f-a8dd-097ac58ac120 # Nombre de règnes
-            handle: null
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: af655362-8a55-4687-b101-fed6e47914f8
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: '2026-01-12T14:41:28+00:00'
-            editCondition: null
-            elementCondition: null
+            elementEditCondition: null
             fieldUid: 83c8b547-d334-479b-8790-6073227cf239 # Date et heure
             handle: null
             instructions: null
-            label: 'Date de gain'
+            label: 'Date de victoire'
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -56,9 +42,26 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: '2026-02-28T17:28:52+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: de1cb108-8395-45f0-9a7e-8648a6b295b1 # Date de perte
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0e79fef4-4945-4728-9dca-89ae94f05891
+            userCondition: null
+            warning: null
+            width: 100
         name: Contenu
         uid: 8485ff01-dd06-43b6-945c-d2b22b1d688d
         userCondition: null
+    thumbFieldKey: null
 handle: championships
 hasTitleField: false
 icon: medal
@@ -70,3 +73,4 @@ slugTranslationMethod: site
 titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,4 +1,4 @@
-dateModified: 1772022038
+dateModified: 1772299732
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -13,6 +13,7 @@ fs:
     url: '@web/uploads'
 meta:
   __names__:
+    0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
     0b13dee1-11a9-4890-9396-d9d8ebabaeb1: 'Planning de stream' # Planning de stream
     1d063901-7cb3-4c79-915e-22ba059582e9: 'Show associé' # Show associé
     2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf: 'Contenu riche' # Contenu riche
@@ -39,18 +40,21 @@ meta:
     83c8b547-d334-479b-8790-6073227cf239: 'Date et heure' # Date et heure
     91fcfd3c-d8aa-45f9-8ee6-3620c987dd12: 'Menu principal' # Menu principal
     137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
+    228e300a-4071-419a-b8ca-635beb87a64a: Ceinture # Ceinture
     320b0998-4777-4f7d-a3cf-657b89946d28: 'Type de show' # Type de show
     394ef542-7e6c-467e-a8b2-c825583a7602: Médiathèque # Médiathèque
     421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
     435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
     571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
+    841b05cb-aaca-4ce8-91d0-c7e1a4ed809d: Ceinture # Ceinture
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
     950e9bc0-fd03-413f-a144-64e282958f13: Vainqueur # Vainqueur
     3835ca37-9fef-4fd0-b183-3837223d3c71: "Pays d'origine" # Pays d'origine
     03997ee4-22b0-493c-a976-adce138d48aa: 'Prochain streams' # Prochain streams
     4479b21e-82c5-4ad9-b095-a75b4b1e09a3: Superstar # Superstar
     6436a9a5-863e-44e1-88b4-477f06146ed4: 'Page Accueil' # Page Accueil
+    7995da79-9780-4f46-8c81-13d8219eed0c: Ceinture # Ceinture
     9080e8ef-3d35-4a29-929f-cd4d82c30e6b: 'Public Schema' # Public Schema
     9981bc2e-03e8-4889-ab40-96ddc496edd2: 'Lien externe' # Lien externe
     58492aea-1965-4454-a046-cd0abbafab76: 'Menu principal' # Menu principal
@@ -73,6 +77,7 @@ meta:
     d3567cd9-d874-4dcf-a4ad-9a2745ddee1a: 'Nom du titre' # Nom du titre
     d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
     de005802-be42-430e-bf28-c16c101a5807: Mediathèque # Mediathèque
+    de1cb108-8395-45f0-9a7e-8648a6b295b1: 'Date de perte' # Date de perte
     e04677af-3be7-4c6e-9e90-a8d20033b7db: Palmarès # Palmarès
     e4ab6bc4-aab9-4263-815b-238aba267fb5: Participants # Participants
     e775c6ec-5d74-4213-8643-cac989a5fd98: Taille # Taille

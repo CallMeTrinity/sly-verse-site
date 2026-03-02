@@ -109,14 +109,28 @@
 	{# Championships #}
 	{% set championships = entry.championships.all() %}
 	{% if championships | length %}
+		{# Group championships by belt #}
+		{% set grouped = {} %}
+		{% for championship in championships %}
+			{% set belt = championship.ceinture.one() %}
+			{% set beltId = belt ? 'belt_' ~ belt.id : 'unknown' %}
+			{% if grouped[beltId] is not defined %}
+				{% set grouped = grouped | merge({ (beltId): { belt: belt, ids: [] } }) %}
+			{% endif %}
+			{% set currentIds = grouped[beltId].ids %}
+			{% set grouped = grouped | merge({ (beltId): { belt: belt, ids: currentIds | merge([championship.id]) } }) %}
+		{% endfor %}
+
 		<section class="bg-black py-12 text-white lg:py-20">
 			<div class="grid-container">
 				<h2 class="h3 mb-8 uppercase" x-data x-reveal>Palmar&egrave;s</h2>
 				<div class="grid-row">
-					{% for championship in championships %}
-						{% set belt = championship.ceinture.one() %}
+					{% for beltId, group in grouped %}
+						{% set belt = group.belt %}
+						{% set reigns = craft.entries.id(group.ids).orderBy('eventDateTime asc').all() %}
 						{% set beltImage = belt ? belt.beltImage.one() : null %}
-						<div class="grid-col mb-4 w-full sm:w-1/2 lg:w-1/3" x-data x-reveal.delay style="--i: {{ loop.index }}">
+						{% set count = reigns | length %}
+						<div class="grid-col mb-4 w-full sm:w-1/2 lg:w-1/3" x-data="{ open: false }" x-reveal.delay style="--i: {{ loop.index }}">
 							<div class="rounded-lg border border-white/10 bg-neutral-900 p-6">
 								{% if beltImage %}
 									{{ macros.image(beltImage, { width: 400, height: 200 }, 'mb-4 h-32 w-full object-contain') }}
@@ -126,16 +140,51 @@
 										<a href="{{ belt.url }}" class="hover:text-yellow-400 transition-colors">{{ belt.title }}</a>
 									</h3>
 								{% endif %}
-								<div class="mt-2 text-sm text-neutral-400">
-									{% if championship.eventDateTime %}
-										<span>{{ championship.eventDateTime | date('d/m/Y') }}</span>
-									{% endif %}
-									{% if championship.datePerte %}
-										<span> → {{ championship.datePerte | date('d/m/Y') }}</span>
-									{% elseif championship.eventDateTime %}
-										<span class="ml-2 rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold text-yellow-400 uppercase">En cours</span>
+								<div class="mt-2 flex items-center gap-2 text-sm text-neutral-400">
+									<span>{{ count }}x Champion</span>
+									{% if count == 1 %}
+										{% set reign = reigns | first %}
+										<span class="text-neutral-600">—</span>
+										{% if reign.eventDateTime %}
+											<span class="font-semibold text-white">{{ reign.eventDateTime | date('Y') }}</span>
+										{% endif %}
+										{% if reign.datePerte %}
+											<span class="text-neutral-600">→</span>
+											<span class="font-semibold text-white">{{ reign.datePerte | date('Y') }}</span>
+										{% elseif reign.eventDateTime %}
+											<span class="rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold text-yellow-400 uppercase">En cours</span>
+										{% endif %}
 									{% endif %}
 								</div>
+								{% if count > 1 %}
+									{# Multiple reigns: expandable details #}
+									<button @click="open = !open" class="mt-3 flex items-center gap-1 text-xs font-semibold text-neutral-500 uppercase transition-colors hover:text-white">
+										<span x-text="open ? 'Masquer' : 'Voir le détail'"></span>
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transition-transform" :class="open && 'rotate-180'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+										</svg>
+									</button>
+									<div x-show="open" x-transition class="mt-3 space-y-2 border-t border-white/5 pt-3">
+										{% for reign in reigns %}
+											<div class="flex items-center justify-between text-sm">
+												<span class="text-neutral-600">R&egrave;gne {{ loop.index }}</span>
+												<div class="flex items-center gap-1.5">
+													{% if reign.eventDateTime %}
+														<span class="font-semibold text-white">{{ reign.eventDateTime | date('Y') }}</span>
+														<span class="text-neutral-600 text-xs">({{ reign.eventDateTime | date('d/m') }})</span>
+													{% endif %}
+													{% if reign.datePerte %}
+														<span class="text-neutral-600">→</span>
+														<span class="font-semibold text-white">{{ reign.datePerte | date('Y') }}</span>
+														<span class="text-neutral-600 text-xs">({{ reign.datePerte | date('d/m') }})</span>
+													{% elseif reign.eventDateTime %}
+														<span class="ml-1 rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold text-yellow-400 uppercase">En cours</span>
+													{% endif %}
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+								{% endif %}
 							</div>
 						</div>
 					{% endfor %}

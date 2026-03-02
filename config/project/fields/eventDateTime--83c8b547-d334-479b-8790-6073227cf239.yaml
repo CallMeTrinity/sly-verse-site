@@ -8,7 +8,7 @@ settings:
   min: null
   minuteIncrement: 30
   showDate: true
-  showTime: true
+  showTime: false
   showTimeZone: false
 translationKeyFormat: null
 translationMethod: none

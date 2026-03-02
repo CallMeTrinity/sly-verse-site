@@ -1,0 +1,36 @@
+columnSuffix: null
+handle: beltImage
+instructions: null
+name: 'Image ceinture'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowSubfolders: false
+  allowUploads: true
+  allowedKinds: null
+  branchLimit: null
+  defaultPlacement: end
+  defaultUploadLocationSource: 'volume:3a16fde8-1283-4270-9152-47a67599c43b' # Images
+  defaultUploadLocationSubpath: /ceintures
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  previewMode: full
+  restrictFiles: false
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:3a16fde8-1283-4270-9152-47a67599c43b' # Images
+  restrictedLocationSubpath: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  sources:
+    - 'volume:3a16fde8-1283-4270-9152-47a67599c43b' # Images
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: thumbs
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Assets

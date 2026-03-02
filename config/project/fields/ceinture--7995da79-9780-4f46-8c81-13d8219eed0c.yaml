@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: ceinture
+instructions: null
+name: Ceinture
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:228e300a-4071-419a-b8ca-635beb87a64a' # Ceinture
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

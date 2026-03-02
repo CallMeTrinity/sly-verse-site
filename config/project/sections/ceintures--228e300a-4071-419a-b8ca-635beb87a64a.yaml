@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 841b05cb-aaca-4ce8-91d0-c7e1a4ed809d # Ceinture
+handle: ceintures
+maxAuthors: 1
+name: Ceinture
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: ceinture/_entry.twig
+    uriFormat: 'ceinture/{slug}'
+type: channel

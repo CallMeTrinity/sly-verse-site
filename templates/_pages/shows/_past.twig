@@ -61,7 +61,8 @@
 			<h2 class="h3 mb-8 uppercase" x-data x-reveal>Résultats</h2>
 			<div class="space-y-4">
 				{% for match in matches %}
-					{% set winner = match.vainqueur.one() ?? null %}
+					{% set winners = match.vainqueur.all() %}
+					{% set winnerIds = winners | map(w => w.id) %}
 					<div class="rounded-lg border border-white/10 bg-neutral-900 p-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
 						{# Match type & stipulation badges #}
 						<div class="mb-3 flex flex-wrap items-center gap-2">
@@ -79,12 +80,12 @@
 
 						<h3 class="h5 mb-3 text-white">{{ match.matchTitle ?? match.title }}</h3>
 
-						{# Participants — vainqueur mis en avant #}
+						{# Participants — vainqueurs mis en avant #}
 						{% set fighters = match.fighters.all() %}
 						{% if fighters | length %}
 							<div class="mb-3 flex flex-wrap gap-2">
 								{% for fighter in fighters %}
-									{% set isWinner = winner and fighter.id == winner.id %}
+									{% set isWinner = fighter.id in winnerIds %}
 									<a
 										href="{{ fighter.url }}"
 										class="rounded-full px-3 py-1 text-sm font-semibold transition-colors {{ isWinner ? 'bg-yellow-400 text-black hover:bg-yellow-300' : 'bg-neutral-800 text-white hover:bg-neutral-700' }}"
@@ -103,14 +104,17 @@
 							</div>
 						{% endif %}
 
-						{# Vainqueur — bannière dorée #}
-						{% if winner %}
-							<div class="mt-4 flex items-center gap-2 rounded-md bg-yellow-400/10 px-4 py-2 ring-1 ring-yellow-400/30">
+						{# Vainqueurs — bannière dorée #}
+						{% if winners | length %}
+							<div class="mt-4 flex flex-wrap items-center gap-2 rounded-md bg-yellow-400/10 px-4 py-2 ring-1 ring-yellow-400/30">
 								<span class="text-yellow-400">★</span>
-								<span class="text-xs font-semibold tracking-wider text-neutral-400 uppercase">Vainqueur</span>
-								<a href="{{ winner.url }}" class="ml-1 font-bold text-yellow-400 hover:text-yellow-300">
-									{{ winner.title }}
-								</a>
+								<span class="text-xs font-semibold tracking-wider text-neutral-400 uppercase">{{ winners | length > 1 ? 'Vainqueurs' : 'Vainqueur' }}</span>
+								{% for winner in winners %}
+									<a href="{{ winner.url }}" class="font-bold text-yellow-400 hover:text-yellow-300">
+										{{ winner.title }}
+									</a>
+									{% if not loop.last %}<span class="text-yellow-400/50">&</span>{% endif %}
+								{% endfor %}
 							</div>
 						{% endif %}
 					</div>

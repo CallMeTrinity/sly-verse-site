@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: bf143ee5-10fb-4cca-8890-1e5ba59c0220 # Article
+handle: articles
+maxAuthors: 1
+name: Articles
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: true
+    template: articles/_entry.twig
+    uriFormat: 'articles/{slug}'
+type: channel

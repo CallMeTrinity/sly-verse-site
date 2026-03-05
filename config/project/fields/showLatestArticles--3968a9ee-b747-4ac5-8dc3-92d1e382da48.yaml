@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: showLatestArticles
+instructions: 'Si activé, les "articles à la une" seront les 3 derniers articles écrits, sinon ce seront les articles choisis.'
+name: 'Afficher derniers articles'
+searchable: false
+settings:
+  default: false
+  offLabel: NON
+  onLabel: OUI
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

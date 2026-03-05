@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 6
+template: _pages/articles/index
+uriParts:
+  - articles
+uriPattern: articles

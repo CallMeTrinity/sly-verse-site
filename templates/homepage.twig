@@ -25,6 +25,31 @@
 		</div>
 	</section>
 
+	{# SWU News Section #}
+	{% set featuredArticles = entry.featuredArticles.all() ?? [] %}
+	{% if not featuredArticles | length and entry.showLatestArticles ?? false %}
+		{% set featuredArticles = craft.entries.section('articles').orderBy('postDate desc').limit(3).all() %}
+	{% endif %}
+	{% if featuredArticles | length %}
+		<section class="py-8 text-white lg:py-14" style="background-color: #00263d;">
+			<div class="grid-container">
+				<div class="mb-6 flex items-end justify-between" x-data x-reveal>
+					<h2 class="h3 uppercase">SWU News</h2>
+					<a href="/articles" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
+						Tous les articles &rarr;
+					</a>
+				</div>
+				<div class="grid-row">
+					{% for article in featuredArticles %}
+						<div class="grid-col mb-4 w-full md:w-1/2 lg:w-1/3 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
+							{% include '_includes/_article-card' with { article: article } only %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
 	{# Superstars Section #}
 	{% set superstars = craft.entries.section('superstars').limit(4).orderBy('RAND()').all() %}
 	{% if superstars | length %}

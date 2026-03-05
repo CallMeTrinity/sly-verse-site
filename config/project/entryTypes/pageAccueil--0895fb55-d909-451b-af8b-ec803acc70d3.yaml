@@ -1,3 +1,4 @@
+allowLineBreaksInTitles: false
 color: null
 description: null
 fieldLayouts:
@@ -39,6 +40,7 @@ fieldLayouts:
             dateAdded: '2026-01-08T21:11:54+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: ff2f36b2-53d4-4ffa-94bc-dafac093ba77 # Titre Hero
             handle: null
             instructions: null
@@ -54,6 +56,7 @@ fieldLayouts:
             dateAdded: '2026-01-08T21:11:54+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 698c46e3-2baa-4914-9a5b-0c7f94fdc345 # Description Hero
             handle: null
             instructions: null
@@ -69,6 +72,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:52:56+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: f4857798-fbf9-40c6-9e25-be024d571f66 # Photo Principale
             handle: null
             instructions: null
@@ -84,6 +88,7 @@ fieldLayouts:
             dateAdded: '2026-01-08T21:11:54+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 137b7ddb-c95b-4e06-8cfc-1aa66be68441 # Reseaux Sociaux
             handle: null
             instructions: null
@@ -98,6 +103,45 @@ fieldLayouts:
         name: Contenu
         uid: 0ee87cec-2290-46d6-80aa-79b3f2796984
         userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-03-05T09:47:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7a5940b8-874a-46b3-828d-0b57d2795971 # Articles à la une
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 942a9c27-b568-45a8-86ce-77c3062e3a1e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-03-05T09:50:23+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3968a9ee-b747-4ac5-8dc3-92d1e382da48 # Afficher derniers articles
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2fe6aa06-56b6-4947-928c-3092e2a64af9
+            userCondition: null
+            warning: null
+            width: 100
+        name: Article
+        uid: 8a8bf853-fe03-4d52-b14b-323ed967b94b
+        userCondition: null
+    thumbFieldKey: null
 handle: pageAccueil
 hasTitleField: true
 icon: house
@@ -109,3 +153,4 @@ slugTranslationMethod: site
 titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
+uiLabelFormat: '{title}'

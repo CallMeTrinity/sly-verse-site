@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: featuredArticles
+instructions: null
+name: 'Articles à la une'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 3
+  minRelations: null
+  selectionLabel: 'Ajouter un article'
+  showSearchInput: true
+  showSiteMenu: true
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:9325512e-8f12-4ade-abc9-c869c5c14c09' # Articles
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

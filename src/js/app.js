@@ -22,7 +22,7 @@ Alpine.directive('reveal', (el, { modifiers }) => {
 				}
 			})
 		},
-		{ threshold: 0.1 },
+		{ threshold: 0 },
 	)
 	observer.observe(el)
 })

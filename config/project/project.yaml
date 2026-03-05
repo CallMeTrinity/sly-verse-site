@@ -1,4 +1,4 @@
-dateModified: 1772704758
+dateModified: 1772709365
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -46,8 +46,10 @@ meta:
     394ef542-7e6c-467e-a8b2-c825583a7602: Médiathèque # Médiathèque
     421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
     435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
+    455a1610-d31f-4a00-8929-3a430acab4a1: 'Clips à la une' # Clips à la une
     571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
+    698fdd99-cfe7-4e4c-a16f-dafe95a1953e: Clip # Clip
     841b05cb-aaca-4ce8-91d0-c7e1a4ed809d: Ceinture # Ceinture
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
     950e9bc0-fd03-413f-a144-64e282958f13: Vainqueur # Vainqueur
@@ -55,6 +57,7 @@ meta:
     3968a9ee-b747-4ac5-8dc3-92d1e382da48: 'Afficher derniers articles' # Afficher derniers articles
     03997ee4-22b0-493c-a976-adce138d48aa: 'Prochain streams' # Prochain streams
     4479b21e-82c5-4ad9-b095-a75b4b1e09a3: Superstar # Superstar
+    5046f95c-da98-45b2-a3c3-53991cc859cb: 'Superstar associé' # Superstar associé
     6436a9a5-863e-44e1-88b4-477f06146ed4: 'Page Accueil' # Page Accueil
     7995da79-9780-4f46-8c81-13d8219eed0c: Ceinture # Ceinture
     9080e8ef-3d35-4a29-929f-cd4d82c30e6b: 'Public Schema' # Public Schema
@@ -69,10 +72,12 @@ meta:
     a349698f-8a90-4500-a74f-9fe7f44ac901: Libellé # Libellé
     aa3b6fc6-594b-4c1d-b7d2-456b44617bbc: 'Comment participer' # Comment participer
     af31a34b-be53-40aa-bd12-bc660d90950e: "Galerie d'images" # Galerie d'images
+    b9bbbe7b-4d2f-4730-be61-7c979b4f6762: 'Afficher derniers clips' # Afficher derniers clips
     b9f994df-9b3e-4505-a43b-0124c057887e: 'Statut actif/inactif' # Statut actif/inactif
     b786d593-d6e5-4df6-8f84-d6b51b741daa: Finisher # Finisher
     bd4c2f9c-ea7f-4ef7-8dfe-9d091b5db3f0: 'Statut du show' # Statut du show
     bf143ee5-10fb-4cca-8890-1e5ba59c0220: Article # Article
+    c2fa968e-d6ac-432d-b772-44b05f76ce4d: Clips # Clips
     c469f72b-bb7d-4fb3-b855-ed34ccd6f73b: 'Image de profil' # Image de profil
     cf8271af-e15e-4b59-b37f-6067d46f7d7c: Poids # Poids
     d34dead9-c601-418a-b86a-9becaab8b175: howTo # howTo

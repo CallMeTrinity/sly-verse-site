@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: showLatestClips
+instructions: 'Si activé, les "clips à la une" seront les 4 derniers clips ajoutés, sinon ce seront les clips choisis.'
+name: 'Afficher derniers clips'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

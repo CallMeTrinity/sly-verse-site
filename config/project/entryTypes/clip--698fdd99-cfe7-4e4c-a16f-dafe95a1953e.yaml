@@ -1,0 +1,86 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  66a8757d-d9fe-4912-aed2-fa86ecfcfd12:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-03-05T10:15:50+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1f4a69d3-03b3-40c7-bc51-dc67ea39c410
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-03-05T10:18:36+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d135e597-391a-47a4-a188-9f9a0ae11542 # Lien vidéo externe
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6e496b9a-fe8b-40c8-860f-43d54f5030a2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-03-05T10:18:36+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5046f95c-da98-45b2-a3c3-53991cc859cb # Superstar associé
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 09a89b0e-b844-45ec-afad-a452fa104237
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 2753137f-bd10-44ca-a1a0-25c0fedf89dc
+        userCondition: null
+    thumbFieldKey: null
+handle: clip
+hasTitleField: true
+icon: null
+name: Clip
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

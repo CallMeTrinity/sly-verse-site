@@ -2,10 +2,10 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    uid: bf143ee5-10fb-4cca-8890-1e5ba59c0220 # Article
-handle: articles
+    uid: 698fdd99-cfe7-4e4c-a16f-dafe95a1953e # Clip
+handle: clips
 maxAuthors: 1
-name: Articles
+name: Clips
 previewTargets:
   -
     label: 'Page d‘entrée primaire'
@@ -16,6 +16,6 @@ siteSettings:
   571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
     enabledByDefault: true
     hasUrls: true
-    template: _pages/articles/_entry.twig
-    uriFormat: 'articles/{slug}'
+    template: _pages/clips/_entry.twig
+    uriFormat: 'clips/{slug}'
 type: channel

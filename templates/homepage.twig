@@ -112,6 +112,31 @@
 		</section>
 	{% endif %}
 
+	{# Clips Section #}
+	{% set featuredClips = entry.featuredClips.all() ?? [] %}
+	{% if not featuredClips | length and entry.showLatestClips ?? false %}
+		{% set featuredClips = craft.entries.section('clips').orderBy('postDate desc').limit(4).all() %}
+	{% endif %}
+	{% if featuredClips | length %}
+		<section class="bg-neutral-950 py-8 text-white lg:py-14">
+			<div class="grid-container">
+				<div class="mb-6 flex items-end justify-between" x-data x-reveal>
+					<h2 class="h3 uppercase">Clips</h2>
+					<a href="/clips" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
+						Voir tous &rarr;
+					</a>
+				</div>
+				<div class="grid-row">
+					{% for clip in featuredClips %}
+						<div class="grid-col mb-4 w-full sm:w-1/2 lg:w-1/4 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
+							{% include '_includes/_clip-card' with { clip: clip } only %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
 	{# Social Media Section #}
 	{% set socials = entry.socialMedia.all() %}
 	{% if socials | length %}

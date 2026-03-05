@@ -138,7 +138,39 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
-        name: Article
+          -
+            dateAdded: '2026-03-05T10:22:25+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 455a1610-d31f-4a00-8929-3a430acab4a1 # Clips à la une
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2024e5cc-d61b-4cfb-b9fe-9e4cfe4c85dd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-03-05T10:22:25+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b9bbbe7b-4d2f-4730-be61-7c979b4f6762 # Afficher derniers clips
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: de9c849c-6b4b-4b78-9582-0f67890d3ef4
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Article et clips'
         uid: 8a8bf853-fe03-4d52-b14b-323ed967b94b
         userCondition: null
     thumbFieldKey: null

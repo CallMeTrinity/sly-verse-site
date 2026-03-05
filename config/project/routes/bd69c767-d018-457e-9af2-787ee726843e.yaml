@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 7
+template: _pages/clips/index
+uriParts:
+  - clips
+uriPattern: clips

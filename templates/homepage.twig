@@ -5,8 +5,17 @@
 	{% set entry = craft.entries.section('pageAccueil').one() %}
 
 	{# Hero Section #}
-	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-20 text-white lg:py-32">
-		<div class="grid-container" x-data x-reveal>
+	{% set heroImage = entry.mainImage.one() %}
+	<section class="relative overflow-hidden bg-black py-20 text-white lg:py-32">
+		{% if heroImage %}
+			<div class="absolute inset-0">
+				{{ macros.image(heroImage, { width: 1920, height: 1080 }, 'h-full w-full object-cover') }}
+				<div class="absolute inset-0 bg-black/70"></div>
+			</div>
+		{% else %}
+			<div class="absolute inset-0 bg-linear-to-br from-black via-neutral-900 to-neutral-800"></div>
+		{% endif %}
+		<div class="grid-container relative" x-data x-reveal>
 			<h1 class="h1 mb-6 text-center tracking-tight uppercase">{{ entry.heroTitle }}</h1>
 			{% if entry.heroDescription %}
 				<p class="mx-auto max-w-3xl text-center text-xl leading-relaxed text-neutral-300 lg:text-2xl">

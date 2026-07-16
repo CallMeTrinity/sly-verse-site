@@ -64,16 +64,21 @@
 		url: '/planning'
 	},
 	{
-		label: 'Médiathèque',
-		url: '/mediatheque'
-	},
-	{
-		label: 'Articles',
-		url: '/articles'
-	},
-	{
-		label: 'Clips',
-		url: '/clips'
+		label: 'Plus',
+		children: [
+			{
+				label: 'Médiathèque',
+				url: '/mediatheque'
+			},
+			{
+				label: 'Articles',
+				url: '/articles'
+			},
+			{
+				label: 'Clips',
+				url: '/clips'
+			}
+		]
 	}
 ] %}
 
@@ -95,24 +100,46 @@
 					x-on:focusout="if (!$el.contains($event.relatedTarget)) open = false"
 					x-on:keydown.escape="open = false"
 				>
-					<a
-						href="{{ item.url }}"
-						class="hover:text-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors"
-						x-bind:aria-expanded="open"
-					>
-						{{ item.label }}
-						<svg
-							class="size-3 transition-transform duration-200"
-							x-bind:class="open && 'rotate-180'"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="3"
-							aria-hidden="true"
+					{% if item.url is defined %}
+						<a
+							href="{{ item.url }}"
+							class="hover:text-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors"
+							x-bind:aria-expanded="open"
 						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
-						</svg>
-					</a>
+							{{ item.label }}
+							<svg
+								class="size-3 transition-transform duration-200"
+								x-bind:class="open && 'rotate-180'"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="3"
+								aria-hidden="true"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+							</svg>
+						</a>
+					{% else %}
+						<button
+							type="button"
+							x-on:click="open = !open"
+							class="hover:text-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors"
+							x-bind:aria-expanded="open"
+						>
+							{{ item.label }}
+							<svg
+								class="size-3 transition-transform duration-200"
+								x-bind:class="open && 'rotate-180'"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="3"
+								aria-hidden="true"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+							</svg>
+						</button>
+					{% endif %}
 					{# pt-3 = pont de survol entre le trigger et le panneau #}
 					<div x-show="open" x-cloak x-transition.origin.top class="absolute top-full left-0 z-50 pt-2">
 						<ul class="border-line bg-surface-2 w-60 rounded-xl border p-2 shadow-2xl shadow-black/50">
@@ -164,13 +191,19 @@
 				{% if item.children is defined %}
 					<div x-data="{ sub: false }" class="border-line border-b">
 						<div class="flex items-center justify-between">
-							<a
-								href="{{ item.url }}"
-								x-on:click="open = false"
-								class="flex-1 py-4 text-lg font-bold tracking-wide uppercase"
-							>
-								{{ item.label }}
-							</a>
+							{% if item.url is defined %}
+								<a
+									href="{{ item.url }}"
+									x-on:click="open = false"
+									class="flex-1 py-4 text-lg font-bold tracking-wide uppercase"
+								>
+									{{ item.label }}
+								</a>
+							{% else %}
+								<span class="flex-1 py-4 text-lg font-bold tracking-wide uppercase">
+									{{ item.label }}
+								</span>
+							{% endif %}
 							<button
 								x-on:click="sub = !sub"
 								x-bind:aria-expanded="sub"
@@ -223,11 +256,21 @@
 {% elseif variant == 'footer' %}
 	<ul class="space-y-2">
 		{% for item in navItems %}
-			<li>
-				<a href="{{ item.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">
-					{{ item.label }}
-				</a>
-			</li>
+			{% if item.url is defined %}
+				<li>
+					<a href="{{ item.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">
+						{{ item.label }}
+					</a>
+				</li>
+			{% else %}
+				{% for child in item.children %}
+					<li>
+						<a href="{{ child.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">
+							{{ child.label }}
+						</a>
+					</li>
+				{% endfor %}
+			{% endif %}
 		{% endfor %}
 		<li>
 			<a href="{{ navCta.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">

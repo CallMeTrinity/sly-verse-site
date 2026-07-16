@@ -1,0 +1,460 @@
+{# Formulaire de proposition de superstar (guest-entries → section propositionsPersonnages).
+   `guestEntry` est renvoyé par le plugin en cas d'erreur de validation. #}
+{% set guestEntry = guestEntry ?? null %}
+{% set proposalSent = craft.app.request.getQueryParam('proposition') == 'merci' %}
+
+{% set inputClass =
+	'border-line bg-bg/60 placeholder:text-ink-faint focus:border-gold focus:ring-gold/30 w-full rounded-md border px-3.5 py-2.5 text-sm text-white transition-colors focus:ring-2 focus:outline-none'
+%}
+{% set labelClass = 'text-ink-faint mb-1.5 block text-xs font-bold tracking-wider uppercase' %}
+
+{# État Alpine : valeurs de la fiche (préremplies si erreur de validation) + maps de classes littérales #}
+{% set sheetData = {
+	ringName: guestEntry.ringName ?? '',
+	hometown: guestEntry.hometown ?? '',
+	homeCountry: guestEntry.homeCountry ?? '',
+	height: guestEntry.height ?? '',
+	weight: guestEntry.weight ?? '',
+	finisher: guestEntry.finisher ?? '',
+	alignment: guestEntry.alignment.value ?? 'tweener',
+	roster: guestEntry.roster.value ?? 'freeAgent',
+	rosterClasses: {
+		raw: 'bg-roster-raw text-white',
+		smackdown: 'bg-roster-smackdown text-white',
+		nxt: 'bg-roster-nxt text-black',
+		bcw: 'bg-roster-bcw text-white',
+		aew: 'bg-roster-aew text-white',
+		freeAgent: 'bg-roster-free-agent text-white',
+		hallOfFamer: 'bg-roster-hall-of-famer text-white'
+	},
+	rosterLabels: {
+		raw: 'Raw',
+		smackdown: 'SmackDown',
+		nxt: 'NXT',
+		bcw: 'BCW',
+		aew: 'AEW',
+		freeAgent: 'Free Agent',
+		hallOfFamer: 'Hall of Famer'
+	},
+	alignmentClasses: {
+		face: 'bg-face',
+		heel: 'bg-heel',
+		tweener: 'bg-tweener'
+	},
+	alignmentLabels: {
+		face: 'Face',
+		heel: 'Heel',
+		tweener: 'Tweener'
+	}
+} %}
+
+<section id="proposer" class="py-14 lg:py-24">
+	<div class="grid-container">
+		<div class="mb-10" x-data x-reveal>
+			<span class="eyebrow">À toi de jouer</span>
+			<h2 class="h2 mb-3">Propose ta superstar</h2>
+			<p class="text-ink-muted max-w-2xl">
+				Remplis la fiche de personnage ci-dessous. Le staff relit chaque proposition avant de l'ajouter au roster.
+			</p>
+		</div>
+
+		{% if proposalSent %}
+			<div class="border-face/40 bg-face/10 mb-10 rounded-lg border p-6" role="status">
+				<p class="text-face font-display text-lg font-bold uppercase">
+					Proposition envoyée !
+				</p>
+				<p class="text-ink-muted mt-1 text-sm">
+					Merci ! Ta superstar est entre les mains du staff. Si elle est retenue, tu la verras bientôt sur le site.
+				</p>
+			</div>
+		{% endif %}
+
+		{% if guestEntry %}
+			<div class="border-heel/40 bg-heel/10 mb-10 rounded-lg border p-6" role="alert">
+				<p class="text-heel font-display text-lg font-bold uppercase">
+					La fiche est incomplète
+				</p>
+				<p class="text-ink-muted mt-1 text-sm">
+					Corrige les champs signalés ci-dessous puis renvoie-la.
+				</p>
+			</div>
+		{% endif %}
+
+		<div class="grid gap-10 lg:grid-cols-12" x-data="{{ sheetData|json_encode }}">
+			{# Preview de la fiche, mise à jour en direct #}
+			<div class="lg:col-span-5 xl:col-span-4">
+				<div class="lg:sticky lg:top-28" x-data x-reveal>
+					<div
+						class="border-line from-surface-2 to-bg overflow-hidden rounded-lg border bg-linear-to-b shadow-2xl"
+					>
+						<div class="border-line bg-surface-3 flex items-center justify-between border-b px-4 py-2.5">
+							<span class="font-display text-gold text-[11px] font-bold tracking-widest uppercase">
+								SWU · Fiche de personnage
+							</span>
+							<span
+								class="inline-block rounded-sm px-2.5 py-1 text-[11px] font-extrabold tracking-wide uppercase"
+								x-bind:class="rosterClasses[roster] || 'bg-surface-3 text-ink'"
+								x-text="rosterLabels[roster] || 'Roster'"
+							>
+
+							</span>
+						</div>
+						<div class="relative aspect-[3/4]">
+							<div class="text-ink-faint/40 flex h-full w-full items-center justify-center">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-28 w-28"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="1"
+										d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+									/>
+								</svg>
+							</div>
+							<div
+								class="from-bg absolute inset-x-0 bottom-0 bg-linear-to-t via-transparent to-transparent pt-24"
+							>
+								<div class="p-5">
+									<div class="mb-2 flex items-center gap-2">
+										<span
+											class="inline-block size-2 shrink-0 rounded-full"
+											x-bind:class="alignmentClasses[alignment] || 'bg-tweener'"
+										>
+
+										</span>
+										<span
+											class="text-ink-faint text-[11px] font-bold tracking-wider uppercase"
+											x-text="alignmentLabels[alignment] || 'Alignement'"
+										>
+
+										</span>
+									</div>
+									<p
+										class="font-display text-2xl font-bold tracking-tight uppercase"
+										x-text="ringName || 'Ta superstar'"
+									></p>
+									<p
+										class="text-ink-muted mt-1 text-sm"
+										x-show="hometown || homeCountry"
+										x-text="[hometown, homeCountry].filter(Boolean).join(', ')"
+									></p>
+								</div>
+							</div>
+						</div>
+						<div class="border-line divide-line grid grid-cols-3 divide-x border-t">
+							<div class="px-3 py-3 text-center">
+								<span class="text-ink-faint block text-[10px] font-semibold tracking-wider uppercase">
+									Taille
+								</span>
+								<span class="text-sm font-bold text-white" x-text="height ? height + ' cm' : '—'"></span>
+							</div>
+							<div class="px-3 py-3 text-center">
+								<span class="text-ink-faint block text-[10px] font-semibold tracking-wider uppercase">
+									Poids
+								</span>
+								<span class="text-sm font-bold text-white" x-text="weight ? weight + ' kg' : '—'"></span>
+							</div>
+							<div class="px-3 py-3 text-center">
+								<span class="text-ink-faint block text-[10px] font-semibold tracking-wider uppercase">
+									Finisher
+								</span>
+								<span class="block truncate text-sm font-bold text-white" x-text="finisher || '—'"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{# Le formulaire #}
+			<div class="lg:col-span-7 xl:col-span-8" x-data x-reveal.delay style="--i: 2">
+				<form
+					method="post"
+					accept-charset="UTF-8"
+					class="border-line bg-surface-2 space-y-10 rounded-lg border p-6 lg:p-10"
+				>
+					{{ csrfInput() }}
+					{{ actionInput('guest-entries/save') }}
+					{{ hiddenInput('sectionHandle', 'propositionsPersonnages') }}
+					{{ redirectInput(entry.url ~ '?proposition=merci#proposer') }}
+
+					{# Honeypot anti-bots : champ invisible, rejeté côté module s'il est rempli #}
+					<div class="absolute -left-[9999px]" aria-hidden="true">
+						<label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+					</div>
+
+					<fieldset>
+						<legend class="mb-5 flex items-baseline gap-3">
+							<span class="font-display text-gold text-2xl font-bold">01</span>
+							<span class="font-display text-base font-bold uppercase">Identité</span>
+						</legend>
+						<div class="grid gap-5 sm:grid-cols-2">
+							<div class="sm:col-span-2">
+								<label for="proposal-ringName" class="{{ labelClass }}">Nom de ring *</label>
+								<input
+									type="text"
+									id="proposal-ringName"
+									name="fields[ringName]"
+									x-model="ringName"
+									maxlength="255"
+									required
+									placeholder="The Sly Reaper"
+									class="{{ inputClass }}"
+								/>
+								{% if guestEntry and (guestEntry.getErrors('ringName')|length) %}
+									<p class="text-heel mt-1.5 text-xs font-semibold">
+										{{ guestEntry.getErrors('ringName')|first }}
+									</p>
+								{% endif %}
+							</div>
+							<div>
+								<label for="proposal-gender" class="{{ labelClass }}">Genre</label>
+								<select id="proposal-gender" name="fields[gender]" class="{{ inputClass }}">
+									<option value="">
+										—
+									</option>
+									<option value="male" {{ guestEntry.gender.value ?? null == 'male' ? 'selected' }}>
+										Homme
+									</option>
+									<option value="female" {{ guestEntry.gender.value ?? null == 'female' ? 'selected' }}>
+										Femme
+									</option>
+								</select>
+							</div>
+							<div>
+								<label for="proposal-hometown" class="{{ labelClass }}">Ville d'origine</label>
+								<input
+									type="text"
+									id="proposal-hometown"
+									name="fields[hometown]"
+									x-model="hometown"
+									placeholder="Lyon"
+									class="{{ inputClass }}"
+								/>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="proposal-homeCountry" class="{{ labelClass }}">Pays d'origine</label>
+								<input
+									type="text"
+									id="proposal-homeCountry"
+									name="fields[homeCountry]"
+									x-model="homeCountry"
+									placeholder="France"
+									class="{{ inputClass }}"
+								/>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<legend class="mb-5 flex items-baseline gap-3">
+							<span class="font-display text-gold text-2xl font-bold">02</span>
+							<span class="font-display text-base font-bold uppercase">Gabarit</span>
+						</legend>
+						<div class="grid gap-5 sm:grid-cols-2">
+							<div>
+								<label for="proposal-height" class="{{ labelClass }}">Taille (cm)</label>
+								<input
+									type="number"
+									id="proposal-height"
+									name="fields[height]"
+									x-model="height"
+									inputmode="numeric"
+									min="0"
+									placeholder="190"
+									class="{{ inputClass }}"
+								/>
+							</div>
+							<div>
+								<label for="proposal-weight" class="{{ labelClass }}">Poids (kg)</label>
+								<input
+									type="number"
+									id="proposal-weight"
+									name="fields[weight]"
+									x-model="weight"
+									inputmode="numeric"
+									min="0"
+									placeholder="102"
+									class="{{ inputClass }}"
+								/>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<legend class="mb-5 flex items-baseline gap-3">
+							<span class="font-display text-gold text-2xl font-bold">03</span>
+							<span class="font-display text-base font-bold uppercase">Style &amp; carrière</span>
+						</legend>
+						<div class="grid gap-5 sm:grid-cols-2">
+							<div class="sm:col-span-2">
+								<span class="{{ labelClass }}">Alignement</span>
+								<div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Alignement">
+									{% for value, label in {
+										face: 'Face',
+										heel: 'Heel',
+										tweener: 'Tweener'
+									} %}
+										<label
+											class="border-line has-checked:border-gold has-checked:bg-surface-3 flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-bold uppercase transition-colors"
+										>
+											<input
+												type="radio"
+												name="fields[alignment]"
+												value="{{ value }}"
+												x-model="alignment"
+												class="sr-only"
+											/>
+											<span
+												class="inline-block size-2 shrink-0 rounded-full {{
+												{
+													face: 'bg-face',
+													heel: 'bg-heel',
+													tweener: 'bg-tweener'
+												}[value]
+												}}"
+											>
+
+											</span>
+											{{ label }}
+										</label>
+									{% endfor %}
+								</div>
+							</div>
+							<div>
+								<label for="proposal-roster" class="{{ labelClass }}">Roster souhaité</label>
+								<select id="proposal-roster" name="fields[roster]" x-model="roster" class="{{ inputClass }}">
+									<option value="raw">
+										Raw
+									</option>
+									<option value="smackdown">
+										SmackDown
+									</option>
+									<option value="nxt">
+										NXT
+									</option>
+									<option value="bcw">
+										BCW
+									</option>
+									<option value="aew">
+										AEW
+									</option>
+									<option value="freeAgent">
+										Free Agent
+									</option>
+									<option value="hallOfFamer">
+										Hall of Famer
+									</option>
+								</select>
+							</div>
+							<div>
+								<label for="proposal-finisher" class="{{ labelClass }}">Finisher</label>
+								<input
+									type="text"
+									id="proposal-finisher"
+									name="fields[finisher]"
+									x-model="finisher"
+									placeholder="Sly Bomb"
+									class="{{ inputClass }}"
+								/>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="proposal-shortDescription" class="{{ labelClass }}">
+									Punchline (200 caractères max)
+								</label>
+								<textarea
+									id="proposal-shortDescription"
+									name="fields[shortDescription]"
+									rows="2"
+									maxlength="200"
+									placeholder="La phrase qui résume ton personnage."
+									class="{{ inputClass }}"
+								>
+									{{- guestEntry.shortDescription ?? '' -}}
+								</textarea>
+							</div>
+							<div class="sm:col-span-2">
+								<label for="proposal-proposalBio" class="{{ labelClass }}">Bio / gimmick</label>
+								<textarea
+									id="proposal-proposalBio"
+									name="fields[proposalBio]"
+									rows="6"
+									maxlength="3000"
+									placeholder="Son histoire, son gimmick, ses rivalités rêvées…"
+									class="{{ inputClass }}"
+								>
+									{{- guestEntry.proposalBio ?? '' -}}
+								</textarea>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<legend class="mb-5 flex items-baseline gap-3">
+							<span class="font-display text-gold text-2xl font-bold">04</span>
+							<span class="font-display text-base font-bold uppercase">Qui es-tu ?</span>
+						</legend>
+						<div class="grid gap-5 sm:grid-cols-2">
+							<div>
+								<label for="proposal-proposerPseudo" class="{{ labelClass }}">Ton pseudo *</label>
+								<input
+									type="text"
+									id="proposal-proposerPseudo"
+									name="fields[proposerPseudo]"
+									value="{{ guestEntry.proposerPseudo ?? '' }}"
+									maxlength="100"
+									required
+									placeholder="Pseudo Discord / Twitch"
+									class="{{ inputClass }}"
+								/>
+								{% if guestEntry and (guestEntry.getErrors('proposerPseudo')|length) %}
+									<p class="text-heel mt-1.5 text-xs font-semibold">
+										{{ guestEntry.getErrors('proposerPseudo')|first }}
+									</p>
+								{% endif %}
+							</div>
+							<div>
+								<label for="proposal-proposerEmail" class="{{ labelClass }}">Ton email *</label>
+								<input
+									type="email"
+									id="proposal-proposerEmail"
+									name="fields[proposerEmail]"
+									value="{{ guestEntry.proposerEmail ?? '' }}"
+									required
+									placeholder="toi@exemple.com"
+									class="{{ inputClass }}"
+								/>
+								{% if guestEntry and (guestEntry.getErrors('proposerEmail')|length) %}
+									<p class="text-heel mt-1.5 text-xs font-semibold">
+										{{ guestEntry.getErrors('proposerEmail')|first }}
+									</p>
+								{% endif %}
+							</div>
+						</div>
+					</fieldset>
+
+					<div
+						class="border-line flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:justify-between"
+					>
+						<p class="text-ink-faint text-xs">
+							Ta proposition est relue par le staff avant toute publication. Ton email ne sert qu'à te
+							recontacter.
+						</p>
+						<button type="submit" class="btn-gold shrink-0">Envoyer ma proposition</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% if guestEntry %}
+	{# Erreur de validation : on ramène l'utilisateur sur le formulaire #}
+	<script>
+		window.addEventListener('DOMContentLoaded', () => { document.getElementById('proposer')?.scrollIntoView() })
+	</script>
+{% endif %}

@@ -3,6 +3,7 @@
 		"craftcms/ckeditor": "^4.1.0",
 		"craftcms/cms": "^5.0.0",
 		"craftcms/feed-me": "6.11.0",
+		"craftcms/guest-entries": "^4.0",
 		"ether/seo": "^5.0.0",
 		"mmikkel/retcon": "^3.2.0",
 		"nystudio107/craft-retour": "^5.0.2",
@@ -29,7 +30,7 @@
 		"sort-packages": true,
 		"optimize-autoloader": true,
 		"platform": {
-			"php": "^8.4"
+			"php": "8.4"
 		}
 	},
 	"scripts": {

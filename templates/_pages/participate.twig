@@ -13,13 +13,14 @@
 			<p class="text-ink-muted max-w-xl text-lg">
 				Crée ton personnage, choisis ton camp et écris ta légende dans le SWU.
 			</p>
-			{% if entry.externalLink %}
-				<div class="mt-8">
+			<div class="mt-8 flex flex-wrap gap-3">
+				<a href="#proposer" class="btn-gold">Proposer ma superstar</a>
+				{% if entry.externalLink %}
 					<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
-						Nous contacter
+						Rejoindre le discord
 					</a>
-				</div>
-			{% endif %}
+				{% endif %}
+			</div>
 		</div>
 	</section>
 
@@ -111,11 +112,14 @@
 		</section>
 	{% endif %}
 
+	{# Formulaire de proposition de superstar #}
+	{% include '_includes/_proposal-form' %}
+
 	{# CTA final #}
 	{% if entry.externalLink %}
 		{% include '_includes/_cta-participate' with {
 			ctaUrl: entry.externalLink,
-			ctaLabel: 'Nous contacter'
+			ctaLabel: 'Rejoindre le discord'
 		} %}
 	{% endif %}
 {% endblock %}

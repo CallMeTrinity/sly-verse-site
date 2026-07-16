@@ -1,0 +1,16 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 7b882246-b980-439b-923f-d839e8e4470b # Proposition de superstar
+handle: propositionsPersonnages
+maxAuthors: 1
+name: 'Propositions de personnages'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: channel

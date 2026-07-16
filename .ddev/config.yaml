@@ -1,7 +1,7 @@
 name: sly-verse-site
 type: craftcms
 docroot: web
-php_version: "8.2"
+php_version: "8.4"
 webserver_type: nginx-fpm
 router_http_port: "8080"
 router_https_port: "8443"
@@ -16,7 +16,6 @@ hooks:
         - exec: npm install
         - exec: npm run build
         - exec: composer install
-        - exec: npm run dev
 upload_dirs:
     - uploads
 webimage_extra_packages: [build-essential]

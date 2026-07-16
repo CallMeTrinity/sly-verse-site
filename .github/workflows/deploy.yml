@@ -1,0 +1,136 @@
+name: Deploy
+
+# Déploie sur slywrestlinguniverse.fr (hébergement Infomaniak).
+#
+#  - push sur main    -> le job "build" se lance tout seul (npm ci + vite build + composer)
+#  - le job "deploy"  -> reste en attente tant que tu n'as pas cliqué "Review deployments"
+#                        -> "Approve and deploy" dans l'onglet Actions.
+#
+# Le serveur n'a pas Node : le build Vite est fait ici, sur le runner, puis
+# rsync vers le serveur. Seuls les migrations Craft et le vidage de cache
+# tournent côté serveur (deploy.sh).
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Un seul déploiement à la fois (rsync + migrations concurrents = mauvaise idée).
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Build front (Vite -> web/dist)
+        run: |
+          npm ci
+          npm run build
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Install PHP dependencies
+        # --no-scripts : post-install-cmd lance `craft up`, qui veut une BDD (absente sur le runner)
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-scripts
+
+      - name: Package release
+        run: |
+          tar -czf deploy.tar.gz \
+            vendor \
+            web/dist \
+            web/index.php web/.htaccess web/favicon.png web/robots.txt web/SWU.jpg web/SWU.png \
+            config modules templates \
+            bootstrap.php craft composer.json composer.lock deploy.sh
+
+      - name: Upload release
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: deploy.tar.gz
+          retention-days: 5
+
+  deploy:
+    name: Deploy to production
+    needs: build
+    runs-on: ubuntu-latest
+    # Environment protégé par un "required reviewer" -> c'est CE qui met le job en pause.
+    environment:
+      name: production
+      url: https://slywrestlinguniverse.fr
+
+    steps:
+      - name: Download release
+        uses: actions/download-artifact@v4
+        with:
+          name: release
+
+      - name: Unpack release
+        run: |
+          mkdir -p release
+          tar -xzf deploy.tar.gz -C release
+
+      - name: Configure SSH key
+        run: |
+          install -m 700 -d ~/.ssh
+          install -m 600 /dev/stdin ~/.ssh/id_deploy <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh-keyscan -p "${{ vars.SSH_PORT }}" -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync to server
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT }}
+          APP_DIR: ${{ vars.APP_DIR }}
+        run: |
+          SSH="ssh -i $HOME/.ssh/id_deploy -p ${SSH_PORT} -o IdentitiesOnly=yes -o BatchMode=yes"
+          TARGET="${SSH_USER}@${SSH_HOST}:${APP_DIR}"
+
+          # vendor/ et web/dist/ sont entièrement régénérés par le runner :
+          # --delete pour purger les paquets retirés et les vieux assets hashés.
+          rsync -az --delete -e "$SSH" release/vendor/    "$TARGET/vendor/"
+          rsync -az --delete -e "$SSH" release/web/dist/  "$TARGET/web/dist/"
+
+          # Le reste : pas de --delete. On ne touche jamais à .env, web/uploads/,
+          # web/cpresources/, storage/ ni config/license.key (absents de l'archive).
+          rsync -az -e "$SSH" --exclude 'license.key' release/config/ "$TARGET/config/"
+          rsync -az -e "$SSH" release/modules/   "$TARGET/modules/"
+          rsync -az -e "$SSH" release/templates/ "$TARGET/templates/"
+          rsync -az -e "$SSH" --exclude 'dist' release/web/ "$TARGET/web/"
+          rsync -az -e "$SSH" \
+            release/bootstrap.php release/craft release/composer.json \
+            release/composer.lock release/deploy.sh \
+            "$TARGET/"
+
+      - name: Run deploy.sh on the server
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT }}
+          APP_DIR: ${{ vars.APP_DIR }}
+        run: |
+          ssh -i "$HOME/.ssh/id_deploy" -p "${SSH_PORT}" \
+            -o IdentitiesOnly=yes -o BatchMode=yes \
+            "${SSH_USER}@${SSH_HOST}" \
+            "cd '${APP_DIR}' && chmod +x deploy.sh && ./deploy.sh"
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_deploy

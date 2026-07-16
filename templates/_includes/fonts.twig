@@ -6,9 +6,43 @@
 {# Preload critical fonts to avoid FOUT #}
 <link rel="preload" href="/dist/fonts/unbounded-v7-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/dist/fonts/unbounded-v7-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/dist/fonts/manrope-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/dist/fonts/manrope-v20-latin-700.woff2" as="font" type="font/woff2" crossorigin />
 
 {# prettier-ignore-start #}
 <style>
+/* manrope-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/dist/fonts/manrope-v20-latin-regular.woff2') format('woff2');
+}
+/* manrope-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/dist/fonts/manrope-v20-latin-500.woff2') format('woff2');
+}
+/* manrope-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/dist/fonts/manrope-v20-latin-700.woff2') format('woff2');
+}
+/* manrope-800 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  src: url('/dist/fonts/manrope-v20-latin-800.woff2') format('woff2');
+}
 /* unbounded-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */

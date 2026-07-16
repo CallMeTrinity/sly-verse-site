@@ -1,0 +1,238 @@
+{# Navigation principale — source unique pour le header (desktop + mobile) et le footer #}
+{# Usage : {% include '_includes/_nav' with { variant: 'desktop' } %} — variants : desktop | mobile | footer #}
+{% import '_includes/macros' as macros %}
+
+{% set navRosters = [
+	{
+		label: 'Raw',
+		value: 'raw'
+	},
+	{
+		label: 'SmackDown',
+		value: 'smackdown'
+	},
+	{
+		label: 'NXT',
+		value: 'nxt'
+	},
+	{
+		label: 'BCW',
+		value: 'bcw'
+	},
+	{
+		label: 'AEW',
+		value: 'aew'
+	},
+	{
+		label: 'Free Agents',
+		value: 'freeAgent'
+	},
+	{
+		label: 'Hall of Famers',
+		value: 'hallOfFamer'
+	}
+] %}
+
+{% set navItems = [
+	{
+		label: 'Superstars',
+		url: '/superstars',
+		children: navRosters|map(
+			r => {
+				label: r.label,
+				url: '/superstars?roster=' ~ r.value,
+				roster: r.value
+			}
+		)
+	},
+	{
+		label: 'Shows',
+		url: '/shows',
+		children: [
+			{
+				label: 'Prochains shows',
+				url: '/shows'
+			},
+			{
+				label: 'Résultats',
+				url: '/resultats'
+			}
+		]
+	},
+	{
+		label: 'Planning',
+		url: '/planning'
+	},
+	{
+		label: 'Médiathèque',
+		url: '/mediatheque'
+	},
+	{
+		label: 'Articles',
+		url: '/articles'
+	},
+	{
+		label: 'Clips',
+		url: '/clips'
+	}
+] %}
+
+{% set navCta = {
+	label: 'Participer',
+	url: '/comment-participer'
+} %}
+
+{% if variant == 'desktop' %}
+	<nav class="hidden items-center gap-1 lg:flex" aria-label="Menu principal">
+		{% for item in navItems %}
+			{% if item.children is defined %}
+				<div
+					class="relative"
+					x-data="{ open: false }"
+					x-on:mouseenter="open = true"
+					x-on:mouseleave="open = false"
+					x-on:focusin="open = true"
+					x-on:focusout="if (!$el.contains($event.relatedTarget)) open = false"
+					x-on:keydown.escape="open = false"
+				>
+					<a
+						href="{{ item.url }}"
+						class="hover:text-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors"
+						x-bind:aria-expanded="open"
+					>
+						{{ item.label }}
+						<svg
+							class="size-3 transition-transform duration-200"
+							x-bind:class="open && 'rotate-180'"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="3"
+							aria-hidden="true"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+						</svg>
+					</a>
+					{# pt-3 = pont de survol entre le trigger et le panneau #}
+					<div x-show="open" x-cloak x-transition.origin.top class="absolute top-full left-0 z-50 pt-2">
+						<ul class="border-line bg-surface-2 w-60 rounded-xl border p-2 shadow-2xl shadow-black/50">
+							{% for child in item.children %}
+								<li>
+									<a
+										href="{{ child.url }}"
+										class="text-ink hover:bg-surface-3 hover:text-gold flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors"
+									>
+										{% if child.roster is defined %}
+											{{ macros.rosterDot(child.roster) }}
+										{% endif %}
+										{{ child.label }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% else %}
+				<a
+					href="{{ item.url }}"
+					class="hover:text-gold px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors"
+				>
+					{{ item.label }}
+				</a>
+			{% endif %}
+		{% endfor %}
+		<a href="{{ navCta.url }}" class="btn-primary ml-3 px-6! py-2.5!">{{ navCta.label }}</a>
+	</nav>
+{% elseif variant == 'mobile' %}
+	<div
+		x-data="{ open: false }"
+		x-on:toggle-menu.window="open = !open"
+		x-on:keydown.escape.window="open = false"
+		x-show="open"
+		x-cloak
+		x-trap.noscroll="open"
+		x-transition:enter="transition duration-200 ease-out"
+		x-transition:enter-start="opacity-0"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="transition duration-150 ease-in"
+		x-transition:leave-start="opacity-100"
+		x-transition:leave-end="opacity-0"
+		class="bg-bg/98 fixed inset-0 top-[57px] z-40 flex flex-col overflow-y-auto backdrop-blur-md lg:hidden"
+	>
+		<nav class="grid-container flex flex-1 flex-col gap-1 py-6" aria-label="Menu mobile">
+			{% for item in navItems %}
+				{% if item.children is defined %}
+					<div x-data="{ sub: false }" class="border-line border-b">
+						<div class="flex items-center justify-between">
+							<a
+								href="{{ item.url }}"
+								x-on:click="open = false"
+								class="flex-1 py-4 text-lg font-bold tracking-wide uppercase"
+							>
+								{{ item.label }}
+							</a>
+							<button
+								x-on:click="sub = !sub"
+								x-bind:aria-expanded="sub"
+								class="p-4"
+								aria-label="Ouvrir le sous-menu {{ item.label }}"
+							>
+								<svg
+									class="size-4 transition-transform duration-200"
+									x-bind:class="sub && 'rotate-180'"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="3"
+									aria-hidden="true"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+								</svg>
+							</button>
+						</div>
+						<ul x-show="sub" x-cloak x-transition.origin.top class="pb-3">
+							{% for child in item.children %}
+								<li>
+									<a
+										href="{{ child.url }}"
+										x-on:click="open = false"
+										class="text-ink-muted hover:text-gold flex items-center gap-3 py-2.5 pl-4 text-sm font-semibold transition-colors"
+									>
+										{% if child.roster is defined %}
+											{{ macros.rosterDot(child.roster) }}
+										{% endif %}
+										{{ child.label }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				{% else %}
+					<a
+						href="{{ item.url }}"
+						x-on:click="open = false"
+						class="border-line border-b py-4 text-lg font-bold tracking-wide uppercase"
+					>
+						{{ item.label }}
+					</a>
+				{% endif %}
+			{% endfor %}
+			<a href="{{ navCta.url }}" x-on:click="open = false" class="btn-primary mt-6">{{ navCta.label }}</a>
+		</nav>
+	</div>
+{% elseif variant == 'footer' %}
+	<ul class="space-y-2">
+		{% for item in navItems %}
+			<li>
+				<a href="{{ item.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">
+					{{ item.label }}
+				</a>
+			</li>
+		{% endfor %}
+		<li>
+			<a href="{{ navCta.url }}" class="text-ink-muted hover:text-gold text-sm transition-colors">
+				{{ navCta.label }}
+			</a>
+		</li>
+	</ul>
+{% endif %}

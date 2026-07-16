@@ -9,9 +9,7 @@
 	{% if not buttons.isEmpty %}
 		<div class="pt-10">
 			{% for button in buttons %}
-				{{
-					macros.button(button.url, button.text, 'btn mr-2', button.target)
-				}}
+				{{ macros.button(button.url, button.text, 'btn mr-2', button.target) }}
 			{% endfor %}
 		</div>
 	{% endif %}

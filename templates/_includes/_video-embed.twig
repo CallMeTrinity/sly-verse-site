@@ -6,31 +6,32 @@
 
 {# YouTube #}
 {% if 'youtube.com/watch?v=' in url %}
-	{% set videoId = url | split('v=') | last | split('&') | first %}
+	{% set videoId = url|split('v=')|last|split('&')|first %}
 	{% set embedUrl = 'https://www.youtube.com/embed/' ~ videoId %}
 {% elseif 'youtu.be/' in url %}
-	{% set videoId = url | split('youtu.be/') | last | split('?') | first %}
+	{% set videoId = url|split('youtu.be/')|last|split('?')|first %}
 	{% set embedUrl = 'https://www.youtube.com/embed/' ~ videoId %}
 {% elseif 'youtube.com/shorts/' in url %}
-	{% set videoId = url | split('shorts/') | last | split('?') | first %}
+	{% set videoId = url|split('shorts/')|last|split('?')|first %}
 	{% set embedUrl = 'https://www.youtube.com/embed/' ~ videoId %}
 
-{# Twitch clips #}
+	{# Twitch clips #}
 {% elseif 'clips.twitch.tv/' in url %}
-	{% set clipSlug = url | split('clips.twitch.tv/') | last | split('?') | first %}
+	{% set clipSlug = url|split('clips.twitch.tv/')|last|split('?')|first %}
 	{% set embedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clipSlug ~ '&parent=' ~ parentDomain ~ '&autoplay=false' %}
 {% elseif 'twitch.tv/' in url and '/clip/' in url %}
-	{% set clipSlug = url | split('/clip/') | last | split('?') | first %}
+	{% set clipSlug = url|split('/clip/')|last|split('?')|first %}
 	{% set embedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clipSlug ~ '&parent=' ~ parentDomain ~ '&autoplay=false' %}
 
-{# Twitch videos #}
+	{# Twitch videos #}
 {% elseif 'twitch.tv/videos/' in url %}
-	{% set twitchVideoId = url | split('videos/') | last | split('?') | first %}
-	{% set embedUrl = 'https://player.twitch.tv/?video=' ~ twitchVideoId ~ '&parent=' ~ parentDomain ~ '&autoplay=false' %}
+	{% set twitchVideoId = url|split('videos/')|last|split('?')|first %}
+	{% set embedUrl = 'https://player.twitch.tv/?video=' ~ twitchVideoId ~ '&parent=' ~ parentDomain ~ '&autoplay=false'
+	%}
 {% endif %}
 
 {% if embedUrl %}
-	<div class="aspect-video overflow-hidden rounded-lg bg-neutral-900">
+	<div class="bg-surface-2 aspect-video overflow-hidden rounded-lg">
 		<iframe
 			src="{{ embedUrl }}"
 			class="h-full w-full"

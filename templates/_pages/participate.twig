@@ -1,46 +1,121 @@
 {% extends '_layout' %}
 
 {% block content %}
-	{# Page Header #}
-	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
-		<div class="grid-container">
-			<h1 class="h1 text-center tracking-tight uppercase">{{ entry.title }}</h1>
+	{# Hero #}
+	<section class="relative overflow-hidden py-20 lg:py-28">
+		<div
+			class="absolute inset-0 bg-[repeating-linear-gradient(115deg,oklch(0.22_0.02_250)_0px,oklch(0.22_0.02_250)_2px,oklch(0.19_0.02_250)_2px,oklch(0.19_0.02_250)_40px)]"
+		></div>
+		<div class="from-bg absolute inset-0 bg-linear-to-t via-transparent to-transparent"></div>
+		<div class="grid-container relative">
+			<span class="eyebrow">Rejoins la fédération</span>
+			<h1 class="h1 mb-4">{{ entry.title }}</h1>
+			<p class="text-ink-muted max-w-xl text-lg">
+				Crée ton personnage, choisis ton camp et écris ta légende dans le SWU.
+			</p>
+			{% if entry.externalLink %}
+				<div class="mt-8">
+					<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+						Nous contacter
+					</a>
+				</div>
+			{% endif %}
 		</div>
 	</section>
 
-	{# Instructions #}
-	{% if entry.richContent | length %}
-		<section class="bg-neutral-950 py-12 text-white lg:py-20">
+	{# Étapes numérotées (Matrix participationSteps si présent, sinon fallback richContent) #}
+	{% set steps = [] %}
+	{% if craft.app.fields.getFieldByHandle('participationSteps') %}
+		{% set steps = entry.participationSteps.all() ?? [] %}
+	{% endif %}
+
+	{% if steps|length %}
+		<section class="bg-surface py-14 lg:py-24">
 			<div class="grid-container">
-				<h2 class="h3 mb-8 uppercase">Instructions</h2>
-				<div class="prose prose-invert max-w-none text-neutral-300">
-					{{ entry.richContent }}
+				<div class="mb-10" x-data x-reveal>
+					<span class="eyebrow">Mode d'emploi</span>
+					<h2 class="h2 mb-0">Comment ça marche</h2>
+				</div>
+				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{% for step in steps %}
+						<div
+							class="border-line bg-surface-2 rounded-lg border p-7"
+							x-data
+							x-reveal.delay
+							style="--i: {{ loop.index }}"
+						>
+							<span class="font-display text-gold mb-4 block text-5xl font-bold">
+								{{ '%02d'|format(loop.index) }}
+							</span>
+							<h3 class="h5 mb-3">{{ step.stepTitle ?? step.title }}</h3>
+							{% if step.stepDescription ?? null %}
+								<div class="prose text-ink-muted max-w-none text-sm">
+									{{ step.stepDescription }}
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% elseif entry.richContent|length %}
+		<section class="bg-surface py-14 lg:py-24">
+			<div class="grid-container">
+				<div class="mb-10" x-data x-reveal>
+					<span class="eyebrow">Mode d'emploi</span>
+					<h2 class="h2 mb-0">Instructions</h2>
+				</div>
+				<div class="border-line bg-surface-2 rounded-lg border p-7 lg:p-10">
+					<div class="prose text-ink-muted max-w-none">
+						{{ entry.richContent }}
+					</div>
 				</div>
 			</div>
 		</section>
 	{% endif %}
 
-	{# Rules #}
-	{% if entry.getFieldValue('richContent2') | length %}
-		<section class="bg-black py-12 text-white lg:py-20">
+	{# Règlement — accordéon #}
+	{% if entry.getFieldValue('richContent2')|length %}
+		<section class="py-14 lg:py-24">
 			<div class="grid-container">
-				<h2 class="h3 mb-8 uppercase">R&egrave;gles</h2>
-				<div class="prose prose-invert max-w-none text-neutral-300">
-					{{ entry.getFieldValue('richContent2') }}
+				<div class="mb-8" x-data x-reveal>
+					<span class="eyebrow">Les règles du jeu</span>
+					<h2 class="h2 mb-0">Règlement</h2>
+				</div>
+				<div class="border-line bg-surface-2 overflow-hidden rounded-lg border" x-data="{ open: false }">
+					<button
+						x-on:click="open = !open"
+						x-bind:aria-expanded="open"
+						class="hover:bg-surface-3 flex w-full items-center justify-between px-6 py-5 text-left transition-colors"
+					>
+						<span class="font-display text-base font-bold uppercase">Lire le règlement complet</span>
+						<svg
+							class="size-5 shrink-0 transition-transform duration-200"
+							x-bind:class="open && 'rotate-180'"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.5"
+							aria-hidden="true"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+						</svg>
+					</button>
+					<div x-show="open" x-cloak x-transition.origin.top class="border-line border-t px-6 py-6 lg:px-8">
+						<div class="prose text-ink-muted max-w-none">
+							{{ entry.getFieldValue('richContent2') }}
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
 	{% endif %}
 
-	{# Contact Link #}
+	{# CTA final #}
 	{% if entry.externalLink %}
-		<section class="bg-neutral-950 py-12 text-white lg:py-20">
-			<div class="grid-container text-center">
-				<h2 class="h3 mb-6 uppercase">Envie de participer ?</h2>
-				<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn border-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700">
-					Nous contacter
-				</a>
-			</div>
-		</section>
+		{% include '_includes/_cta-participate' with {
+			ctaUrl: entry.externalLink,
+			ctaLabel: 'Nous contacter'
+		} %}
 	{% endif %}
 {% endblock %}

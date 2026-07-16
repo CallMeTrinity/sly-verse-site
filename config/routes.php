@@ -18,8 +18,5 @@
  * set to the value `2012`.
  */
 
-return [
-	'resultats' => ['template' => '_pages/shows/past-index'],
-	'shows-a-venir' => ['template' => '_pages/shows/upcoming-index'],
-	'mediatheque' => ['template' => '_pages/media/index'],
-];
+// Toutes les routes du site sont gérées dans le CP (Settings → Routes / config/project/routes/).
+return [];

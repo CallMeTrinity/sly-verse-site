@@ -1,0 +1,40 @@
+{# Card show — expects `show` (entry de la section shows), option `featured` (bool) #}
+{% import '_includes/macros' as macros %}
+{% set image = show.mainImage.one() %}
+{% set featured = featured ?? false %}
+
+<a
+	href="{{ show.url }}"
+	class="group border-line bg-surface-2 hover:border-line-strong block h-full overflow-hidden rounded-lg border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/40"
+>
+	<div class="bg-surface-3 relative overflow-hidden {{ featured ? 'aspect-[21/9]' : 'aspect-video' }}">
+		{% if image %}
+			{{
+				macros.image(
+					image,
+					featured
+						? {
+							width: 1280,
+							height: 549
+						}
+						: {
+							width: 640,
+							height: 360
+						},
+					'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
+				)
+			}}
+		{% endif %}
+		{% if show.showType.value ?? null %}
+			{{ macros.showTypeBadge(show.showType, 'absolute top-3 left-3') }}
+		{% endif %}
+	</div>
+	<div class="{{ featured ? 'p-6 lg:p-8' : 'p-5' }}">
+		{% if show.eventDateTime %}
+			<p class="text-gold mb-2 text-[13px] font-bold tracking-wide uppercase">
+				{{ show.eventDateTime|date('d/m/Y — H\\hi') }}
+			</p>
+		{% endif %}
+		<h3 class="{{ featured ? 'h4' : 'h5' }} group-hover:text-gold mb-0 transition-colors">{{ show.title }}</h3>
+	</div>
+</a>

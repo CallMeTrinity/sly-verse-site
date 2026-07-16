@@ -2,86 +2,51 @@
 {% set image = entry.mainImage.one() %}
 {% set timestamp = entry.eventDateTime ? entry.eventDateTime.timestamp * 1000 : 0 %}
 
-{# Hero with countdown #}
-<section
-	class="relative bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24"
-	x-data="{
-		target: {{ timestamp }},
-		days: 0, hours: 0, minutes: 0, seconds: 0,
-		isPast: false,
-		init() {
-			this.update()
-			setInterval(() => this.update(), 1000)
-		},
-		update() {
-			const diff = this.target - Date.now()
-			if (diff <= 0) { this.isPast = true; this.days = this.hours = this.minutes = this.seconds = 0; return }
-			this.days    = Math.floor(diff / 86400000)
-			this.hours   = Math.floor((diff % 86400000) / 3600000)
-			this.minutes = Math.floor((diff % 3600000) / 60000)
-			this.seconds = Math.floor((diff % 60000) / 1000)
-		},
-		pad(n) { return String(n).padStart(2, '0') }
-	}"
->
+{# Hero avec countdown #}
+<section class="relative overflow-hidden py-16 lg:py-24" x-data="countdown({{ timestamp }})">
 	{% if image %}
-		<div class="absolute inset-0 overflow-hidden">
-			{{ macros.image(image, { width: 1920 }, 'h-full w-full object-cover opacity-20') }}
-			<div class="absolute inset-0 bg-linear-to-t from-black via-black/80 to-black/50"></div>
+		<div class="absolute inset-0" data-hero-bg>
+			{{ macros.image(image, { width: 1920 }, 'h-full w-full object-cover opacity-25') }}
 		</div>
 	{% endif %}
+	<div class="from-bg via-bg/85 absolute inset-0 bg-linear-to-t to-black/40"></div>
 
 	<div class="grid-container relative">
-		<div class="mb-4 flex flex-wrap gap-2">
+		<div class="mb-5 flex flex-wrap gap-2">
 			{% if entry.showType.value ?? null %}
-				<span class="rounded-sm bg-red-600 px-3 py-1 text-xs font-bold uppercase">
-					{{ entry.showType.label }}
-				</span>
+				{{ macros.showTypeBadge(entry.showType) }}
 			{% endif %}
-			<span class="rounded-sm bg-green-700 px-3 py-1 text-xs font-bold uppercase">À venir</span>
+			<span class="bg-face rounded-sm px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-white uppercase">
+				À venir
+			</span>
 		</div>
 
-		<h1 class="h1 mb-4 tracking-tight uppercase">{{ entry.title }}</h1>
+		<h1 class="h1 mb-4">{{ entry.title }}</h1>
 
 		{% if entry.eventDateTime %}
-			<p class="mb-8 text-lg text-neutral-300">
+			<p class="text-gold mb-8 text-lg font-bold tracking-wide uppercase">
 				{{ entry.eventDateTime | date('l d F Y \\à H\\hi', 'Europe/Paris') | capitalize }}
 			</p>
 		{% endif %}
 
 		{# Countdown #}
 		{% if timestamp %}
-			<div x-show="!isPast" class="mb-8">
-				<p class="mb-4 text-sm font-semibold tracking-widest text-neutral-400 uppercase">Commence dans</p>
-				<div class="flex flex-wrap gap-4">
-					<div class="min-w-[80px] rounded-lg bg-white/10 px-4 py-3 text-center backdrop-blur-sm">
-						<span class="block text-3xl font-black tabular-nums" x-text="pad(days)">00</span>
-						<span class="mt-1 block text-xs text-neutral-400 uppercase">Jours</span>
-					</div>
-					<div class="min-w-[80px] rounded-lg bg-white/10 px-4 py-3 text-center backdrop-blur-sm">
-						<span class="block text-3xl font-black tabular-nums" x-text="pad(hours)">00</span>
-						<span class="mt-1 block text-xs text-neutral-400 uppercase">Heures</span>
-					</div>
-					<div class="min-w-[80px] rounded-lg bg-white/10 px-4 py-3 text-center backdrop-blur-sm">
-						<span class="block text-3xl font-black tabular-nums" x-text="pad(minutes)">00</span>
-						<span class="mt-1 block text-xs text-neutral-400 uppercase">Minutes</span>
-					</div>
-					<div class="min-w-[80px] rounded-lg bg-white/10 px-4 py-3 text-center backdrop-blur-sm">
-						<span class="block text-3xl font-black tabular-nums" x-text="pad(seconds)">00</span>
-						<span class="mt-1 block text-xs text-neutral-400 uppercase">Secondes</span>
-					</div>
+			<div x-show="!isPast" class="mb-9">
+				<p class="text-ink-faint mb-4 text-sm font-bold tracking-widest uppercase">Commence dans</p>
+				<div class="flex flex-wrap gap-3 sm:gap-4">
+					{% for unit in [['days', 'Jours'], ['hours', 'Heures'], ['minutes', 'Minutes'], ['seconds', 'Secondes']] %}
+						<div class="border-line bg-surface-2/80 min-w-[80px] rounded-lg border px-4 py-3 text-center backdrop-blur-sm">
+							<span class="font-display block text-3xl font-bold tabular-nums" x-text="pad({{ unit[0] }})">00</span>
+							<span class="text-ink-faint mt-1 block text-xs uppercase">{{ unit[1] }}</span>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		{% endif %}
 
-		{# CTA Twitch/stream #}
+		{# CTA stream #}
 		{% if entry.externalLink %}
-			<a
-				href="{{ entry.externalLink }}"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="btn border-red-600 bg-red-600 text-white hover:border-red-700 hover:bg-red-700"
-			>
+			<a href="{{ entry.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
 				Regarder sur Twitch
 			</a>
 		{% endif %}
@@ -90,9 +55,9 @@
 
 {# Description #}
 {% if entry.richContent | length %}
-	<section class="bg-neutral-950 py-12 text-white lg:py-20">
+	<section class="bg-surface py-12 lg:py-16">
 		<div class="grid-container" x-data x-reveal>
-			<div class="prose prose-invert max-w-none text-neutral-300">
+			<div class="prose text-ink-muted max-w-none">
 				{{ entry.richContent }}
 			</div>
 		</div>
@@ -102,41 +67,17 @@
 {# Carte annoncée (sans résultats) #}
 {% set matches = entry.matchCard.all() %}
 {% if matches | length %}
-	<section class="bg-black py-12 text-white lg:py-20">
+	<section class="py-12 lg:py-20">
 		<div class="grid-container">
-			<h2 class="h3 mb-2 uppercase" x-data x-reveal>Carte annoncée</h2>
-			<p class="mb-8 text-sm text-neutral-500">Les résultats seront disponibles après le show.</p>
-			<div class="space-y-4">
+			<div class="mb-8" x-data x-reveal>
+				<span class="eyebrow">Le programme</span>
+				<h2 class="h2 mb-2">Carte annoncée</h2>
+				<p class="text-ink-faint text-sm">Les résultats seront disponibles après le show.</p>
+			</div>
+			<div class="space-y-6">
 				{% for match in matches %}
-					<div class="rounded-lg border border-white/10 bg-neutral-900 p-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
-						<div class="mb-3 flex flex-wrap items-center gap-2">
-							{% if match.matchType %}
-								<span class="rounded-sm bg-neutral-800 px-2 py-1 text-xs font-semibold uppercase text-neutral-400">
-									{{ match.matchType }}
-								</span>
-							{% endif %}
-							{% if match.stipulation %}
-								<span class="rounded-sm bg-red-900/50 px-2 py-1 text-xs font-semibold uppercase text-red-400">
-									{{ match.stipulation }}
-								</span>
-							{% endif %}
-						</div>
-
-						<h3 class="h5 mb-3 text-white">{{ match.matchTitle ?? match.title }}</h3>
-
-						{% set fighters = match.fighters.all() %}
-						{% if fighters | length %}
-							<div class="flex flex-wrap gap-2">
-								{% for fighter in fighters %}
-									<a
-										href="{{ fighter.url }}"
-										class="rounded-full bg-neutral-800 px-3 py-1 text-sm text-white transition-colors hover:bg-neutral-700"
-									>
-										{{ fighter.title }}
-									</a>
-								{% endfor %}
-							</div>
-						{% endif %}
+					<div x-data x-reveal.delay style="--i: {{ loop.index }}">
+						{% include '_includes/_match-card' with { match: match, showResults: false } only %}
 					</div>
 				{% endfor %}
 			</div>

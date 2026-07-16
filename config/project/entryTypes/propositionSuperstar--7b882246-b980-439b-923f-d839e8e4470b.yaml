@@ -1,0 +1,224 @@
+color: orange
+description: 'Superstar proposée par un membre de la communauté via le formulaire de la page Participer'
+fieldLayouts:
+  40f92fa7-d669-46a8-a3f6-b4966a188d72:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3578225c-417c-495c-8f54-908e4ced4ac1 # Pseudo du membre
+            handle: null
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 032d53a8-b28f-4b3c-a3cd-e9043dbbb4da
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: c3293a68-e449-4a40-8873-d420aa1561f3 # Email du membre
+            handle: null
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3fc9b8bd-6eaf-4ba6-a658-3f717701b0a2
+            userCondition: null
+            warning: null
+            width: 50
+        name: Proposition
+        uid: e8c9101d-7373-4de5-81f5-a0f534353ec5
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3e1c5ada-e455-476e-a1c9-8f739eeb9dce # Nom de ring
+            handle: null
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a77188c0-1176-4082-a40c-8a05f7cb3494
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 421b99f8-110b-4e5f-9fcb-dd00a1b61d41 # Genre
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a10cf3f0-773f-486e-8f4d-7640985fb9d4
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 9d4ead9a-be68-4068-8951-d44d1242f7f6 # Ville d'origine
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ee81cd6d-c29b-421d-b0bc-50c42027be33
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 3835ca37-9fef-4fd0-b183-3837223d3c71 # Pays d'origine
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a04848d6-a12e-4fa9-8c52-3fd2e41aec22
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: e775c6ec-5d74-4213-8643-cac989a5fd98 # Taille
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fdca6c37-3bb0-4795-bf61-03e88bb8689f
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: cf8271af-e15e-4b59-b37f-6067d46f7d7c # Poids
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 422fab45-b124-4b74-9934-3dd7ce4b949a
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 235945f3-c99a-4e44-972a-2e56c18f7843 # Status (Face/Heel)
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0535a56e-3348-4965-a13c-8d73abdb7cdf
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3 # Roster
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1a8d07fe-b000-4191-960f-56a3a795c0ef
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: b786d593-d6e5-4df6-8f84-d6b51b741daa # Finisher
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 777a9a8d-795e-4372-9592-ea5507b47347
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 156177ef-b718-4dfe-9d8b-dcd8eb5f98af # Description Courte
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 29284331-e435-43cb-80dc-ce6e5787547e
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2026-07-16T12:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 4a2cfaaa-355b-411a-bffa-203af6572122 # Bio proposée
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4079ead7-a31a-487f-893b-11cb1b2b7a54
+            userCondition: null
+            warning: null
+            width: 100
+        name: Personnage
+        uid: 6e67ae81-af3b-42cf-8fa9-3ffe80495d5b
+        userCondition: null
+handle: propositionSuperstar
+hasTitleField: false
+icon: user-plus
+name: 'Proposition de superstar'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{ringName}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

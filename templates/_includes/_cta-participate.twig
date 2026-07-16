@@ -1,0 +1,17 @@
+{# Bannière CTA "Deviens une Superstar" — réutilisable (homepage, shows, participer) #}
+{# Option : `ctaUrl` (défaut /comment-participer), `ctaLabel` #}
+<section class="relative overflow-hidden py-20 lg:py-28">
+	<div class="from-blue absolute inset-0 bg-linear-to-br to-[oklch(0.4_0.1_260)]"></div>
+	<div
+		class="absolute inset-0 bg-[repeating-linear-gradient(115deg,transparent_0px,transparent_2px,oklch(0.16_0.02_250/0.12)_2px,oklch(0.16_0.02_250/0.12)_40px)]"
+	></div>
+	<div class="grid-container relative text-center">
+		<h2 class="h2 text-white">Deviens une Superstar</h2>
+		<p class="mx-auto mb-9 max-w-2xl text-lg leading-relaxed text-white/90">
+			Crée ton personnage, rejoins un roster et écris ta légende dans le SWU. Rejoins la fédération dès aujourd'hui.
+		</p>
+		<a href="{{ ctaUrl ?? '/comment-participer' }}" class="btn bg-bg text-ink hover:bg-black">
+			{{ ctaLabel ?? 'Comment participer' }}
+		</a>
+	</div>
+</section>

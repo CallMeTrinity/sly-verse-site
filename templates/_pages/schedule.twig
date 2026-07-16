@@ -1,51 +1,224 @@
 {% extends '_layout' %}
 
 {% block content %}
+	{# Sérialisation des événements : streams + shows #}
+	{% set events = [] %}
+	{% for stream in entry.upcomingStreams.all() %}
+		{% if stream.eventDateTime %}
+			{% set events =
+				events|merge(
+					[
+						{
+							date: stream.eventDateTime|date('Y-m-d'),
+							time: stream.eventDateTime|date('H:i'),
+							title: stream.title,
+							type: 'stream',
+							url: stream.externalLink ?? null
+						}
+					]
+				)
+			%}
+		{% endif %}
+	{% endfor %}
+	{% for show in craft.entries.section('shows').all() %}
+		{% if show.eventDateTime %}
+			{% set events =
+				events|merge(
+					[
+						{
+							date: show.eventDateTime|date('Y-m-d'),
+							time: show.eventDateTime|date('H:i'),
+							title: show.title,
+							type: 'show',
+							url: show.url
+						}
+					]
+				)
+			%}
+		{% endif %}
+	{% endfor %}
+
 	{# Page Header #}
-	<section class="bg-linear-to-br from-black via-neutral-900 to-neutral-800 py-16 text-white lg:py-24">
+	<section class="bg-surface py-16 lg:py-24">
 		<div class="grid-container">
-			<h1 class="h1 text-center tracking-tight uppercase">Planning Streams</h1>
+			<span class="eyebrow">Ne rate rien</span>
+			<h1 class="h1 mb-3">Planning</h1>
+			<p class="text-ink-muted">
+				Streams, shows et Premium Live Events — tout l'agenda du SWU.
+			</p>
 		</div>
 	</section>
 
-	{# Upcoming Streams #}
-	<section class="bg-black py-12 text-white lg:py-20">
+	{# Calendrier #}
+	<section class="py-12 lg:py-20">
 		<div class="grid-container">
-			{% set streams = entry.upcomingStreams.all() %}
-			{% if streams | length %}
+			{{
+				tag(
+					'script',
+					{
+						type: 'application/json',
+						id: 'calendar-events',
+						html: events|json_encode
+					}
+				)
+			}}
+
+			<div x-data="calendar(JSON.parse(document.getElementById('calendar-events').textContent))">
+				{# Barre de navigation du mois #}
+				<div class="mb-6 flex items-center justify-between">
+					<h2 class="font-display text-xl font-bold uppercase lg:text-2xl" x-text="monthLabel"></h2>
+					<div class="flex gap-2">
+						<button
+							x-on:click="prev()"
+							class="border-line hover:border-gold hover:text-gold rounded-md border p-2.5 transition-colors"
+							aria-label="Mois précédent"
+						>
+							<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+							</svg>
+						</button>
+						<button
+							x-on:click="next()"
+							class="border-line hover:border-gold hover:text-gold rounded-md border p-2.5 transition-colors"
+							aria-label="Mois suivant"
+						>
+							<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+							</svg>
+						</button>
+					</div>
+				</div>
+
+				{# Légende #}
+				<div class="text-ink-muted mb-4 flex flex-wrap gap-5 text-xs font-bold uppercase">
+					<span class="flex items-center gap-2"><span class="bg-gold size-2.5 rounded-full"></span>Show</span>
+					<span class="flex items-center gap-2"><span class="bg-blue size-2.5 rounded-full"></span>Stream</span>
+				</div>
+
+				{# Grille calendrier (desktop/tablette) #}
+				<div class="border-line hidden overflow-hidden rounded-lg border md:block">
+					<div class="border-line bg-surface-2 grid grid-cols-7 border-b">
+						{% for dayName in ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] %}
+							<div class="text-ink-faint px-2 py-3 text-center text-xs font-extrabold tracking-wide uppercase">
+								{{ dayName }}
+							</div>
+						{% endfor %}
+					</div>
+					<div class="grid grid-cols-7">
+						<template x-for="(cell, i) in cells" :key="i">
+							<div
+								class="border-line/60 min-h-28 border-t border-r p-1.5 [&:nth-child(7n)]:border-r-0"
+								:class="cell.inMonth ? 'bg-surface' : 'bg-bg'"
+							>
+								<span
+									class="mb-1.5 flex size-7 items-center justify-center rounded-full text-xs font-bold"
+									:class="{
+										'bg-gold text-black': cell.isToday,
+										'text-ink': cell.inMonth && !cell.isToday,
+										'text-ink-faint/50': !cell.inMonth,
+									}"
+									x-text="cell.day"
+								>
+
+								</span>
+								<div class="space-y-1">
+									<template x-for="event in cell.events">
+										<a
+											:href="event.url || '#'"
+											class="block truncate rounded-sm px-1.5 py-1 text-[11px] leading-tight font-bold"
+											:class="event.type === 'show' ? 'bg-gold text-black hover:bg-gold-bright' : 'bg-blue text-white hover:bg-blue-bright'"
+											:title="event.title"
+										>
+											<span x-show="event.time && event.time !== '00:00'" x-text="event.time + ' · '"></span><span x-text="event.title"></span>
+										</a>
+									</template>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+
+				{# Vue agenda (mobile) #}
+				<div class="md:hidden">
+					<template x-if="agenda.length">
+						<div class="border-line divide-line divide-y overflow-hidden rounded-lg border">
+							<template x-for="(event, i) in agenda" :key="i">
+								<a
+									:href="event.url || '#'"
+									class="bg-surface-2 hover:bg-surface-3 flex items-center gap-4 p-4 transition-colors"
+								>
+									<span
+										class="size-2.5 shrink-0 rounded-full"
+										:class="event.type === 'show' ? 'bg-gold' : 'bg-blue'"
+									>
+
+									</span>
+									<div class="min-w-0 flex-1">
+										<p class="text-ink-faint text-xs font-bold uppercase">
+											<span x-text="agendaLabel(event)"></span>
+											<span x-show="event.time && event.time !== '00:00'" x-text="' — ' + event.time"></span>
+										</p>
+										<p class="font-display truncate text-sm font-bold uppercase" x-text="event.title"></p>
+									</div>
+								</a>
+							</template>
+						</div>
+					</template>
+					<template x-if="!agenda.length">
+						<p class="text-ink-faint py-8 text-center text-sm">
+							Rien de prévu ce mois-ci.
+						</p>
+					</template>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{# Liste détaillée des prochains streams #}
+	{% set streams = entry.upcomingStreams.all()|filter(s => s.eventDateTime and s.eventDateTime >= now) %}
+	{% if streams|length %}
+		<section class="bg-surface py-12 lg:py-20">
+			<div class="grid-container">
+				<div class="mb-8" x-data x-reveal>
+					<span class="eyebrow">En direct</span>
+					<h2 class="h2 mb-0">Prochains streams</h2>
+				</div>
 				<div class="space-y-4">
 					{% for stream in streams %}
-						<div class="rounded-lg border border-white/10 bg-neutral-900 p-6 transition-colors hover:border-white/20">
-							<div class="grid-row items-center">
-								<div class="grid-col w-full sm:w-auto sm:shrink-0">
-									{% if stream.eventDateTime %}
-										<div class="mb-3 inline-block rounded-lg bg-red-600 px-4 py-2 text-center sm:mb-0">
-											<span class="block text-2xl font-bold leading-none">{{ stream.eventDateTime | date('d') }}</span>
-											<span class="block text-xs uppercase">{{ stream.eventDateTime | date('M Y') }}</span>
-											<span class="block text-sm font-medium">{{ stream.eventDateTime | date('H\\hi') }}</span>
-										</div>
-									{% endif %}
+						<div
+							class="border-line bg-surface-2 hover:border-line-strong flex flex-wrap items-center gap-5 rounded-lg border p-5 transition-colors sm:p-6"
+						>
+							{% if stream.eventDateTime %}
+								<div class="bg-blue inline-block shrink-0 rounded-lg px-4 py-2.5 text-center text-white">
+									<span class="font-display block text-2xl leading-none font-bold">
+										{{ stream.eventDateTime|date('d') }}
+									</span>
+									<span class="block text-xs uppercase">{{ stream.eventDateTime|date('M Y') }}</span>
+									<span class="block text-sm font-bold">{{ stream.eventDateTime|date('H\\hi') }}</span>
 								</div>
-								<div class="grid-col flex-1">
-									<h3 class="h5 mb-1 text-white">{{ stream.title }}</h3>
-									{% if stream.shortDescription ?? null %}
-										<p class="text-sm text-neutral-400">{{ stream.shortDescription }}</p>
-									{% endif %}
-								</div>
-								{% if stream.externalLink ?? null %}
-									<div class="grid-col mt-3 w-full sm:mt-0 sm:w-auto">
-										<a href="{{ stream.externalLink }}" target="_blank" rel="noopener noreferrer" class="btn border-red-600 bg-red-600 text-sm text-white hover:bg-red-700 hover:border-red-700">
-											Twitch
-										</a>
-									</div>
+							{% endif %}
+							<div class="min-w-0 flex-1">
+								<h3 class="h5 mb-1">{{ stream.title }}</h3>
+								{% if stream.shortDescription ?? null %}
+									<p class="text-ink-muted text-sm">
+										{{ stream.shortDescription }}
+									</p>
 								{% endif %}
 							</div>
+							{% if stream.externalLink ?? null %}
+								<a
+									href="{{ stream.externalLink }}"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="btn-primary shrink-0 px-6! py-2.5!"
+								>
+									Twitch
+								</a>
+							{% endif %}
 						</div>
 					{% endfor %}
 				</div>
-			{% else %}
-				<p class="text-center text-neutral-500">Aucun stream pr&eacute;vu pour le moment.</p>
-			{% endif %}
-		</div>
-	</section>
+			</div>
+		</section>
+	{% endif %}
 {% endblock %}

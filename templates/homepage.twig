@@ -4,45 +4,80 @@
 	{% import '_includes/macros' as macros %}
 	{% set entry = craft.entries.section('pageAccueil').one() %}
 
-	{# Hero Section #}
+	{# Hero #}
 	{% set heroImage = entry.mainImage.one() %}
-	<section class="relative overflow-hidden bg-black py-20 text-white lg:py-32">
+	<section class="relative flex min-h-[88svh] items-center overflow-hidden" data-hero>
 		{% if heroImage %}
-			<div class="absolute inset-0">
-				{{ macros.image(heroImage, { width: 1920, height: 1080 }, 'h-full w-full object-cover') }}
-				<div class="absolute inset-0 bg-black/70"></div>
+			<div class="absolute inset-0" data-hero-bg>
+				{{
+					macros.image(
+						heroImage,
+						{
+							width: 1920,
+							height: 1080
+						},
+						'h-full w-full object-cover'
+					)
+				}}
 			</div>
 		{% else %}
-			<div class="absolute inset-0 bg-linear-to-br from-black via-neutral-900 to-neutral-800"></div>
+			<div
+				class="absolute inset-0 bg-[repeating-linear-gradient(115deg,oklch(0.22_0.02_250)_0px,oklch(0.22_0.02_250)_2px,oklch(0.19_0.02_250)_2px,oklch(0.19_0.02_250)_40px)]"
+			></div>
 		{% endif %}
-		<div class="grid-container relative" x-data x-reveal>
-			<h1 class="h1 mb-6 text-center tracking-tight uppercase">{{ entry.heroTitle }}</h1>
+		<div class="from-bg via-bg/70 absolute inset-0 bg-linear-to-t to-black/30"></div>
+
+		<div class="grid-container relative w-full py-24">
+			<div
+				class="border-gold text-gold mb-6 inline-block rounded-sm border px-3.5 py-1.5 text-xs font-extrabold tracking-[0.15em] uppercase"
+				data-hero-item
+			>
+				Fédération indépendante
+			</div>
+			<h1
+				class="font-display mb-5 max-w-4xl text-[clamp(42px,7vw,96px)] leading-[0.98] font-bold tracking-tight uppercase"
+				data-hero-item
+			>
+				{{ entry.heroTitle }}
+			</h1>
 			{% if entry.heroDescription %}
-				<p class="mx-auto max-w-3xl text-center text-xl leading-relaxed text-neutral-300 lg:text-2xl">
+				<p class="text-ink-muted mb-9 max-w-xl text-lg leading-relaxed lg:text-xl" data-hero-item>
 					{{ entry.heroDescription }}
 				</p>
 			{% endif %}
+			<div class="flex flex-wrap gap-4" data-hero-item>
+				<a href="/shows" class="btn-primary">Voir les shows</a>
+				<a href="/comment-participer" class="btn-ghost">Rejoindre le roster</a>
+			</div>
 		</div>
 	</section>
 
-	{# SWU News Section #}
+	{# SWU News #}
 	{% set featuredArticles = entry.featuredArticles.all() ?? [] %}
-	{% if not featuredArticles | length and entry.showLatestArticles ?? false %}
+	{% if not featuredArticles|length and entry.showLatestArticles ?? false %}
 		{% set featuredArticles = craft.entries.section('articles').orderBy('postDate desc').limit(3).all() %}
 	{% endif %}
-	{% if featuredArticles | length %}
-		<section class="py-8 text-white lg:py-14" style="background-color: #00263d;">
+	{% if featuredArticles|length %}
+		<section class="bg-surface py-14 lg:py-20">
 			<div class="grid-container">
-				<div class="mb-6 flex items-end justify-between" x-data x-reveal>
-					<h2 class="h3 uppercase">SWU News</h2>
-					<a href="/articles" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+					<div>
+						<span class="eyebrow">Actualités</span>
+						<h2 class="h2 mb-0">SWU News</h2>
+					</div>
+					<a
+						href="/articles"
+						class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+					>
 						Tous les articles &rarr;
 					</a>
 				</div>
-				<div class="grid-row">
+				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{% for article in featuredArticles %}
-						<div class="grid-col mb-4 w-full md:w-1/2 lg:w-1/3 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
-							{% include '_includes/_article-card' with { article: article } only %}
+						<div x-data x-reveal.delay style="--i: {{ loop.index }}">
+							{% include '_includes/_article-card' with {
+								article: article
+							} only %}
 						</div>
 					{% endfor %}
 				</div>
@@ -50,21 +85,29 @@
 		</section>
 	{% endif %}
 
-	{# Superstars Section #}
+	{# Superstars #}
 	{% set superstars = craft.entries.section('superstars').limit(4).orderBy('RAND()').all() %}
-	{% if superstars | length %}
-		<section class="bg-neutral-950 py-12 text-white lg:py-20">
+	{% if superstars|length %}
+		<section class="py-14 lg:py-24">
 			<div class="grid-container">
-				<div class="mb-8 flex items-end justify-between" x-data x-reveal>
-					<h2 class="h3 uppercase">Superstars</h2>
-					<a href="/superstars" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
-						Voir toutes &rarr;
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+					<div>
+						<span class="eyebrow">Le roster</span>
+						<h2 class="h2 mb-0">Superstars</h2>
+					</div>
+					<a
+						href="/superstars"
+						class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+					>
+						Voir tout le roster &rarr;
 					</a>
 				</div>
-				<div class="grid-row">
+				<div class="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
 					{% for superstar in superstars %}
-						<div class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
-							{% include '_includes/_superstar-card' with { superstar: superstar } only %}
+						<div x-data x-reveal.delay style="--i: {{ loop.index }}">
+							{% include '_includes/_superstar-card' with {
+								superstar: superstar
+							} only %}
 						</div>
 					{% endfor %}
 				</div>
@@ -72,64 +115,95 @@
 		</section>
 	{% endif %}
 
-	{# Upcoming Shows Section #}
-	{% set upcomingShows = craft.entries.section('shows').showStatus('aVenir').orderBy('eventDateTime asc').limit(3).all() %}
-	{% if upcomingShows | length %}
-		<section class="bg-black py-12 text-white lg:py-20">
+	{# Prochains shows #}
+	{% set upcomingShows =
+		craft.entries.section('shows').showStatus('aVenir').orderBy('eventDateTime asc').limit(3).all()
+	%}
+	{% if upcomingShows|length %}
+		<section class="bg-surface py-14 lg:py-24">
 			<div class="grid-container">
-				<div class="mb-8 flex items-end justify-between" x-data x-reveal>
-					<h2 class="h3 uppercase">Prochains shows</h2>
-					<a href="/shows" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
-						Voir tous &rarr;
+				<div class="mb-10" x-data x-reveal>
+					<span class="eyebrow">À l'affiche</span>
+					<h2 class="h2 mb-0">Prochains shows</h2>
+				</div>
+				<div class="grid gap-6 lg:grid-cols-3">
+					{% for show in upcomingShows %}
+						<div
+							class="{{ loop.first and (upcomingShows|length) > 1 ? 'lg:col-span-2 lg:row-span-1' : '' }}"
+							x-data
+							x-reveal.delay
+							style="--i: {{ loop.index }}"
+						>
+							{% include '_includes/_show-card' with {
+								show: show,
+								featured: loop.first
+							} only %}
+						</div>
+					{% endfor %}
+				</div>
+				<div class="mt-8 text-center">
+					<a href="/shows" class="btn-outline">Tous les shows</a>
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# Résultats récents #}
+	{% set pastShows =
+		craft.entries.section('shows').showStatus('termine').orderBy('eventDateTime desc').limit(4).all()
+	%}
+	{% if pastShows|length %}
+		<section class="py-14 lg:py-24">
+			<div class="grid-container">
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+					<div>
+						<span class="eyebrow">Les archives</span>
+						<h2 class="h2 mb-0">Résultats récents</h2>
+					</div>
+					<a
+						href="/resultats"
+						class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+					>
+						Tous les résultats &rarr;
 					</a>
 				</div>
-				<div class="grid-row">
-					{% for show in upcomingShows %}
-						{% set image = show.mainImage.one() %}
-						<div class="grid-col mb-4 w-full md:w-1/2 lg:w-1/3 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
-							<a href="{{ show.url }}" class="group block overflow-hidden rounded-lg bg-neutral-900 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
-								<div class="relative aspect-video overflow-hidden bg-neutral-800">
-									{% if image %}
-										{{ macros.image(image, { width: 600, height: 340 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
-									{% endif %}
-									{% if show.showType.value ?? null %}
-										<span class="absolute top-3 left-3 rounded-sm bg-red-600 px-2 py-1 text-xs font-bold uppercase">
-											{{ show.showType.label }}
-										</span>
-									{% endif %}
-								</div>
-								<div class="p-4">
-									<h3 class="h5 mb-2 text-white transition-colors group-hover:text-red-500">{{ show.title }}</h3>
-									{% if show.eventDateTime %}
-										<p class="text-sm text-neutral-400">{{ show.eventDateTime | date('d/m/Y \\à H\\hi') }}</p>
-									{% endif %}
-								</div>
-							</a>
-						</div>
+				<div class="border-line divide-line divide-y overflow-hidden rounded-lg border" x-data x-reveal>
+					{% for show in pastShows %}
+						{% include '_includes/_result-row' with {
+							show: show
+						} only %}
 					{% endfor %}
 				</div>
 			</div>
 		</section>
 	{% endif %}
 
-	{# Clips Section #}
+	{# Clips #}
 	{% set featuredClips = entry.featuredClips.all() ?? [] %}
-	{% if not featuredClips | length and entry.showLatestClips ?? false %}
+	{% if not featuredClips|length and entry.showLatestClips ?? false %}
 		{% set featuredClips = craft.entries.section('clips').orderBy('postDate desc').limit(4).all() %}
 	{% endif %}
-	{% if featuredClips | length %}
-		<section class="bg-neutral-950 py-8 text-white lg:py-14">
+	{% if featuredClips|length %}
+		<section class="bg-surface py-14 lg:py-24">
 			<div class="grid-container">
-				<div class="mb-6 flex items-end justify-between" x-data x-reveal>
-					<h2 class="h3 uppercase">Clips</h2>
-					<a href="/clips" class="text-sm font-medium text-neutral-400 transition-colors hover:text-white">
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+					<div>
+						<span class="eyebrow">Highlights</span>
+						<h2 class="h2 mb-0">Clips</h2>
+					</div>
+					<a
+						href="/clips"
+						class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+					>
 						Voir tous &rarr;
 					</a>
 				</div>
-				<div class="grid-row">
+				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{% for clip in featuredClips %}
-						<div class="grid-col mb-4 w-full sm:w-1/2 lg:w-1/4 lg:mb-6" x-data x-reveal.delay style="--i: {{ loop.index }}">
-							{% include '_includes/_clip-card' with { clip: clip } only %}
+						<div x-data x-reveal.delay style="--i: {{ loop.index }}">
+							{% include '_includes/_clip-card' with {
+								clip: clip
+							} only %}
 						</div>
 					{% endfor %}
 				</div>
@@ -137,41 +211,47 @@
 		</section>
 	{% endif %}
 
-	{# Social Media Section #}
-	{% set socials = entry.socialMedia.all() %}
-	{% if socials | length %}
-		<section class="bg-neutral-950 py-12 lg:py-20">
-			<div class="grid-container">
-				<h2 class="h3 mb-8 text-center text-white uppercase" x-data x-reveal>Nos liens</h2>
-				<div class="flex flex-wrap justify-center gap-4 lg:gap-6">
-					{% for social in socials %}
-						{% set image = social.linkImage.one() %}
-						{% if image %}
-							<a
-								href="{{ social.basicLink.value }}"
-								class="group relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full bg-neutral-900 shadow-lg ring-2 ring-white/10 transition-all duration-300 hover:scale-110 hover:ring-white/40 hover:shadow-2xl lg:h-48 lg:w-48"
-								target="_blank"
-								rel="noopener noreferrer"
-								x-data x-reveal.delay
-								style="--i: {{ loop.index }}"
-							>
-								<img
-									src="{{ image.url }}"
-									alt="{{ image.title }}"
-									class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-									loading="lazy"
-								/>
-								<div class="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/20"></div>
-								<div class="absolute inset-0 flex items-end justify-center pb-5">
-									<span class="rounded-full bg-black/70 px-3 py-1 text-xs font-semibold tracking-wider text-white uppercase backdrop-blur-sm lg:text-sm">
-										{{ image.title }}
-									</span>
-								</div>
-							</a>
-						{% endif %}
-					{% endfor %}
+	{# Teaser planning #}
+	{% set schedule = craft.entries.section('streamSchedule').one() %}
+	{% if schedule %}
+		{% set nextStreams =
+			schedule.upcomingStreams.all()|filter(s => s.eventDateTime and s.eventDateTime >= now)|slice(0, 3)
+		%}
+		{% if nextStreams|length %}
+			<section class="py-14 lg:py-24">
+				<div class="grid-container">
+					<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+						<div>
+							<span class="eyebrow">Ne rate rien</span>
+							<h2 class="h2 mb-0">Prochains streams</h2>
+						</div>
+						<a
+							href="/planning"
+							class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+						>
+							Voir le planning &rarr;
+						</a>
+					</div>
+					<div class="grid gap-5 md:grid-cols-3" x-data x-reveal>
+						{% for stream in nextStreams %}
+							<div class="border-line bg-surface-2 border-l-blue rounded-md border border-l-3 p-5">
+								<p class="text-gold mb-2 text-xs font-extrabold tracking-wide uppercase">
+									{{ stream.eventDateTime|date('d/m — H\\hi') }}
+								</p>
+								<h3 class="font-display mb-2 text-base font-bold uppercase">{{ stream.title }}</h3>
+								{% if stream.shortDescription %}
+									<p class="text-ink-muted text-sm">
+										{{ stream.shortDescription }}
+									</p>
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		{% endif %}
 	{% endif %}
+
+	{# Bannière Participer #}
+	{% include '_includes/_cta-participate' %}
 {% endblock %}

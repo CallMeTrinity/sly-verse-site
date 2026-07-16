@@ -2,17 +2,33 @@
 {% import '_includes/macros' as macros %}
 {% set image = article.mainImage.one() %}
 
-<a href="{{ article.url }}" class="group block overflow-hidden rounded-lg bg-white/5 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 hover:shadow-2xl">
-	<div class="relative aspect-video overflow-hidden bg-neutral-800">
+<a
+	href="{{ article.url }}"
+	class="group block overflow-hidden rounded-lg bg-white/5 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 hover:shadow-2xl"
+>
+	<div class="bg-surface-3 relative aspect-video overflow-hidden">
 		{% if image %}
-			{{ macros.image(image, { width: 600, height: 340 }, 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110') }}
+			{{
+				macros.image(
+					image,
+					{
+						width: 600,
+						height: 340
+					},
+					'h-full w-full object-cover transition-transform duration-500 group-hover:scale-110'
+				)
+			}}
 		{% endif %}
 	</div>
 	<div class="p-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-400 uppercase">{{ article.postDate | date('d/m/Y') }}</p>
+		<p class="text-ink-muted mb-2 text-xs font-semibold tracking-wider uppercase">
+			{{ article.postDate|date('d/m/Y') }}
+		</p>
 		<h3 class="h5 mb-2 text-white">{{ article.title }}</h3>
 		{% if article.shortDescription %}
-			<p class="line-clamp-2 text-sm text-neutral-400">{{ article.shortDescription }}</p>
+			<p class="text-ink-muted line-clamp-2 text-sm">
+				{{ article.shortDescription }}
+			</p>
 		{% endif %}
 	</div>
 </a>

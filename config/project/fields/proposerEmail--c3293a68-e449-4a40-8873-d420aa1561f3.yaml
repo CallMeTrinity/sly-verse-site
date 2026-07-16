@@ -1,0 +1,10 @@
+columnSuffix: null
+handle: proposerEmail
+instructions: null
+name: 'Email du membre'
+searchable: false
+settings:
+  placeholder: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Email

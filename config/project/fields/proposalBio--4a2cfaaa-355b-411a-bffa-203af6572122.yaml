@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: proposalBio
+instructions: 'Biographie / gimmick proposé par le membre'
+name: 'Bio proposée'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: 3000
+  code: false
+  initialRows: 8
+  multiline: true
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

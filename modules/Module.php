@@ -2,6 +2,9 @@
 namespace modules;
 
 use Craft;
+use craft\guestentries\controllers\SaveController;
+use craft\guestentries\events\SaveEvent;
+use yii\base\Event;
 
 /**
  * Custom module class.
@@ -39,6 +42,19 @@ class Module extends \yii\base\Module
 
         parent::init();
 
-        // Custom initialization code goes here...
+        // Honeypot : les bots remplissent le champ caché "website" du formulaire
+        // de proposition de superstar ; on marque alors la soumission comme spam
+        // (guest-entries répond "succès" sans rien enregistrer)
+        if (class_exists(SaveController::class)) {
+            Event::on(
+                SaveController::class,
+                SaveController::EVENT_BEFORE_SAVE_ENTRY,
+                function(SaveEvent $event) {
+                    if (Craft::$app->getRequest()->getBodyParam('website')) {
+                        $event->isSpam = true;
+                    }
+                }
+            );
+        }
     }
 }

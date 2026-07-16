@@ -1,3 +1,4 @@
+allowLineBreaksInTitles: false
 color: null
 description: null
 fieldLayouts:
@@ -11,6 +12,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 3da03560-0cdd-49dd-841c-1f93fed92c25 # Titre du match
             handle: null
             instructions: null
@@ -26,6 +28,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: e4ab6bc4-aab9-4263-815b-238aba267fb5 # Participants
             handle: null
             instructions: null
@@ -41,6 +44,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 9ed251ed-f16f-42d7-8807-5ad4e2143b12 # Type de match
             handle: null
             instructions: null
@@ -56,6 +60,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: f86e6bc1-0aef-44f6-a0c1-83f69929d250 # Stipulation
             handle: null
             instructions: null
@@ -71,6 +76,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 5f2cb259-f127-4914-9959-1be5198ce79c # Resultat
             handle: null
             instructions: null
@@ -86,6 +92,7 @@ fieldLayouts:
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null
+            elementEditCondition: null
             fieldUid: 950e9bc0-fd03-413f-a144-64e282958f13 # Vainqueur
             handle: null
             instructions: null
@@ -97,9 +104,26 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: '2026-07-16T14:58:23+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 366c32c9-979f-479c-a308-e9c462d68c15 # Image du match
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6419c9a2-422d-4dfe-9a12-06cf6ce611ee
+            userCondition: null
+            warning: null
+            width: 100
         name: Contenu
         uid: c9a689e0-8c61-4a7f-a827-726e3052dcc2
         userCondition: null
+    thumbFieldKey: null
 handle: matchCard
 hasTitleField: false
 icon: null
@@ -111,3 +135,4 @@ slugTranslationMethod: site
 titleFormat: '{matchTitle}'
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
+uiLabelFormat: '{title}'

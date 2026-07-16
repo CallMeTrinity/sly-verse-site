@@ -18,11 +18,7 @@
 			{{ macros.image(asset, transform, 'mb-4 lg:mb-0') }}
 		</div>
 		<div
-			class="col-span-12 flex items-center lg:col-span-4 {{
-			block.layout == 'textImage'
-				? ''
-				: 'lg:col-start-9'
-			}}"
+			class="col-span-12 flex items-center lg:col-span-4 {{ block.layout == 'textImage' ? '' : 'lg:col-start-9' }}"
 		>
 			<div>
 				<article class="prose">
@@ -33,13 +29,7 @@
 				{% if buttons %}
 					<div class="pt-10">
 						{% for row in buttons %}
-							{{
-								macros.button(
-									row.button.url,
-									row.button.label,
-									'btn mr-2'
-								)
-							}}
+							{{ macros.button(row.button.url, row.button.label, 'btn mr-2') }}
 						{% endfor %}
 					</div>
 				{% endif %}

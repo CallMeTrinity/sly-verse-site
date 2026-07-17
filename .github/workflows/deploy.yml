@@ -56,7 +56,7 @@ jobs:
           tar -czf deploy.tar.gz \
             vendor \
             web/dist \
-            web/index.php web/.htaccess web/favicon.png web/robots.txt web/SWU.jpg web/SWU.png \
+            web/index.php web/.htaccess web/favicon.png web/SWU.jpg web/SWU.png \
             config modules templates \
             bootstrap.php craft composer.json composer.lock deploy.sh
 

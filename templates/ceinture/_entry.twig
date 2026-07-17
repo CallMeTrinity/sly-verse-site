@@ -1,5 +1,10 @@
 {% extends '_layout' %}
 
+{% set seoImage = entry.beltImage.one() %}
+{% if seoImage %}
+	{% do seomatic.meta.seoImage(seoImage.getUrl({ width: 1200 })) %}
+{% endif %}
+
 {% block content %}
 	{% import '_includes/macros' as macros %}
 	{% set beltImage = entry.beltImage.one() %}

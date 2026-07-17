@@ -1,8 +1,17 @@
 {% extends '_layout' %}
 
+{% set entry = craft.entries.section('pageAccueil').one() %}
+{% do seomatic.meta.seoTitle('Accueil') %}
+{% if entry.heroDescription ?? null %}
+	{% do seomatic.meta.seoDescription(entry.heroDescription|striptags|trim) %}
+{% endif %}
+{% set homeOgImage = entry.mainImage.one() ?? null %}
+{% if homeOgImage %}
+	{% do seomatic.meta.seoImage(homeOgImage.getUrl({ width: 1200 })) %}
+{% endif %}
+
 {% block content %}
 	{% import '_includes/macros' as macros %}
-	{% set entry = craft.entries.section('pageAccueil').one() %}
 
 	{# Hero #}
 	{% set heroImage = entry.mainImage.one() %}

@@ -1,4 +1,4 @@
-dateModified: 1784228437
+dateModified: 1784229848
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -51,7 +51,7 @@ meta:
     421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
     435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
     455a1610-d31f-4a00-8929-3a430acab4a1: 'Clips à la une' # Clips à la une
-    571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wresling Universe' # Sly Wresling Universe
+    571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wrestling Universe' # Sly Wrestling Universe
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
     698fdd99-cfe7-4e4c-a16f-dafe95a1953e: Clip # Clip
     841b05cb-aaca-4ce8-91d0-c7e1a4ed809d: Ceinture # Ceinture
@@ -141,10 +141,10 @@ plugins:
                 -
                   - authorUid
                   - 75910dfe-f4d8-470b-8716-dc62239e083f
-  seo:
+  seomatic:
     edition: standard
     enabled: true
-    schemaVersion: 3.2.0
+    schemaVersion: 3.0.13
   vite:
     edition: standard
     enabled: true
@@ -154,7 +154,7 @@ system:
   live: true
   name: sly-verse
   schemaVersion: 5.9.0.8
-  timeZone: America/Los_Angeles
+  timeZone: Europe/Paris
 users:
   allowPublicRegistration: false
   defaultGroup: null

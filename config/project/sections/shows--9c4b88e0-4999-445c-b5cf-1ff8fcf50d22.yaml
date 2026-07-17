@@ -13,7 +13,7 @@ previewTargets:
     urlFormat: '{url}'
 propagationMethod: all
 siteSettings:
-  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wresling Universe
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wrestling Universe
     enabledByDefault: true
     hasUrls: true
     template: _pages/shows/_entry.twig

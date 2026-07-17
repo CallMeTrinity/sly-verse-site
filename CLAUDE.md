@@ -155,13 +155,14 @@ These run automatically on `ddev start`.
 
 Key Craft plugins (from composer.json):
 - **nystudio107/craft-vite**: Vite asset integration
-- **nystudio107/craft-retour**: 404 redirects
-- **nystudio107/craft-seomatic**: SEO management
-- **verbb/formie**: Form builder
+- **nystudio107/craft-seomatic**: SEO management (title/meta/OG rendered via `{% hook 'seomaticRender' %}` in `_layout.twig`; per-page overrides via `{% do seomatic.meta.… %}` at the top of templates)
 - **craftcms/ckeditor**: Rich text editor
+- **craftcms/feed-me**: Content imports
+- **craftcms/guest-entries**: Public character proposal form
 - **wbrowar/craft-admin-bar**: Frontend admin bar
-- **putyourlightson/craft-dashboard-begone**: Removes default dashboard
-- **mmikkel/retcon**: HTML/text transformation
+- **voku/stringy**: Not a plugin — explicit dependency required by SEOmatic (do not remove)
+
+Note: SEOmatic forces `robots: none` and omits the canonical tag in dev mode (`🚧` title prefix); both render normally in production.
 
 ## Important Notes
 

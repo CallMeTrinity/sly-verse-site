@@ -1,5 +1,8 @@
 {% extends '_layout' %}
 
+{% do seomatic.meta.seoTitle('Superstars') %}
+{% do seomatic.meta.seoDescription('Le roster complet des superstars de la Sly Wrestling Universe.') %}
+
 {% block content %}
 	{% set superstars = craft.entries.section('superstars').orderBy('title asc').all() %}
 

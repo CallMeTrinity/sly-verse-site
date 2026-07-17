@@ -1,5 +1,13 @@
 {% extends '_layout' %}
 
+{% set seoImage = entry.imageGallery.one() %}
+{% if seoImage %}
+	{% do seomatic.meta.seoImage(seoImage.getUrl({ width: 1200 })) %}
+{% endif %}
+{% if entry.shortDescription %}
+	{% do seomatic.meta.seoDescription(entry.shortDescription|striptags|trim) %}
+{% endif %}
+
 {% block content %}
 	{% import '_includes/macros' as macros %}
 	{% set mediaType = entry.mediaType.value ?? 'photo' %}

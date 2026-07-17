@@ -4,7 +4,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		{# SEOmatic meta tags #}
+		{# SEOmatic : title, meta description, canonical, Open Graph, JSON-LD #}
+		{# Fallbacks par section dans le CP (SEOmatic → Content SEO), overrides ponctuels via seomatic.meta dans les templates #}
 		{% hook 'seomaticRender' %}
 
 		{# Include local fonts #}
@@ -20,8 +21,8 @@
 		{{ craft.vite.script('src/js/app.js', false) }}
 
 		{# Favicon #}
-		<link rel="icon" href="/SWU.jpg" type="image/jpeg" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="icon" href="/favicon.png" type="image/png" />
+		<link rel="apple-touch-icon" href="/SWU.png" />
 		<meta name="theme-color" content="#171c26" />
 	</head>
 
@@ -38,6 +39,11 @@
 
 		{% include '_includes/alertBar' %}
 		{% include '_includes/header' %}
+
+		{# Panneau mobile hors du <header> : son backdrop-filter en ferait le bloc conteneur du position:fixed #}
+		{% include '_includes/_nav' with {
+			variant: 'mobile'
+		} %}
 
 		<main id="main">
 			{% block content %}

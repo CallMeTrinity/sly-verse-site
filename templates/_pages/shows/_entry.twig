@@ -1,5 +1,10 @@
 {% extends '_layout' %}
 
+{% set seoImage = entry.mainImage.one() %}
+{% if seoImage %}
+	{% do seomatic.meta.seoImage(seoImage.getUrl({ width: 1200 })) %}
+{% endif %}
+
 {% block content %}
 	{% if entry.showStatus.value == 'termine' %}
 		{% include '_pages/shows/_past' %}

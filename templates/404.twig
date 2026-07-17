@@ -1,11 +1,29 @@
-{% import '_includes/macros' as macros %}
-
 {% extends '_layout' %}
 
-{% block content %}
-	<div class="prose container mx-auto p-5 text-center lg:py-32">
-		<h1 class="h1">{{ error404.heading404 }}</h1>
+{% do seomatic.meta.seoTitle('Page introuvable') %}
+{% do seomatic.meta.robots('none') %}
 
-		{{ error404.text404 }}
-	</div>
+{% block content %}
+	<section class="relative overflow-hidden py-24 lg:py-40">
+		<div
+			class="absolute inset-0 bg-[repeating-linear-gradient(115deg,oklch(0.22_0.02_250)_0px,oklch(0.22_0.02_250)_2px,oklch(0.19_0.02_250)_2px,oklch(0.19_0.02_250)_40px)]"
+		></div>
+		<div class="from-bg via-bg/70 absolute inset-0 bg-linear-to-t to-black/30"></div>
+
+		<div class="grid-container relative text-center">
+			<div
+				class="border-gold text-gold mb-6 inline-block rounded-sm border px-3.5 py-1.5 text-xs font-extrabold tracking-[0.15em] uppercase"
+			>
+				Erreur 404
+			</div>
+			<h1 class="h1 mb-4">Page introuvable</h1>
+			<p class="text-ink-muted mx-auto mb-8 max-w-xl">
+				La page que vous cherchez n'existe pas ou a été déplacée.
+			</p>
+			<div class="flex flex-wrap justify-center gap-3">
+				<a href="{{ siteUrl }}" class="btn-gold">Retour à l'accueil</a>
+				<a href="{{ url('shows') }}" class="btn-primary">Voir les shows</a>
+			</div>
+		</div>
+	</section>
 {% endblock %}

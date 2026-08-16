@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
-{% do seomatic.meta.seoTitle('Shows') %}
-{% do seomatic.meta.seoDescription('Les prochains shows de la Sly Wrestling Universe et les derniers résultats.') %}
+{% set seoTitle = 'Shows' %}
+{% set seoDescription = 'Les prochains shows de la Sly Wrestling Universe et les derniers résultats.' %}
 
 {% block content %}
 	{% import '_includes/macros' as macros %}

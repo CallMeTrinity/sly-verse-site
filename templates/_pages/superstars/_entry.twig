@@ -1,12 +1,7 @@
 {% extends '_layout' %}
 
 {% set seoImage = entry.profileImage.one() %}
-{% if seoImage %}
-	{% do seomatic.meta.seoImage(seoImage.getUrl({ width: 1200 })) %}
-{% endif %}
-{% if entry.shortDescription %}
-	{% do seomatic.meta.seoDescription(entry.shortDescription|striptags|trim) %}
-{% endif %}
+{% set seoType = 'profile' %}
 
 {% block content %}
 	{% import '_includes/macros' as macros %}

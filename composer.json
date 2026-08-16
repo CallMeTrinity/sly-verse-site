@@ -4,10 +4,8 @@
 		"craftcms/cms": "^5.0.0",
 		"craftcms/feed-me": "6.11.0",
 		"craftcms/guest-entries": "^4.0",
-		"nystudio107/craft-seomatic": "^5.0.4",
 		"nystudio107/craft-vite": "^5.0.0",
 		"vlucas/phpdotenv": "^5.6.0",
-		"voku/stringy": "^6.5",
 		"wbrowar/craft-admin-bar": "^5.0.0-beta.1"
 	},
 	"require-dev": {

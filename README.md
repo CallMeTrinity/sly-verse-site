@@ -801,13 +801,14 @@ theme: {
 
 **Actions :**
 
-- Ajouter plugin SEOmatic (optionnel)
-- Ou créer champs manuels :
-   - Meta description
-   - Meta titre
-   - Open Graph images
-- Sitemap.xml
-- Robots.txt
+- SEO manuel (aucun plugin payant) : `templates/_includes/seo.twig`, inclus dans le `<head>` du layout
+   - `<title>`, meta description, canonical, meta robots
+   - Open Graph + Twitter Card (image de partage transformée en 1200x630)
+   - JSON-LD `Organization`
+- Surcharges par page : `{% set seoTitle / seoDescription / seoImage / seoType / seoRobots / seoCanonical %}`
+   en haut du template, avant le `{% block content %}`
+- Sitemap.xml : `templates/_sitemap.xml.twig`, servi sur `/sitemap.xml` (route dans `config/routes.php`)
+- Robots.txt : fichier géré directement sur le serveur (hors dépôt), doit pointer vers `/sitemap.xml`
 
 ---
 

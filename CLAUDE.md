@@ -155,14 +155,22 @@ These run automatically on `ddev start`.
 
 Key Craft plugins (from composer.json):
 - **nystudio107/craft-vite**: Vite asset integration
-- **nystudio107/craft-seomatic**: SEO management (title/meta/OG rendered via `{% hook 'seomaticRender' %}` in `_layout.twig`; per-page overrides via `{% do seomatic.meta.… %}` at the top of templates)
 - **craftcms/ckeditor**: Rich text editor
 - **craftcms/feed-me**: Content imports
 - **craftcms/guest-entries**: Public character proposal form
 - **wbrowar/craft-admin-bar**: Frontend admin bar
-- **voku/stringy**: Not a plugin — explicit dependency required by SEOmatic (do not remove)
 
-Note: SEOmatic forces `robots: none` and omits the canonical tag in dev mode (`🚧` title prefix); both render normally in production.
+Note: SEOmatic was removed (paid plugin) — SEO is now handled manually, see below.
+
+## SEO (manual, no plugin)
+
+- `templates/_includes/seo.twig` is included from the `<head>` in `_layout.twig` and renders `<title>`, meta description, canonical, meta robots, Open Graph, Twitter Card and an `Organization` JSON-LD block. Site-wide defaults (description, share image) live at the top of that file.
+- Per-page overrides: set the variables at the top of the template, **before** `{% block content %}` (they propagate to the layout):
+  `seoTitle`, `seoDescription`, `seoImage` (Asset or URL), `seoType` (og:type), `seoRobots`, `seoCanonical`.
+- Without overrides it falls back to `entry.title`, `entry.shortDescription`, the default share image (`web/SWU.jpg`) and the current URL.
+- Robots: `CRAFT_DISALLOW_ROBOTS=true` (local/preprod) forces `robots: none` site-wide; production sets it to `false`.
+- Sitemap: `templates/_sitemap.xml.twig`, served on `/sitemap.xml` via `config/routes.php`. It lists the CP listing routes plus every published entry with a URI.
+- `robots.txt` is not in the repo — it lives on the server (and is excluded from the deploy archive).
 
 ## Important Notes
 

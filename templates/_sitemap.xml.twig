@@ -1,0 +1,36 @@
+{#-
+	Sitemap XML servi sur /sitemap.xml (route déclarée dans config/routes.php).
+	Remplace le sitemap que générait SEOmatic.
+
+	Contenu : les pages listing (routes du CP) + toutes les entrées publiées
+	qui ont une URI. Les sections sans uriFormat (propositions de personnages)
+	sont donc exclues automatiquement.
+-#}
+{%- header 'Content-Type: text/xml; charset=utf-8' -%}
+
+{%- set listingUris = ['', 'superstars', 'shows', 'resultats', 'mediatheque', 'articles', 'clips'] -%}
+{%- set locs = [] -%}
+{%- set urls = [] -%}
+
+{%- for uri in listingUris -%}
+	{%- set locs = locs|merge([url(uri)]) -%}
+	{%- set urls = urls|merge([{ loc: url(uri), lastmod: null }]) -%}
+{%- endfor -%}
+
+{%- for entry in craft.entries.uri(':notempty:').orderBy('uri asc').all() -%}
+	{%- if entry.url and entry.url not in locs -%}
+		{%- set locs = locs|merge([entry.url]) -%}
+		{%- set urls = urls|merge([{ loc: entry.url, lastmod: entry.dateUpdated }]) -%}
+	{%- endif -%}
+{%- endfor -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for item in urls %}
+	<url>
+		<loc>{{ item.loc }}</loc>
+{% if item.lastmod %}
+		<lastmod>{{ item.lastmod|atom }}</lastmod>
+{% endif %}
+	</url>
+{% endfor %}
+</urlset>

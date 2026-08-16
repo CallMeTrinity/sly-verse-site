@@ -1,0 +1,97 @@
+{#
+	SEO manuel — title, meta description, canonical, robots, Open Graph, Twitter Card, JSON-LD.
+	Inclus une seule fois depuis _layout.twig, dans le <head>.
+
+	Surcharges par page : déclarer les variables en haut du template,
+	AVANT le {% block content %} (elles sont évaluées avant le layout) :
+
+		{% set seoTitle = 'Articles' %}
+		{% set seoDescription = 'Toute l’actualité du SWU.' %}
+		{% set seoImage = entry.mainImage.one() %}   -> Asset OU URL absolue
+		{% set seoType = 'article' %}                -> og:type (défaut : website)
+		{% set seoRobots = 'noindex, follow' %}
+		{% set seoCanonical = 'https://…' %}
+
+	Sans surcharge : titre = entry.title, description = entry.shortDescription,
+	image = image par défaut du site, canonical = URL courante.
+#}
+
+{# Valeurs par défaut du site — à modifier ici si le pitch ou l’image de partage changent #}
+{% set siteName = craft.app.sites.currentSite.name %}
+{% set siteDescription = 'La Sly Wrestling Universe : les superstars, les shows, les résultats, les clips et les coulisses de la fédération.' %}
+{% set siteRoot = siteUrl|trim('/', 'right') %}
+{% set defaultImage = { url: siteRoot ~ '/SWU.jpg', width: 602, height: 602 } %}
+
+{# Titre #}
+{% set metaTitle = seoTitle ?? entry.title ?? null %}
+{% set metaTitle = metaTitle ? metaTitle ~ ' | ' ~ siteName : siteName %}
+
+{# Description : 160 caractères max, HTML retiré #}
+{% set metaDescription = seoDescription ?? entry.shortDescription ?? null %}
+{% set metaDescription = (metaDescription|striptags|trim ?: siteDescription)|truncate(160, '…') %}
+
+{# URL canonique #}
+{% set canonical = seoCanonical ?? url(craft.app.request.pathInfo) %}
+
+{# Robots : CRAFT_DISALLOW_ROBOTS=true (local / préprod) désindexe tout le site #}
+{% set metaRobots = craft.app.config.general.disallowRobots ? 'none' : (seoRobots ?? 'index, follow') %}
+
+{# Image de partage : Asset transformé en 1200x630, URL brute, ou image par défaut #}
+{% set shareImage = defaultImage %}
+{% if seoImage is defined and seoImage %}
+	{% if seoImage.getUrl is defined %}
+		{% set transformedUrl = seoImage.getUrl({ width: 1200, height: 630, mode: 'crop', format: 'jpg' }) %}
+		{% if transformedUrl %}
+			{% set shareImage = { url: transformedUrl, width: 1200, height: 630 } %}
+		{% endif %}
+	{% elseif seoImage is not iterable %}
+		{% set shareImage = { url: seoImage, width: null, height: null } %}
+	{% endif %}
+{% endif %}
+{% if shareImage.url starts with '/' %}
+	{% set shareImage = shareImage|merge({ url: siteRoot ~ shareImage.url }) %}
+{% endif %}
+
+<title>{{ metaTitle }}</title>
+<meta name="description" content="{{ metaDescription }}" />
+<meta name="robots" content="{{ metaRobots }}" />
+<link rel="canonical" href="{{ canonical }}" />
+
+<meta property="og:type" content="{{ seoType ?? 'website' }}" />
+<meta property="og:site_name" content="{{ siteName }}" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="{{ metaTitle }}" />
+<meta property="og:description" content="{{ metaDescription }}" />
+<meta property="og:url" content="{{ canonical }}" />
+<meta property="og:image" content="{{ shareImage.url }}" />
+{% if shareImage.width %}
+<meta property="og:image:width" content="{{ shareImage.width }}" />
+<meta property="og:image:height" content="{{ shareImage.height }}" />
+{% endif %}
+{% if (seoType ?? null) == 'article' and entry is defined %}
+{% if entry.postDate %}
+<meta property="article:published_time" content="{{ entry.postDate|atom }}" />
+{% endif %}
+{% if entry.dateUpdated %}
+<meta property="article:modified_time" content="{{ entry.dateUpdated|atom }}" />
+{% endif %}
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ metaTitle }}" />
+<meta name="twitter:description" content="{{ metaDescription }}" />
+<meta name="twitter:image" content="{{ shareImage.url }}" />
+
+{# JSON-LD : identité du site, repris par Google pour le knowledge panel #}
+{% set schema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: siteName,
+	alternateName: 'SWU',
+	url: siteUrl,
+	logo: siteRoot ~ '/SWU.png',
+	description: siteDescription
+} %}
+<script type="application/ld+json">
+	{{ schema|json_encode(constant('JSON_UNESCAPED_SLASHES') b-or constant('JSON_UNESCAPED_UNICODE'))|raw }}
+</script>

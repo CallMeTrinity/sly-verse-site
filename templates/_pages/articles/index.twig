@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
-{% do seomatic.meta.seoTitle('Articles') %}
-{% do seomatic.meta.seoDescription('Toute l’actualité de la Sly Wrestling Universe : annonces, résumés et coulisses.') %}
+{% set seoTitle = 'Articles' %}
+{% set seoDescription = 'Toute l’actualité de la Sly Wrestling Universe : annonces, résumés et coulisses.' %}
 
 {% block content %}
 	{% import '_includes/macros' as macros %}

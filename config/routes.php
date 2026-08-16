@@ -18,5 +18,8 @@
  * set to the value `2012`.
  */
 
-// Toutes les routes du site sont gérées dans le CP (Settings → Routes / config/project/routes/).
-return [];
+// Toutes les routes du site sont gérées dans le CP (Settings → Routes / config/project/routes/),
+// sauf le sitemap, généré par un template (il remplace celui de SEOmatic).
+return [
+	'sitemap.xml' => ['template' => '_sitemap.xml'],
+];

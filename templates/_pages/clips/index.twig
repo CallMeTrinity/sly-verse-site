@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
-{% do seomatic.meta.seoTitle('Clips') %}
-{% do seomatic.meta.seoDescription('Les meilleurs moments de la Sly Wrestling Universe en vidéo.') %}
+{% set seoTitle = 'Clips' %}
+{% set seoDescription = 'Les meilleurs moments de la Sly Wrestling Universe en vidéo.' %}
 
 {% block content %}
 	{% set clips = craft.entries.section('clips').orderBy('postDate desc').all() %}

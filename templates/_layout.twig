@@ -4,9 +4,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		{# SEOmatic : title, meta description, canonical, Open Graph, JSON-LD #}
-		{# Fallbacks par section dans le CP (SEOmatic → Content SEO), overrides ponctuels via seomatic.meta dans les templates #}
-		{% hook 'seomaticRender' %}
+		{# SEO : title, meta description, canonical, robots, Open Graph, Twitter Card, JSON-LD #}
+		{# Overrides par page : {% set seoTitle / seoDescription / seoImage / seoType / seoRobots %} en haut du template #}
+		{% include '_includes/seo' %}
 
 		{# Include local fonts #}
 		{% include '_includes/fonts' %}

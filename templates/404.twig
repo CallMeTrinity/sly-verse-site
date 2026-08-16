@@ -1,7 +1,8 @@
 {% extends '_layout' %}
 
-{% do seomatic.meta.seoTitle('Page introuvable') %}
-{% do seomatic.meta.robots('none') %}
+{% set seoTitle = 'Page introuvable' %}
+{% set seoDescription = 'Cette page n’existe pas ou a été déplacée.' %}
+{% set seoRobots = 'noindex, follow' %}
 
 {% block content %}
 	<section class="relative overflow-hidden py-24 lg:py-40">

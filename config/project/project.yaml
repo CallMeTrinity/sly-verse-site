@@ -1,4 +1,4 @@
-dateModified: 1784229848
+dateModified: 1789244609
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -141,10 +141,6 @@ plugins:
                 -
                   - authorUid
                   - 75910dfe-f4d8-470b-8716-dc62239e083f
-  seomatic:
-    edition: standard
-    enabled: true
-    schemaVersion: 3.0.13
   vite:
     edition: standard
     enabled: true

@@ -1,4 +1,4 @@
-dateModified: 1789245931
+dateModified: 1789246204
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -97,6 +97,7 @@ meta:
     e4ab6bc4-aab9-4263-815b-238aba267fb5: Participants # Participants
     e775c6ec-5d74-4213-8643-cac989a5fd98: Taille # Taille
     e6222976-8d28-4eb9-9eb4-ebcdc2f3d586: Navigation # Navigation
+    f64ff3d8-6f22-469f-8fa2-5309be018a24: 'Note du match' # Note du match
     f86e6bc1-0aef-44f6-a0c1-83f69929d250: Stipulation # Stipulation
     f4857798-fbf9-40c6-9e25-be024d571f66: 'Photo Principale' # Photo Principale
     ff2f36b2-53d4-4ffa-94bc-dafac093ba77: 'Titre Hero' # Titre Hero

@@ -105,6 +105,22 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: '2026-09-12T20:50:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f64ff3d8-6f22-469f-8fa2-5309be018a24 # Note du match
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 87a5c7c5-3417-418d-a7d3-860b7bbbc12e
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-07-16T14:58:23+00:00'
             editCondition: null
             elementCondition: null

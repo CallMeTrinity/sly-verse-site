@@ -71,6 +71,14 @@
 {% set winners = showResults ? match.vainqueur.all() : [] %}
 {% set winnerIds = winners|map(w => w.id) %}
 {% set fightImage = match.fightImage.one() %}
+{% set ratingValue = showResults ? match.matchRating.value : null %}
+{% set rating = ratingValue ? ratingValue * 1 : null %}
+{% set ratingLabel = ratingValue
+	? ratingValue|replace({
+		'.': ','
+	})
+	: null
+%}
 
 <div class="border-line bg-surface-2 overflow-hidden rounded-lg border">
 	{# Image du match en bandeau #}
@@ -106,6 +114,33 @@
 				>
 					{{ match.stipulation }}
 				</span>
+			{% endif %}
+			{# Note du match (demi-étoiles : on rogne l'étoile dorée à 50 %) #}
+			{% if rating %}
+				{% set starPath =
+					'M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z'
+				%}
+				<div class="ml-auto flex items-center gap-1.5" role="img" aria-label="Note : {{ ratingLabel }} sur 5">
+					<div class="flex items-center gap-0.5" aria-hidden="true">
+						{% for i in 1..5 %}
+							<span class="relative block size-4">
+								<svg class="text-line-strong absolute inset-0 size-4" viewBox="0 0 20 20" fill="currentColor">
+									<path d="{{ starPath }}" />
+								</svg>
+								{% if rating >= i - 0.5 %}
+									<span
+										class="absolute inset-y-0 left-0 overflow-hidden {{ rating >= i ? 'w-full' : 'w-1/2' }}"
+									>
+										<svg class="text-gold size-4 max-w-none" viewBox="0 0 20 20" fill="currentColor">
+											<path d="{{ starPath }}" />
+										</svg>
+									</span>
+								{% endif %}
+							</span>
+						{% endfor %}
+					</div>
+					<span class="text-gold text-xs font-bold">{{ ratingLabel }}</span>
+				</div>
 			{% endif %}
 		</div>
 

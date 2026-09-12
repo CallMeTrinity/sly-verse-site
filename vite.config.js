@@ -7,7 +7,9 @@ export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd(), '')
 	const siteUrl = env.PRIMARY_SITE_URL || 'http://localhost'
 	const parsedUrl = new URL(siteUrl)
-	const devOrigin = `${parsedUrl.protocol}//${parsedUrl.hostname}:3000`
+	// DDEV router: Vite is exposed on 3000 in HTTPS and 3001 in HTTP (see .ddev/config.yaml)
+	const devPublicPort = parsedUrl.protocol === 'https:' ? 3000 : 3001
+	const devOrigin = `${parsedUrl.protocol}//${parsedUrl.hostname}:${devPublicPort}`
 
 	return {
 		base: command === 'serve' ? '' : '/dist/',
@@ -47,6 +49,9 @@ export default defineConfig(({ command, mode }) => {
 			},
 			headers: {
 				'Access-Control-Allow-Private-Network': 'true',
+			},
+			hmr: {
+				clientPort: devPublicPort,
 			},
 			host: '0.0.0.0',
 			origin: devOrigin,

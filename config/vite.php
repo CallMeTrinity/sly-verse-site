@@ -42,7 +42,10 @@ return [
 	 */
 	'devServerPublic' => (function() {
 		$url = parse_url(App::env('PRIMARY_SITE_URL'));
-		return ($url['scheme'] ?? 'https') . '://' . ($url['host'] ?? 'localhost') . ':3000';
+		$scheme = $url['scheme'] ?? 'https';
+		// DDEV router: Vite is exposed on 3000 in HTTPS and 3001 in HTTP (see .ddev/config.yaml)
+		$port = $scheme === 'https' ? 3000 : 3001;
+		return $scheme . '://' . ($url['host'] ?? 'localhost') . ':' . $port;
 	})(),
 
 	/**

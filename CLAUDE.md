@@ -155,14 +155,12 @@ These run automatically on `ddev start`.
 
 Key Craft plugins (from composer.json):
 - **nystudio107/craft-vite**: Vite asset integration
-- **nystudio107/craft-seomatic**: SEO management (title/meta/OG rendered via `{% hook 'seomaticRender' %}` in `_layout.twig`; per-page overrides via `{% do seomatic.meta.… %}` at the top of templates)
 - **craftcms/ckeditor**: Rich text editor
 - **craftcms/feed-me**: Content imports
 - **craftcms/guest-entries**: Public character proposal form
 - **wbrowar/craft-admin-bar**: Frontend admin bar
-- **voku/stringy**: Not a plugin — explicit dependency required by SEOmatic (do not remove)
 
-Note: SEOmatic forces `robots: none` and omits the canonical tag in dev mode (`🚧` title prefix); both render normally in production.
+Note: SEO (title/meta description/canonical/Open Graph) is handled natively in `_layout.twig`, not by a plugin. Templates override defaults by setting `pageTitle`/`pageDescription`/`pageImage`/`pageRobots` before `{% block content %}`. Noindex on dev/staging is handled by `disallowRobots(!$isProd)` in `config/general.php`; production is unaffected.
 
 ## Important Notes
 

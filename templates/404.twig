@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
-{% do seomatic.meta.seoTitle('Page introuvable') %}
-{% do seomatic.meta.robots('none') %}
+{% set pageTitle = 'Page introuvable' %}
+{% set pageRobots = 'none' %}
 
 {% block content %}
 	<section class="relative overflow-hidden py-24 lg:py-40">

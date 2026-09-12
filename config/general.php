@@ -24,6 +24,7 @@ return GeneralConfig::create()
 	->enableGql(false) // Remove GraphQL from the sidebar
 	->transformGifs(false) // Don't screw up gifs by transforming them
 	->enableTemplateCaching($isProd) // Only allow template caching on production
+	->disallowRobots(!$isProd) // Noindex automatique hors production (dev/staging)
 	->limitAutoSlugsToAscii() // https://craftcms.com/docs/5.x/reference/config/general.html#limitautoslugstoascii
 	->previewTokenDuration('P1M') // Make preview links (?x-craft-preview) last for a month instead of a day
 	->upscaleImages(false) // don't upscale image transforms

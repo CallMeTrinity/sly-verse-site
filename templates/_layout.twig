@@ -4,9 +4,31 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		{# SEOmatic : title, meta description, canonical, Open Graph, JSON-LD #}
-		{# Fallbacks par section dans le CP (SEOmatic → Content SEO), overrides ponctuels via seomatic.meta dans les templates #}
-		{% hook 'seomaticRender' %}
+		{# Title, meta description, canonical, Open Graph #}
+		{# Défauts ci-dessous, overrides via {% set pageTitle/pageDescription/pageImage/pageRobots %} en tête de template #}
+		{% set pageTitle = pageTitle ?? (entry is defined and entry ? entry.title : null) %}
+		{% set pageDescription =
+			pageDescription ?? 'Fédération de catch fictive Sly Wrestling Universe : shows, résultats, superstars, articles et médias.'
+		%}
+		{% set pageImage = pageImage ?? (siteUrl ~ 'SWU.png') %}
+		{% set pageRobots = pageRobots ?? null %}
+		{% set metaTitle = pageTitle ? pageTitle ~ ' | ' ~ siteName : siteName %}
+		{% set canonicalUrl = craft.app.request.absoluteUrl %}
+
+		<title>{{ metaTitle }}</title>
+		<meta name="description" content="{{ pageDescription }}" />
+		<link rel="canonical" href="{{ canonicalUrl }}" />
+		{% if pageRobots %}
+			<meta name="robots" content="{{ pageRobots }}" />
+		{% endif %}
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="{{ siteName }}" />
+		<meta property="og:title" content="{{ metaTitle }}" />
+		<meta property="og:description" content="{{ pageDescription }}" />
+		<meta property="og:url" content="{{ canonicalUrl }}" />
+		<meta property="og:image" content="{{ pageImage }}" />
+		<meta name="twitter:card" content="summary_large_image" />
 
 		{# Include local fonts #}
 		{% include '_includes/fonts' %}

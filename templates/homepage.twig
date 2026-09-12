@@ -1,13 +1,13 @@
 {% extends '_layout' %}
 
 {% set entry = craft.entries.section('pageAccueil').one() %}
-{% do seomatic.meta.seoTitle('Accueil') %}
+{% set pageTitle = 'Accueil' %}
 {% if entry.heroDescription ?? null %}
-	{% do seomatic.meta.seoDescription(entry.heroDescription|striptags|trim) %}
+	{% set pageDescription = entry.heroDescription|striptags|trim %}
 {% endif %}
 {% set homeOgImage = entry.mainImage.one() ?? null %}
 {% if homeOgImage %}
-	{% do seomatic.meta.seoImage(homeOgImage.getUrl({ width: 1200 })) %}
+	{% set pageImage = homeOgImage.getUrl({ width: 1200 }) %}
 {% endif %}
 
 {% block content %}

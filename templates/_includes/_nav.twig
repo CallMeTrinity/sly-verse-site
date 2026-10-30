@@ -43,7 +43,12 @@
 				url: '/superstars?roster=' ~ r.value,
 				roster: r.value
 			}
-		)
+		)|merge([
+			{
+				label: 'Tag Teams',
+				url: '/superstars?roster=tagTeams'
+			}
+		])
 	},
 	{
 		label: 'Shows',

@@ -1,4 +1,4 @@
-dateModified: 1789246204
+dateModified: 1793391987
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -14,6 +14,8 @@ fs:
 meta:
   __names__:
     0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
+    d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
+    ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     0b13dee1-11a9-4890-9396-d9d8ebabaeb1: 'Planning de stream' # Planning de stream
     1d063901-7cb3-4c79-915e-22ba059582e9: 'Show associé' # Show associé
     2b080f0a-aee1-44b5-ba77-35402e39a787: 'Propositions de personnages' # Propositions de personnages

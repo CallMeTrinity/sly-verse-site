@@ -3,6 +3,8 @@ enableVersioning: true
 entryTypes:
   -
     uid: 4479b21e-82c5-4ad9-b095-a75b4b1e09a3 # Superstar
+  -
+    uid: ef72edb8-dec6-4a6c-b033-4c9bc542853b # Tag Team
 handle: superstars
 maxAuthors: 1
 name: Superstars

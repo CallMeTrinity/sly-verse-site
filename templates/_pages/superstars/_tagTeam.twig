@@ -1,0 +1,136 @@
+{% extends '_layout' %}
+
+{% set seoImage = entry.profileImage.one() %}
+{% if seoImage %}
+	{% set pageImage = seoImage.getUrl({ width: 1200 }) %}
+{% endif %}
+{% if entry.shortDescription %}
+	{% set pageDescription = entry.shortDescription|striptags|trim %}
+{% endif %}
+
+{% block content %}
+	{% import '_includes/macros' as macros %}
+	{% set image = entry.profileImage.one() %}
+	{% set members = entry.members.all() %}
+
+	{# Hero Section #}
+	<section class="bg-surface relative py-16 text-white lg:py-24">
+		<div class="grid-container">
+			<div class="grid-row items-center">
+				{# Team Image #}
+				{% if image %}
+					<div class="grid-col mb-8 w-full lg:mb-0 lg:w-5/12" x-data x-reveal>
+						<div
+							class="bg-surface-3 relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-lg shadow-2xl lg:mx-0"
+						>
+							{{
+								macros.image(
+									image,
+									{
+										width: 800,
+										height: 1067
+									},
+									'h-full w-full object-cover'
+								)
+							}}
+						</div>
+					</div>
+				{% endif %}
+
+				{# Info #}
+				<div class="grid-col w-full {{ image ? 'lg:w-7/12' : '' }}" x-data x-reveal.delay style="--i: 2">
+					{# Badges #}
+					<div class="mb-4 flex flex-wrap gap-2">
+						<span class="bg-surface-3 rounded-full px-3 py-1 text-xs font-bold uppercase">Tag team</span>
+						{% if entry.alignment.value ?? null %}
+							{% set alignmentColors = {
+								face: 'bg-face',
+								heel: 'bg-blue',
+								tweener: 'bg-tweener'
+							} %}
+							<span
+								class="rounded-full px-3 py-1 text-xs font-bold uppercase {{
+								alignmentColors[entry.alignment.value]
+									?? 'bg-tweener'
+								}}"
+							>
+								{{ entry.alignment.label }}
+							</span>
+						{% endif %}
+						{% if entry.roster.value ?? null %}
+							<span class="bg-surface-3 rounded-full px-3 py-1 text-xs font-bold uppercase">
+								{{ entry.roster.label }}
+							</span>
+						{% endif %}
+						{% if not entry.isActive %}
+							<span class="bg-tweener rounded-full px-3 py-1 text-xs font-bold uppercase">Inactif</span>
+						{% endif %}
+					</div>
+
+					<h1 class="h1 mb-4 tracking-tight uppercase">{{ entry.title }}</h1>
+
+					{% if members|length %}
+						<p class="text-gold mb-4 text-lg font-bold uppercase">
+							{{ members|map(m => m.title)|join(' & ') }}
+						</p>
+					{% endif %}
+
+					{% if entry.shortDescription %}
+						<p class="text-ink-muted mb-8 text-lg">
+							{{ entry.shortDescription }}
+						</p>
+					{% endif %}
+
+					{% if entry.finisher %}
+						<div class="inline-block rounded-lg bg-white/5 p-4">
+							<span class="text-ink-faint mb-1 block text-xs font-semibold tracking-wider uppercase">
+								Finisher
+							</span>
+							<span class="text-sm text-white">{{ entry.finisher }}</span>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{# Members #}
+	{% if members|length %}
+		<section class="bg-bg py-12 text-white lg:py-20">
+			<div class="grid-container">
+				<h2 class="h3 mb-8 uppercase" x-data x-reveal>Membres</h2>
+				<div class="grid-row">
+					{% for member in members %}
+						<div
+							class="grid-col mb-4 w-full sm:w-1/2 md:w-1/3 lg:mb-6 lg:w-1/4"
+							x-data
+							x-reveal.delay
+							style="--i: {{ loop.index }}"
+						>
+							{% include '_includes/_superstar-card' with {
+								superstar: member
+							} only %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# History #}
+	{% if entry.richContent|length %}
+		<section class="bg-surface py-12 text-white lg:py-20">
+			<div class="grid-container" x-data x-reveal>
+				<h2 class="h3 mb-8 uppercase">Histoire</h2>
+				<div class="prose text-ink-muted max-w-none">
+					{{ entry.richContent }}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{# Championships #}
+	{% include '_includes/_palmares' with {
+		championships: entry.championships.all()
+	} only %}
+{% endblock %}

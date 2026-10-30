@@ -74,7 +74,11 @@
 				{{ superstar.title }}
 			</h3>
 
-			{% if superstar.hometown %}
+			{% if superstar.type.handle == 'tagTeam' %}
+				<p class="text-ink-muted mt-1 text-xs">
+					{{ superstar.members.all()|map(m => m.title)|join(' & ') }}
+				</p>
+			{% elseif superstar.hometown %}
 				<p class="text-ink-muted mt-1 text-xs">
 					{{ superstar.hometown }}
 				</p>

@@ -1,0 +1,203 @@
+allowLineBreaksInTitles: false
+color: orange
+description: null
+fieldLayouts:
+  434280d5-ec64-4916-8aec-b1a67089178a:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Nom de la tag team'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 827476a6-1683-4e2a-b7b2-30565f8792ee
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d24ae61a-0fab-418c-bd29-3c9e40d6a184 # Membres
+            handle: null
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3765764a-a012-4593-b879-370da0a7e289
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c469f72b-bb7d-4fb3-b855-ed34ccd6f73b # Image de profil
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a7073d31-a624-42f5-a430-78ac92a39cd7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3 # Roster
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cccf7aed-138f-4c1a-b04d-fe071a8821e5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 235945f3-c99a-4e44-972a-2e56c18f7843 # Status (Face/Heel)
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6350ef3d-6c60-4e1e-8aad-c5d622bc80f9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 156177ef-b718-4dfe-9d8b-dcd8eb5f98af # Description Courte
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b27e5ffd-364e-4678-b963-b523ef886df4
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Info de base'
+        uid: 534473c2-fae4-4c53-868a-d2a9c1162ea0
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf # Contenu riche
+            handle: null
+            instructions: null
+            label: Histoire
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: edb4a9ba-e390-4ebc-91b6-4e25f2120384
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b786d593-d6e5-4df6-8f84-d6b51b741daa # Finisher
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f80ba045-200d-416a-b697-4a9965d5520c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: e04677af-3be7-4c6e-9e90-a8d20033b7db # Palmarès
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 67d20f6a-dc40-41e4-a66d-07fe8d372af4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-30T20:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b9f994df-9b3e-4505-a43b-0124c057887e # Statut actif/inactif
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1c9febc1-d9d4-4f8b-bb47-b42c84a29368
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contenu
+        uid: 3c46b86f-671b-4a36-b393-0091cb5ba6b4
+        userCondition: null
+handle: tagTeam
+hasTitleField: true
+icon: users
+name: 'Tag Team'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

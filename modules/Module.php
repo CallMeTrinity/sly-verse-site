@@ -4,13 +4,20 @@ namespace modules;
 use Craft;
 use craft\guestentries\controllers\SaveController;
 use craft\guestentries\events\SaveEvent;
+use craft\elements\Entry;
+use craft\events\DefineHtmlEvent;
 use craft\events\RegisterCpNavItemsEvent;
+use craft\events\RegisterElementActionsEvent;
+use craft\helpers\Html;
+use craft\helpers\Json;
 use craft\events\RegisterTemplateRootsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\twig\variables\Cp;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
+use modules\elements\actions\AcceptProposals;
+use modules\services\ProposalAcceptor;
 use modules\variables\CweVariable;
 use yii\base\Event;
 
@@ -51,6 +58,7 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->registerShowGenerator();
+        $this->registerProposalAcceptance();
 
         // craft.cwe : helpers Twig du site (catégories de lutteurs, champions actuels...)
         Event::on(
@@ -75,6 +83,84 @@ class Module extends \yii\base\Module
                 }
             );
         }
+    }
+
+    /**
+     * Propositions de superstars : « Accepter la proposition » crée la superstar en brouillon.
+     * Bouton sur la fiche de la proposition + action en masse dans l'index de la section.
+     */
+    private function registerProposalAcceptance(): void
+    {
+        $canAccept = function(): bool {
+            $user = Craft::$app->getUser()->getIdentity();
+            $section = Craft::$app->getEntries()->getSectionByHandle('superstars');
+            return $user && $section && $user->can("saveEntries:{$section->uid}");
+        };
+
+        Event::on(
+            Entry::class,
+            Entry::EVENT_REGISTER_ACTIONS,
+            function(RegisterElementActionsEvent $event) use ($canAccept) {
+                $section = Craft::$app->getEntries()->getSectionByHandle(ProposalAcceptor::PROPOSAL_SECTION);
+                if ($section && $event->source === "section:{$section->uid}" && $canAccept()) {
+                    $event->actions[] = AcceptProposals::class;
+                }
+            }
+        );
+
+        Event::on(
+            Entry::class,
+            Entry::EVENT_DEFINE_ADDITIONAL_BUTTONS,
+            function(DefineHtmlEvent $event) use ($canAccept) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                if (
+                    $event->static ||
+                    !ProposalAcceptor::isProposal($entry) ||
+                    $entry->getIsUnpublishedDraft() ||
+                    $entry->getIsRevision() ||
+                    ProposalAcceptor::isAccepted($entry->getCanonical()) ||
+                    !$canAccept()
+                ) {
+                    return;
+                }
+
+                $buttonId = Html::id('cwe-accept-proposal');
+                $event->html .= Html::button('Accepter la proposition', [
+                    'id' => $buttonId,
+                    'class' => ['btn', 'secondary'],
+                    'title' => 'Crée la superstar en brouillon à partir de cette proposition',
+                ]);
+
+                $js = <<<JS
+(() => {
+    const button = document.getElementById({$this->jsonEncode($buttonId)});
+    if (!button) return;
+    button.addEventListener('click', async () => {
+        if (!confirm('Créer la superstar en brouillon à partir de cette proposition ?')) return;
+        button.classList.add('loading');
+        button.disabled = true;
+        try {
+            const {data} = await Craft.sendActionRequest('POST', 'my-module/proposals/accept', {
+                data: {proposalId: {$this->jsonEncode($entry->getCanonicalId())}},
+            });
+            window.location.href = data.cpEditUrl;
+        } catch (e) {
+            Craft.cp.displayError(e?.response?.data?.message ?? 'La superstar n\'a pas pu être créée.');
+            button.classList.remove('loading');
+            button.disabled = false;
+        }
+    });
+})();
+JS;
+                Craft::$app->getView()->registerJs($js);
+            }
+        );
+    }
+
+    private function jsonEncode(mixed $value): string
+    {
+        return Json::encode($value);
     }
 
     /**

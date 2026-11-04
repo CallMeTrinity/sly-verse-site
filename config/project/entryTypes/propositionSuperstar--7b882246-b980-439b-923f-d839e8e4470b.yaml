@@ -8,6 +8,22 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
+            dateAdded: '2026-11-04T16:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: cfc3c3c2-dffa-43f5-85e4-7021f5cfdfd7 # Statut de la proposition
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 52ee5f5f-bd6a-4e60-a1af-fc1ee351aaaf
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-07-16T12:00:00+00:00'
             editCondition: null
             elementCondition: null

@@ -40,6 +40,22 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 25
+          -
+            dateAdded: '2026-11-04T16:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 67374eb6-0395-4810-9715-47e98618a0a5 # Show de la victoire
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0f63d9c3-9103-46d5-ae34-aded974b820c
+            userCondition: null
+            warning: null
+            width: 100
         name: Contenu
         uid: 22b21dfb-db96-4cb1-88be-7141696a7d43
         userCondition: null

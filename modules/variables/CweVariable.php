@@ -3,6 +3,7 @@
 namespace modules\variables;
 
 use craft\elements\Entry;
+use modules\services\PalmaresSync;
 
 /**
  * Helpers Twig propres à la CWE, accessibles via `craft.cwe`.
@@ -132,6 +133,44 @@ class CweVariable
         uasort($result, fn($a, $b) => [$b['current'], $b['count']] <=> [$a['current'], $a['count']]);
 
         return array_values($result);
+    }
+
+    /**
+     * Match pour le titre : ceintures possibles d'après les participants (champions actuels présents).
+     *
+     * @return Entry[]
+     */
+    public function titleCandidates(Entry $match): array
+    {
+        return $this->palmaresSync()->candidateBelts($match);
+    }
+
+    /**
+     * Match pour le titre : ceintures choisies à la main.
+     *
+     * @return Entry[]
+     */
+    public function selectedTitleBelts(Entry $match): array
+    {
+        return $this->palmaresSync()->selectedBelts($match);
+    }
+
+    /**
+     * Match pour le titre : ceintures en jeu et résultat (changed : true nouveau champion,
+     * false titre conservé, null si le palmarès n'a pas encore été mis à jour depuis ce show).
+     *
+     * @return array<int, array{belt: Entry, changed: ?bool}>
+     */
+    public function titleOutcome(Entry $match): array
+    {
+        return $this->palmaresSync()->titleOutcome($match);
+    }
+
+    private ?PalmaresSync $palmaresSync = null;
+
+    private function palmaresSync(): PalmaresSync
+    {
+        return $this->palmaresSync ??= new PalmaresSync();
     }
 
     /**

@@ -71,6 +71,10 @@
 {% set winners = showResults ? match.vainqueur.all() : [] %}
 {% set winnerIds = winners|map(w => w.id) %}
 {% set fightImage = match.fightImage.one() %}
+{# Boutons radio avec « Autre » : libellé de l'option, sinon texte libre (anciens matchs) #}
+{% set matchTypeLabel = match.matchType.value ? (match.matchType.label ?? match.matchType.value) : null %}
+{% set stipulationLabel = match.stipulation.value ? (match.stipulation.label ?? match.stipulation.value) : null %}
+{% set titles = match.titleMatch ? craft.cwe.titleOutcome(match) : [] %}
 {% set ratingValue = showResults ? match.matchRating.value : null %}
 {% set rating = ratingValue ? ratingValue * 1 : null %}
 {% set ratingLabel = ratingValue
@@ -101,18 +105,18 @@
 	<div class="p-6 lg:p-8">
 		{# Badges type & stipulation #}
 		<div class="mb-3 flex flex-wrap items-center gap-2">
-			{% if match.matchType %}
+			{% if matchTypeLabel %}
 				<span
 					class="bg-surface-3 text-ink-muted rounded-sm px-2.5 py-1 text-[11px] font-bold tracking-wide uppercase"
 				>
-					{{ match.matchType }}
+					{{ matchTypeLabel }}
 				</span>
 			{% endif %}
-			{% if match.stipulation %}
+			{% if stipulationLabel %}
 				<span
 					class="bg-heel/15 text-heel ring-heel/40 rounded-sm px-2.5 py-1 text-[11px] font-bold tracking-wide uppercase ring-1"
 				>
-					{{ match.stipulation }}
+					{{ stipulationLabel }}
 				</span>
 			{% endif %}
 			{# Note du match (demi-étoiles : on rogne l'étoile dorée à 50 %) #}
@@ -143,6 +147,44 @@
 				</div>
 			{% endif %}
 		</div>
+
+		{# Ceinture(s) en jeu #}
+		{% if titles|length %}
+			<div class="mb-4 flex flex-wrap gap-3">
+				{% for title in titles %}
+					{% set beltImage = title.belt.beltImage.one() %}
+					<a
+						href="{{ title.belt.url }}"
+						class="bg-gold/10 ring-gold/30 hover:bg-gold/20 flex items-center gap-3 rounded-md px-3 py-2 ring-1 transition-colors"
+					>
+						{% if beltImage %}
+							{{
+								macros.image(
+									beltImage,
+									{
+										width: 160,
+										height: 80,
+										mode: 'fit'
+									},
+									'h-8 w-16 object-contain'
+								)
+							}}
+						{% endif %}
+						<span class="flex flex-col">
+							<span class="text-gold text-[11px] font-bold tracking-wider uppercase">Match pour le titre</span>
+							<span class="text-sm font-bold text-white">{{ title.belt.title }}</span>
+						</span>
+						{% if showResults and title.changed is not null %}
+							<span
+								class="{{ title.changed ? 'bg-gold text-black' : 'bg-surface-3 text-ink-muted' }} rounded-sm px-2 py-0.5 text-[11px] font-bold tracking-wide uppercase"
+							>
+								{{ title.changed ? 'Nouveau champion' : 'Conserve son titre' }}
+							</span>
+						{% endif %}
+					</a>
+				{% endfor %}
+			</div>
+		{% endif %}
 
 		<h3 class="h5 mb-6">{{ match.matchTitle ?? match.title }}</h3>
 

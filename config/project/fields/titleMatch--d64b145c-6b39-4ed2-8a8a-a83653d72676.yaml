@@ -1,0 +1,12 @@
+columnSuffix: null
+handle: titleMatch
+instructions: 'La ceinture du champion présent dans le match est détectée automatiquement. Quand le show passe à « Terminé », un nouveau vainqueur devient champion dans le palmarès.'
+name: 'Match pour le titre'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

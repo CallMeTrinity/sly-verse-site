@@ -110,7 +110,7 @@ class ShowGenerator extends Component
     /**
      * Crée le show (désactivé, statut "À venir") et ses cartes de match.
      *
-     * @param array $payload { title, date, time, showType, matches: [{ label, fighterIds, stake, stipulation }] }
+     * @param array $payload { title, date, time, showType, matches: [{ label, fighterIds, format, titleIds, stipulation }] }
      */
     public function createShow(array $payload): Entry
     {
@@ -151,14 +151,17 @@ class ShowGenerator extends Component
         $sortOrder = [];
         foreach (array_values($payload['matches'] ?? []) as $i => $match) {
             $key = 'new' . ($i + 1);
+            $titleIds = array_values(array_filter(array_map('intval', $match['titleIds'] ?? [])));
             $blocks[$key] = [
                 'type' => 'matchCard',
                 'enabled' => true,
                 'fields' => [
                     'matchTitle' => mb_substr((string)($match['label'] ?? ''), 0, 255),
                     'fighters' => array_values(array_map('intval', $match['fighterIds'] ?? [])),
-                    'matchType' => (string)($match['stake'] ?? ''),
-                    'stipulation' => (string)($match['stipulation'] ?? ''),
+                    'matchType' => $this->optionValue('matchType', (string)($match['format'] ?? '')),
+                    'stipulation' => $this->optionValue('stipulation', (string)($match['stipulation'] ?? '')),
+                    'titleMatch' => !empty($titleIds),
+                    'titleBelts' => $titleIds,
                 ],
             ];
             $sortOrder[] = $key;
@@ -170,5 +173,29 @@ class ShowGenerator extends Component
         }
 
         return $show;
+    }
+
+    /**
+     * Valeur d'option d'un champ boutons radio (type de match, stipulation) : on accepte la valeur
+     * ou le libellé (insensible à la casse). Sinon le texte est gardé tel quel, en option « Autre ».
+     */
+    private function optionValue(string $fieldHandle, string $input): string
+    {
+        $input = trim($input);
+        if ($input === '') {
+            return '';
+        }
+
+        $field = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
+        foreach ($field->options ?? [] as $option) {
+            if (
+                (string)$option['value'] === $input ||
+                mb_strtolower((string)$option['label']) === mb_strtolower($input)
+            ) {
+                return (string)$option['value'];
+            }
+        }
+
+        return $input;
     }
 }

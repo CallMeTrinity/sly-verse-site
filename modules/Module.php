@@ -2,9 +2,11 @@
 namespace modules;
 
 use Craft;
+use craft\base\Element;
 use craft\guestentries\controllers\SaveController;
 use craft\guestentries\events\SaveEvent;
 use craft\elements\Entry;
+use craft\events\ModelEvent;
 use craft\events\DefineHtmlEvent;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\events\RegisterElementActionsEvent;
@@ -17,6 +19,7 @@ use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
 use modules\elements\actions\AcceptProposals;
+use modules\services\PalmaresSync;
 use modules\services\ProposalAcceptor;
 use modules\variables\CweVariable;
 use yii\base\Event;
@@ -59,6 +62,7 @@ class Module extends \yii\base\Module
 
         $this->registerShowGenerator();
         $this->registerProposalAcceptance();
+        $this->registerTitleMatches();
 
         // craft.cwe : helpers Twig du site (catégories de lutteurs, champions actuels...)
         Event::on(
@@ -156,6 +160,160 @@ JS;
                 Craft::$app->getView()->registerJs($js);
             }
         );
+    }
+
+    /**
+     * Matchs pour le titre (modules/services/PalmaresSync.php) :
+     * - match : ceinture en jeu détectée à l'enregistrement, erreur si elle est ambiguë ;
+     * - show : palmarès mis à jour une fois quand le dernier show passe à « Terminé » ;
+     * - bouton « Recalculer le palmarès » sur le dernier show terminé.
+     */
+    private function registerTitleMatches(): void
+    {
+        $sync = new PalmaresSync();
+        $isMatch = fn(Entry $entry): bool => $entry->getType()->handle === 'matchCard';
+
+        Event::on(
+            Entry::class,
+            Entry::EVENT_BEFORE_SAVE,
+            function(ModelEvent $event) use ($sync, $isMatch) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                if ($isMatch($entry)) {
+                    $sync->fillBelts($entry);
+                }
+            }
+        );
+
+        Event::on(
+            Entry::class,
+            Entry::EVENT_AFTER_VALIDATE,
+            function(Event $event) use ($sync, $isMatch) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                // Pas d'erreur sur les enregistrements automatiques des brouillons
+                if ($entry->getScenario() !== Element::SCENARIO_LIVE || !$isMatch($entry)) {
+                    return;
+                }
+                if ($error = $sync->beltError($entry)) {
+                    $entry->addError('titleBelts', $error);
+                }
+            }
+        );
+
+        // Après la sauvegarde des matchs imbriqués (afterPropagate passe après les champs Matrix)
+        Event::on(
+            Entry::class,
+            Entry::EVENT_AFTER_PROPAGATE,
+            function(ModelEvent $event) use ($sync) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                if (
+                    $entry->getSection()?->handle !== 'shows' ||
+                    !$entry->getIsCanonical() ||
+                    $entry->resaving ||
+                    $entry->propagating
+                ) {
+                    return;
+                }
+
+                $isWeb = !Craft::$app->getRequest()->getIsConsoleRequest();
+                try {
+                    $report = $sync->autoSync($entry);
+                } catch (\Throwable $e) {
+                    Craft::error("Palmarès non mis à jour pour le show #{$entry->id} : {$e->getMessage()}", __METHOD__);
+                    if ($isWeb) {
+                        Craft::$app->getSession()->setError("Palmarès non mis à jour : {$e->getMessage()}");
+                    }
+                    return;
+                }
+
+                if ($report && $isWeb) {
+                    Craft::$app->getSession()->setNotice('Palmarès mis à jour. ' . implode(' ', $report));
+                }
+            }
+        );
+
+        Event::on(
+            Entry::class,
+            Entry::EVENT_DEFINE_ADDITIONAL_BUTTONS,
+            function(DefineHtmlEvent $event) use ($sync) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                if ($event->static || $entry->getSection()?->handle !== 'shows' || $entry->getIsRevision()) {
+                    return;
+                }
+
+                $user = Craft::$app->getUser()->getIdentity();
+                $beltSection = Craft::$app->getEntries()->getSectionByHandle('ceintures');
+                $show = $entry->getIsCanonical() ? $entry : $entry->getCanonical();
+                if (
+                    !$user ||
+                    !$beltSection ||
+                    !$user->can("saveEntries:{$beltSection->uid}") ||
+                    $show->getIsUnpublishedDraft() ||
+                    !$sync->isLatestFinishedShow($show)
+                ) {
+                    return;
+                }
+
+                $buttonId = Html::id('cwe-sync-palmares');
+                $event->html .= Html::button('Recalculer le palmarès', [
+                    'id' => $buttonId,
+                    'class' => ['btn', 'secondary'],
+                    'title' => 'Rejoue les matchs pour le titre de ce show (dernier show terminé)',
+                ]);
+
+                $confirm = "Recalculer le palmarès à partir de ce show ?\n\n"
+                    . "Les règnes créés par ce show sont supprimés, puis recréés d'après les résultats (les modifications en cours sont enregistrées avant).\n\n"
+                    . "Attention : les changements faits à la main sur ces règnes, ou sur les ceintures concernées depuis ce show, peuvent être écrasés.";
+
+                $js = <<<JS
+(() => {
+    const button = document.getElementById({$this->jsonEncode($buttonId)});
+    if (!button) return;
+    button.addEventListener('click', async () => {
+        if (!confirm({$this->jsonEncode($confirm)})) return;
+        button.classList.add('loading');
+        button.disabled = true;
+        try {
+            const {data} = await Craft.sendActionRequest('POST', 'my-module/palmares/sync', {
+                data: {showId: {$this->jsonEncode($show->id)}},
+            });
+            window.location.href = data.cpEditUrl;
+        } catch (e) {
+            Craft.cp.displayError(e?.response?.data?.message ?? 'Le palmarès n\'a pas pu être recalculé.');
+            button.classList.remove('loading');
+            button.disabled = false;
+        }
+    });
+})();
+JS;
+                Craft::$app->getView()->registerJs($js);
+            }
+        );
+
+        // Type de match / stipulation : boutons radio sur plusieurs colonnes plutôt qu'une longue liste
+        if (Craft::$app->getRequest()->getIsCpRequest()) {
+            Event::on(
+                View::class,
+                View::EVENT_BEGIN_BODY,
+                function() {
+                    Craft::$app->getView()->registerCss(<<<CSS
+.field[data-attribute="matchType"] .radio-group,
+.field[data-attribute="stipulation"] .radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: 0.25rem 1rem;
+}
+.field[data-attribute="matchType"] .radio-group > div:last-child,
+.field[data-attribute="stipulation"] .radio-group > div:last-child {
+    grid-column: 1 / -1;
+}
+CSS);
+                }
+            );
+        }
     }
 
     private function jsonEncode(mixed $value): string

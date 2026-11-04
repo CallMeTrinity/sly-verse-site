@@ -112,6 +112,8 @@ jobs:
           # web/cpresources/, storage/ ni config/license.key (absents de l'archive).
           rsync -az -e "$SSH" --exclude 'license.key' release/config/ "$TARGET/config/"
           rsync -az -e "$SSH" release/modules/   "$TARGET/modules/"
+          # Content migrations : sans elles, `craft up` (deploy.sh) n'a rien à appliquer
+          rsync -az -e "$SSH" release/migrations/ "$TARGET/migrations/"
           rsync -az -e "$SSH" release/templates/ "$TARGET/templates/"
           rsync -az -e "$SSH" --exclude 'dist' release/web/ "$TARGET/web/"
           rsync -az -e "$SSH" \

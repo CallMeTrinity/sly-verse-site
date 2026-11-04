@@ -82,6 +82,7 @@ meta:
     36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
     43f6fe78-d1df-49c6-92cc-4e3fecb73e26: 'Durée estimée' # Durée estimée
     46fbcf79-d0f1-4aad-a7c9-b699f446122c: 'Type de lien' # Type de lien
+    79d1124a-ea04-46a8-a761-c350934c49f6: 'Pictures of the week' # Pictures of the week
     83c8b547-d334-479b-8790-6073227cf239: 'Date et heure' # Date et heure
     91fcfd3c-d8aa-45f9-8ee6-3620c987dd12: 'Menu principal' # Menu principal
     137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
@@ -89,6 +90,7 @@ meta:
     320b0998-4777-4f7d-a3cf-657b89946d28: 'Type de show' # Type de show
     366c32c9-979f-479c-a308-e9c462d68c15: 'Image du match' # Image du match
     394ef542-7e6c-467e-a8b2-c825583a7602: Médiathèque # Médiathèque
+    411d0cda-0059-4565-aeb6-73503b93ec37: 'Dernière galerie automatique' # Dernière galerie automatique
     421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
     435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
     455a1610-d31f-4a00-8929-3a430acab4a1: 'Clips à la une' # Clips à la une

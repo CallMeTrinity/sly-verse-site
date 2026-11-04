@@ -49,6 +49,29 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 // Recalcule les positions une fois images/fonts chargées
 window.addEventListener('load', () => ScrollTrigger.refresh())
 
+// Lightbox réutilisable : x-data="lightbox([{ src, alt }])" + include '_includes/_lightbox'
+Alpine.data('lightbox', (images = []) => ({
+	images,
+	index: 0,
+	lightboxOpen: false,
+	open(i) {
+		this.index = i
+		this.lightboxOpen = true
+	},
+	close() {
+		this.lightboxOpen = false
+	},
+	prev() {
+		this.index = (this.index - 1 + this.images.length) % this.images.length
+	},
+	next() {
+		this.index = (this.index + 1) % this.images.length
+	},
+	get current() {
+		return this.images[this.index] || {}
+	},
+}))
+
 // Compte à rebours réutilisable : x-data="countdown(timestampMs)"
 Alpine.data('countdown', (target) => ({
 	target,

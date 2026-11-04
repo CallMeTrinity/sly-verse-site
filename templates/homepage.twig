@@ -61,7 +61,7 @@
 		</div>
 	</section>
 
-	{# SWU News #}
+	{# CWE News #}
 	{% set featuredArticles = entry.featuredArticles.all() ?? [] %}
 	{% if not featuredArticles|length and entry.showLatestArticles ?? false %}
 		{% set featuredArticles = craft.entries.section('articles').orderBy('postDate desc').limit(3).all() %}
@@ -72,7 +72,7 @@
 				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
 					<div>
 						<span class="eyebrow">Actualités</span>
-						<h2 class="h2 mb-0">SWU News</h2>
+						<h2 class="h2 mb-0">CWE News</h2>
 					</div>
 					<a
 						href="/articles"

@@ -9,7 +9,7 @@ minAuthors: 1
 name: 'Propositions de personnages'
 propagationMethod: all
 siteSettings:
-  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wrestling Universe
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Chimera Wrestling Entertainment
     enabledByDefault: true
     hasUrls: false
     template: null

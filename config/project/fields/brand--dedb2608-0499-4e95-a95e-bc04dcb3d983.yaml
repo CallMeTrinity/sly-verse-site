@@ -1,0 +1,96 @@
+columnSuffix: null
+handle: brand
+instructions: 'Show auquel la ceinture est rattachée. Sert à ranger les ceintures dans le CP.'
+name: Show
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Raw
+        -
+          - value
+          - raw
+        -
+          - icon
+          - ''
+        -
+          - color
+          - red
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - SmackDown
+        -
+          - value
+          - smackdown
+        -
+          - icon
+          - ''
+        -
+          - color
+          - blue
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - NXT
+        -
+          - value
+          - nxt
+        -
+          - icon
+          - ''
+        -
+          - color
+          - yellow
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - BCW
+        -
+          - value
+          - bcw
+        -
+          - icon
+          - ''
+        -
+          - color
+          - green
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - AEW
+        -
+          - value
+          - aew
+        -
+          - icon
+          - ''
+        -
+          - color
+          - gray
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

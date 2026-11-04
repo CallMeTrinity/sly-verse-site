@@ -1,4 +1,298 @@
-dateModified: 1793784355
+dateModified: 1793801169
+elementSources:
+  craft\elements\Entry:
+    -
+      key: '*'
+      page: Entries
+      type: native
+    -
+      key: singles
+      page: Entries
+      type: native
+    -
+      heading: 'Ceintures par show'
+      key: 'heading:8613ea92-f34b-44c6-8474-859c2cecdb74'
+      page: Entries
+      type: heading
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:228e300a-4071-419a-b8ca-635beb87a64a' # Ceinture
+      page: Entries
+      tableAttributes:
+        - 'field:dedb2608-0499-4e95-a95e-bc04dcb3d983' # Show
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: native
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 6d9301c9-a79d-47ac-8e68-31c036b670f6
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: d31b90bf-abe7-4f35-abbd-116804032e7d
+            values:
+              - raw
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:c3d5d6da-460b-47ab-a7a8-44c86fc6f516'
+      label: Raw
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 76f633ee-c68a-436f-9a37-d2d5d9e6e381
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 4e55a31a-f24f-4a8e-88b8-ac3d703ec466
+            values:
+              - smackdown
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:71e8eecf-44cf-455f-a934-06ceb49cf1e1'
+      label: SmackDown
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: ac0038b3-0d65-4993-8911-9bb2f06104d5
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 75db50f4-d804-4616-9d81-a0ffd9e387c4
+            values:
+              - nxt
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:7f60d1de-b9f8-43a3-ba0b-aae4a34a1c9d'
+      label: NXT
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 4a60695f-e992-4451-b8e0-96ad5c7a55dd
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: c05d4c7b-7796-4292-a8f9-150fa5471713
+            values:
+              - bcw
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:f7d47e4b-ad45-46ef-9ea9-748af88ba521'
+      label: BCW
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 4e6f3e03-6a05-4137-a23b-56736afb77fa
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 0983e964-ebcc-408d-b859-dea35846a82e
+            values:
+              - aew
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:23fa777e-3b72-4ed7-bfe1-30b47fcf48f6'
+      label: AEW
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      heading: People
+      key: 'heading:3b6fe60d-825e-47e4-a218-65a18b621350'
+      page: Entries
+      type: heading
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\TypeConditionRule
+            operator: in
+            uid: 38fc51c7-f353-4a34-82a6-fb477093d775
+            values:
+              - 4479b21e-82c5-4ad9-b095-a75b4b1e09a3 # Superstar
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - id
+        - asc
+      defaultViewMode: ''
+      key: 'custom:b3bf5601-e911-4cd4-8c6a-1bb45dc7bc10'
+      label: Superstar
+      page: Entries
+      tableAttributes:
+        - dateUpdated
+        - 'field:b786d593-d6e5-4df6-8f84-d6b51b741daa' # Finisher
+        - 'field:c469f72b-bb7d-4fb3-b855-ed34ccd6f73b' # Image de profil
+        - 'field:4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3' # Roster
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\TypeConditionRule
+            operator: in
+            uid: 3e591bbb-262e-4c86-9243-79fe75ad41b7
+            values:
+              - ef72edb8-dec6-4a6c-b033-4c9bc542853b # Tag Team
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - dateUpdated
+        - desc
+      defaultViewMode: ''
+      key: 'custom:fbced5a7-171a-4461-9587-6529f1d7c67e'
+      label: 'Tag Team'
+      page: Entries
+      tableAttributes:
+        - dateUpdated
+        - 'field:b786d593-d6e5-4df6-8f84-d6b51b741daa' # Finisher
+        - 'field:c469f72b-bb7d-4fb3-b855-ed34ccd6f73b' # Image de profil
+        - 'field:d24ae61a-0fab-418c-bd29-3c9e40d6a184' # Membres
+        - 'field:4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3' # Roster
+      type: custom
+    -
+      key: 'section:3cb24964-134b-49e1-8c08-8687ab0b3b66' # Personnel
+      page: Entries
+      type: native
+    -
+      key: 'section:2b080f0a-aee1-44b5-ba77-35402e39a787' # Propositions de personnages
+      page: Entries
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:6da1a3b6-9cc2-475e-b48e-c326a587677e' # Superstars
+      page: Entries
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Shows
+      key: 'heading:c209e549-edfe-4345-8593-8013ff48b538'
+      page: Entries
+      type: heading
+    -
+      key: 'section:9c4b88e0-4999-445c-b5cf-1ff8fcf50d22' # Shows
+      page: Entries
+      type: native
+    -
+      heading: Contenu
+      key: 'heading:6c527bca-40e5-4494-8302-7c534049656a'
+      page: Entries
+      type: heading
+    -
+      key: 'section:de005802-be42-430e-bf28-c16c101a5807' # Mediathèque
+      page: Entries
+      type: native
+    -
+      key: 'section:9325512e-8f12-4ade-abc9-c869c5c14c09' # Articles
+      page: Entries
+      type: native
+    -
+      key: 'section:c2fa968e-d6ac-432d-b772-44b05f76ce4d' # Clips
+      page: Entries
+      type: native
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: 'Chimera Wrestling Entertainment'
@@ -141,6 +435,7 @@ meta:
     d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
     de005802-be42-430e-bf28-c16c101a5807: Mediathèque # Mediathèque
     de1cb108-8395-45f0-9a7e-8648a6b295b1: 'Date de perte' # Date de perte
+    dedb2608-0499-4e95-a95e-bc04dcb3d983: Show # Show
     e04677af-3be7-4c6e-9e90-a8d20033b7db: Palmarès # Palmarès
     e4ab6bc4-aab9-4263-815b-238aba267fb5: Participants # Participants
     e775c6ec-5d74-4213-8643-cac989a5fd98: Taille # Taille

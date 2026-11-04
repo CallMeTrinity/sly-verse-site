@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: champions
+instructions: 'Superstar ou tag team qui remporte le titre. Pour un titre par équipe sans tag team créée, sélectionner les deux superstars. Laisser vide si le titre devient vacant.'
+name: Champion(s)
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  selectionLabel: 'Choisir le champion'
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:6da1a3b6-9cc2-475e-b48e-c326a587677e' # Superstars
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

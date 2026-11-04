@@ -1,0 +1,57 @@
+allowLineBreaksInTitles: false
+color: amber
+description: null
+fieldLayouts:
+  29814276-a38b-44e4-96fd-e7f58db86ccc:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-11-04T11:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c938d8b9-8b0c-4c50-af82-c9ef47c19ae9 # Champion(s)
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 252c592e-aa92-4187-b02a-500a5f789f9f
+            userCondition: null
+            warning: null
+            width: 75
+          -
+            dateAdded: '2026-11-04T11:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1243aea1-defe-4b81-a4da-f41f7ab7efc4 # Date de victoire
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9c45a2d5-778c-4c95-a02a-f4ee38a40bc0
+            userCondition: null
+            warning: null
+            width: 25
+        name: Contenu
+        uid: 22b21dfb-db96-4cb1-88be-7141696a7d43
+        userCondition: null
+handle: reign
+hasTitleField: false
+icon: crown
+name: Règne
+showSlugField: false
+showStatusField: false
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: "{% set c = object.champions.all() %}{{ c|length ? c|map(x => x.title)|join(' & ') : 'Vacant' }}"
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

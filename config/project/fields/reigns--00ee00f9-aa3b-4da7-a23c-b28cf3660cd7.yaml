@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: reigns
+instructions: 'Un règne par changement de titre, du plus ancien au plus récent (glisser-déposer pour réordonner). Le dernier règne est le champion actuel.'
+name: 'Historique des règnes'
+searchable: false
+settings:
+  createButtonLabel: 'Ajouter un règne'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - f3510671-d049-4714-8238-8368185b45b2 # Règne
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

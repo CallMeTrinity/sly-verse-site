@@ -187,7 +187,7 @@
 
 	{# Championships #}
 	{% include '_includes/_palmares' with {
-		championships: entry.championships.all()
+		palmares: craft.cwe.palmares(entry)
 	} only %}
 
 	{# Clips #}

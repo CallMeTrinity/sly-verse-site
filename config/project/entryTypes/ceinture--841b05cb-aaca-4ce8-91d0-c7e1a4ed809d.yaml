@@ -52,6 +52,22 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: '2026-11-04T11:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 00ee00f9-aa3b-4da7-a23c-b28cf3660cd7 # Historique des règnes
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3fd58e81-2f89-43b7-bb67-4e76374a8fbb
+            userCondition: null
+            warning: null
+            width: 100
         name: Contenu
         uid: ff4e0481-92e2-4e88-b8cc-ae1de18ef031
         userCondition: null

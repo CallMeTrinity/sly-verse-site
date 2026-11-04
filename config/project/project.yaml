@@ -54,6 +54,7 @@ meta:
   __names__:
     0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
     0b13dee1-11a9-4890-9396-d9d8ebabaeb1: 'Planning de stream' # Planning de stream
+    00ee00f9-aa3b-4da7-a23c-b28cf3660cd7: 'Historique des règnes' # Historique des règnes
     1d063901-7cb3-4c79-915e-22ba059582e9: 'Show associé' # Show associé
     2b080f0a-aee1-44b5-ba77-35402e39a787: 'Propositions de personnages' # Propositions de personnages
     2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf: 'Contenu riche' # Contenu riche
@@ -97,6 +98,7 @@ meta:
     841b05cb-aaca-4ce8-91d0-c7e1a4ed809d: Ceinture # Ceinture
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
     950e9bc0-fd03-413f-a144-64e282958f13: Vainqueur # Vainqueur
+    1243aea1-defe-4b81-a4da-f41f7ab7efc4: 'Date de victoire' # Date de victoire
     3835ca37-9fef-4fd0-b183-3837223d3c71: "Pays d'origine" # Pays d'origine
     3968a9ee-b747-4ac5-8dc3-92d1e382da48: 'Afficher derniers articles' # Afficher derniers articles
     03997ee4-22b0-493c-a976-adce138d48aa: 'Prochain streams' # Prochain streams
@@ -124,6 +126,7 @@ meta:
     bf143ee5-10fb-4cca-8890-1e5ba59c0220: Article # Article
     c2fa968e-d6ac-432d-b772-44b05f76ce4d: Clips # Clips
     c469f72b-bb7d-4fb3-b855-ed34ccd6f73b: 'Image de profil' # Image de profil
+    c938d8b9-8b0c-4c50-af82-c9ef47c19ae9: Champion(s) # Champion(s)
     c3293a68-e449-4a40-8873-d420aa1561f3: 'Email du membre' # Email du membre
     cf8271af-e15e-4b59-b37f-6067d46f7d7c: Poids # Poids
     d2efc507-7128-42cf-92ba-30f7b9e83015: Rôle # Rôle
@@ -143,6 +146,7 @@ meta:
     ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     f64ff3d8-6f22-469f-8fa2-5309be018a24: 'Note du match' # Note du match
     f86e6bc1-0aef-44f6-a0c1-83f69929d250: Stipulation # Stipulation
+    f3510671-d049-4714-8238-8368185b45b2: Règne # Règne
     f4857798-fbf9-40c6-9e25-be024d571f66: 'Photo Principale' # Photo Principale
     ff2f36b2-53d4-4ffa-94bc-dafac093ba77: 'Titre Hero' # Titre Hero
 plugins:

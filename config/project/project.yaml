@@ -1,4 +1,4 @@
-dateModified: 1793391987
+dateModified: 1793784355
 email:
   fromEmail: anteur.ap@gmail.com
   fromName: sly-verse
@@ -11,6 +11,45 @@ fs:
       path: '@webroot/uploads'
     type: craft\fs\Local
     url: '@web/uploads'
+mcp:
+  authorizationRoute: /admin/mcp/auth
+  enabled: true
+  publicAllowDrafts: false
+  publicAllowInactive: false
+  publicAllowRevisions: false
+  publicElementTypes:
+    - craft\elements\Address
+    - user
+  publicEnabled: true
+  publicNestedEntryFieldHandles:
+    - matchCard
+    - richContent
+    - heroDescription
+    - mainMenu
+    - championships
+    - upcomingStreams
+    - socialMedia
+    - results
+  publicRoute: /mcp
+  publicSectionHandles:
+    - articles
+    - ceintures
+    - clips
+    - howToParticipate
+    - media
+    - pageAccueil
+    - streamSchedule
+    - propositionsPersonnages
+    - shows
+    - superstars
+  publicSiteHandles:
+    - default
+  publicTools:
+    - craft-context-get
+    - craft-query
+  publicVolumeHandles:
+    - images
+  route: /admin/mcp
 meta:
   __names__:
     0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
@@ -38,7 +77,6 @@ meta:
     9d4ead9a-be68-4068-8951-d44d1242f7f6: "Ville d'origine" # Ville d'origine
     9d821b57-8cd2-4cac-8997-29b5d7fe1d72: 'Lien interne' # Lien interne
     9ed251ed-f16f-42d7-8807-5ad4e2143b12: 'Type de match' # Type de match
-    17d2cdef-6126-4860-b9b7-efd2fd907c7c: Simple # Simple
     23f8f2ea-3312-4fde-b78f-91af2c6b4d08: Lien # Lien
     36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
     43f6fe78-d1df-49c6-92cc-4e3fecb73e26: 'Durée estimée' # Durée estimée
@@ -111,7 +149,7 @@ plugins:
   ckeditor:
     edition: standard
     enabled: true
-    schemaVersion: 3.0.0.0
+    schemaVersion: 5.6.0.0
   feed-me:
     edition: standard
     enabled: true
@@ -152,7 +190,7 @@ system:
   edition: solo
   live: true
   name: sly-verse
-  schemaVersion: 5.9.0.8
+  schemaVersion: 5.12.0.1
   timeZone: Europe/Paris
 users:
   allowPublicRegistration: false

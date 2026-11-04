@@ -5,6 +5,7 @@ entryTypes:
     uid: bf143ee5-10fb-4cca-8890-1e5ba59c0220 # Article
 handle: articles
 maxAuthors: 1
+minAuthors: 1
 name: Articles
 previewTargets:
   -

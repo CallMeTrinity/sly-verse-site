@@ -5,6 +5,7 @@ entryTypes:
     uid: 0b13dee1-11a9-4890-9396-d9d8ebabaeb1 # Planning de stream
 handle: streamSchedule
 maxAuthors: 1
+minAuthors: 1
 name: 'Planning Streams'
 previewTargets:
   -

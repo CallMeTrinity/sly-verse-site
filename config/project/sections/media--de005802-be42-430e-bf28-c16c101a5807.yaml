@@ -5,6 +5,7 @@ entryTypes:
     uid: 394ef542-7e6c-467e-a8b2-c825583a7602 # Médiathèque
 handle: media
 maxAuthors: 1
+minAuthors: 1
 name: Mediathèque
 previewTargets:
   -

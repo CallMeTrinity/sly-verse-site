@@ -5,6 +5,7 @@ entryTypes:
     uid: d34dead9-c601-418a-b86a-9becaab8b175 # howTo
 handle: howToParticipate
 maxAuthors: 1
+minAuthors: 1
 name: 'Comment participer'
 previewTargets:
   -

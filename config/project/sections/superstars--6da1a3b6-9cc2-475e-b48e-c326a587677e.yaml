@@ -7,6 +7,7 @@ entryTypes:
     uid: ef72edb8-dec6-4a6c-b033-4c9bc542853b # Tag Team
 handle: superstars
 maxAuthors: 1
+minAuthors: 1
 name: Superstars
 previewTargets:
   -

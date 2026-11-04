@@ -5,6 +5,7 @@ entryTypes:
     uid: 7b882246-b980-439b-923f-d839e8e4470b # Proposition de superstar
 handle: propositionsPersonnages
 maxAuthors: 1
+minAuthors: 1
 name: 'Propositions de personnages'
 propagationMethod: all
 siteSettings:

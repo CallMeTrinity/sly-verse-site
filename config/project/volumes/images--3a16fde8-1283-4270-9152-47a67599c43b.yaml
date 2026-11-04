@@ -41,6 +41,7 @@ fieldLayouts:
 fs: uploads
 handle: images
 name: Images
+propagationMethod: custom
 sortOrder: 1
 subpath: images
 titleTranslationKeyFormat: null

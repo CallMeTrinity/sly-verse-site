@@ -5,6 +5,7 @@ entryTypes:
     uid: 698fdd99-cfe7-4e4c-a16f-dafe95a1953e # Clip
 handle: clips
 maxAuthors: 1
+minAuthors: 1
 name: Clips
 previewTargets:
   -

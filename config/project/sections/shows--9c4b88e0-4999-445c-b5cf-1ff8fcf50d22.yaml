@@ -5,6 +5,7 @@ entryTypes:
     uid: 3d7f00c7-52ff-4d8d-9751-516d1d2031e3 # Shows
 handle: shows
 maxAuthors: 1
+minAuthors: 1
 name: Shows
 previewTargets:
   -

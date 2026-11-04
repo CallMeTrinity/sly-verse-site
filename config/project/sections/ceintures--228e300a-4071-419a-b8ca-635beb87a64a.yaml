@@ -5,6 +5,7 @@ entryTypes:
     uid: 841b05cb-aaca-4ce8-91d0-c7e1a4ed809d # Ceinture
 handle: ceintures
 maxAuthors: 1
+minAuthors: 1
 name: Ceinture
 previewTargets:
   -

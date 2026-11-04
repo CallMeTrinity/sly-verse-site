@@ -1,0 +1,147 @@
+columnSuffix: null
+handle: staffRole
+instructions: null
+name: Rôle
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Direction
+        -
+          - value
+          - authority
+        -
+          - icon
+          - crown
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'General Manager'
+        -
+          - value
+          - gm
+        -
+          - icon
+          - briefcase
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Commentateur
+        -
+          - value
+          - commentator
+        -
+          - icon
+          - microphone
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Annonceur de ring'
+        -
+          - value
+          - ringAnnouncer
+        -
+          - icon
+          - bullhorn
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Interviewer
+        -
+          - value
+          - interviewer
+        -
+          - icon
+          - comment
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Arbitre
+        -
+          - value
+          - referee
+        -
+          - icon
+          - flag
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Manager / Valet'
+        -
+          - value
+          - manager
+        -
+          - icon
+          - handshake
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Autre
+        -
+          - value
+          - other
+        -
+          - icon
+          - user
+        -
+          - color
+          - ''
+        -
+          - default
+          - '1'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

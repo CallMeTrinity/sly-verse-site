@@ -41,6 +41,11 @@
 				<div class="grid-col w-full {{ image ? 'lg:w-7/12' : '' }}" x-data x-reveal.delay style="--i: 2">
 					{# Badges #}
 					<div class="mb-4 flex flex-wrap gap-2">
+						{% if (entry.origin.value ?? null) == 'wwe' %}
+							<span class="rounded-full bg-white px-3 py-1 text-xs font-bold text-black uppercase">
+								Superstar WWE
+							</span>
+						{% endif %}
 						<span class="bg-surface-3 rounded-full px-3 py-1 text-xs font-bold uppercase">Tag team</span>
 						{% if entry.alignment.value ?? null %}
 							{% set alignmentColors = {

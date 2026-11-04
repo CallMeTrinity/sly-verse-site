@@ -4,6 +4,8 @@ namespace modules;
 use Craft;
 use craft\guestentries\controllers\SaveController;
 use craft\guestentries\events\SaveEvent;
+use craft\web\twig\variables\CraftVariable;
+use modules\variables\CweVariable;
 use yii\base\Event;
 
 /**
@@ -41,6 +43,15 @@ class Module extends \yii\base\Module
         }
 
         parent::init();
+
+        // craft.cwe : helpers Twig du site (catégories de lutteurs, champions actuels...)
+        Event::on(
+            CraftVariable::class,
+            CraftVariable::EVENT_INIT,
+            function(Event $event) {
+                $event->sender->set('cwe', CweVariable::class);
+            }
+        );
 
         // Honeypot : les bots remplissent le champ caché "website" du formulaire
         // de proposition de superstar ; on marque alors la soumission comme spam

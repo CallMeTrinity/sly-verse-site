@@ -53,17 +53,17 @@ mcp:
 meta:
   __names__:
     0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
-    d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
-    ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     0b13dee1-11a9-4890-9396-d9d8ebabaeb1: 'Planning de stream' # Planning de stream
     1d063901-7cb3-4c79-915e-22ba059582e9: 'Show associé' # Show associé
     2b080f0a-aee1-44b5-ba77-35402e39a787: 'Propositions de personnages' # Propositions de personnages
     2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf: 'Contenu riche' # Contenu riche
     3a16fde8-1283-4270-9152-47a67599c43b: Images # Images
+    3cb24964-134b-49e1-8c08-8687ab0b3b66: Personnel # Personnel
     3d7f00c7-52ff-4d8d-9751-516d1d2031e3: Shows # Shows
     3da03560-0cdd-49dd-841c-1f93fed92c25: 'Titre du match' # Titre du match
     3e1c5ada-e455-476e-a1c9-8f739eeb9dce: 'Nom de ring' # Nom de ring
     4a2cfaaa-355b-411a-bffa-203af6572122: 'Bio proposée' # Bio proposée
+    4e1ec470-7a9b-47a8-838c-83aadad645bd: 'Membre du personnel' # Membre du personnel
     4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3: Roster # Roster
     5dd8b7cd-49eb-45ee-8908-71aa8d1af97b: 'Type de media' # Type de media
     5f2cb259-f127-4914-9959-1be5198ce79c: Resultat # Resultat
@@ -126,8 +126,11 @@ meta:
     c469f72b-bb7d-4fb3-b855-ed34ccd6f73b: 'Image de profil' # Image de profil
     c3293a68-e449-4a40-8873-d420aa1561f3: 'Email du membre' # Email du membre
     cf8271af-e15e-4b59-b37f-6067d46f7d7c: Poids # Poids
+    d2efc507-7128-42cf-92ba-30f7b9e83015: Rôle # Rôle
+    d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
     d34dead9-c601-418a-b86a-9becaab8b175: howTo # howTo
     d84ac3fa-7b19-4233-8929-20ca20accc37: 'Carte des matchs' # Carte des matchs
+    d90c070e-b52d-4500-b783-1a1c07b14626: Origine # Origine
     d135e597-391a-47a4-a188-9f9a0ae11542: 'Lien vidéo externe' # Lien vidéo externe
     d3567cd9-d874-4dcf-a4ad-9a2745ddee1a: 'Nom du titre' # Nom du titre
     d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
@@ -137,6 +140,7 @@ meta:
     e4ab6bc4-aab9-4263-815b-238aba267fb5: Participants # Participants
     e775c6ec-5d74-4213-8643-cac989a5fd98: Taille # Taille
     e6222976-8d28-4eb9-9eb4-ebcdc2f3d586: Navigation # Navigation
+    ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     f64ff3d8-6f22-469f-8fa2-5309be018a24: 'Note du match' # Note du match
     f86e6bc1-0aef-44f6-a0c1-83f69929d250: Stipulation # Stipulation
     f4857798-fbf9-40c6-9e25-be024d571f66: 'Photo Principale' # Photo Principale

@@ -95,7 +95,7 @@
 	{% endif %}
 
 	{# Superstars #}
-	{% set superstars = craft.entries.section('superstars').limit(4).orderBy('RAND()').all() %}
+	{% set superstars = craft.entries.section('superstars').type('superstar').origin('cwe').limit(4).orderBy('RAND()').all() %}
 	{% if superstars|length %}
 		<section class="py-14 lg:py-24">
 			<div class="grid-container">

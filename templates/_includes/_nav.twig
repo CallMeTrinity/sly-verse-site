@@ -2,53 +2,32 @@
 {# Usage : {% include '_includes/_nav' with { variant: 'desktop' } %} — variants : desktop | mobile | footer #}
 {% import '_includes/macros' as macros %}
 
-{% set navRosters = [
-	{
-		label: 'Raw',
-		value: 'raw'
-	},
-	{
-		label: 'SmackDown',
-		value: 'smackdown'
-	},
-	{
-		label: 'NXT',
-		value: 'nxt'
-	},
-	{
-		label: 'BCW',
-		value: 'bcw'
-	},
-	{
-		label: 'AEW',
-		value: 'aew'
-	},
-	{
-		label: 'Free Agents',
-		value: 'freeAgent'
-	},
-	{
-		label: 'Hall of Famers',
-		value: 'hallOfFamer'
-	}
-] %}
-
 {% set navItems = [
 	{
 		label: 'Superstars',
 		url: '/superstars',
-		children: navRosters|map(
-			r => {
-				label: r.label,
-				url: '/superstars?roster=' ~ r.value,
-				roster: r.value
-			}
-		)|merge([
+		children: [
+			{
+				label: 'Superstars CWE',
+				url: '/superstars'
+			},
+			{
+				label: 'Superstars WWE',
+				url: '/superstars?tab=wwe'
+			},
 			{
 				label: 'Tag Teams',
-				url: '/superstars?roster=tagTeams'
+				url: '/superstars?tab=tagTeams'
+			},
+			{
+				label: 'Personnel',
+				url: '/superstars?tab=personnel'
+			},
+			{
+				label: 'Champions',
+				url: '/superstars?roster=champions'
 			}
-		])
+		]
 	},
 	{
 		label: 'Shows',

@@ -8,9 +8,9 @@
 		{# Défauts ci-dessous, overrides via {% set pageTitle/pageDescription/pageImage/pageRobots %} en tête de template #}
 		{% set pageTitle = pageTitle ?? (entry is defined and entry ? entry.title : null) %}
 		{% set pageDescription =
-			pageDescription ?? 'Fédération de catch fictive Sly Wrestling Universe : shows, résultats, superstars, articles et médias.'
+			pageDescription ?? 'Fédération de catch fictive Chimera Wrestling Entertainment (CWE) : shows, résultats, superstars, articles et médias.'
 		%}
-		{% set pageImage = pageImage ?? (siteUrl ~ 'SWU.png') %}
+		{% set pageImage = pageImage ?? (siteUrl ~ 'og-cwe.jpg') %}
 		{% set pageRobots = pageRobots ?? null %}
 		{% set metaTitle = pageTitle ? pageTitle ~ ' | ' ~ siteName : siteName %}
 		{% set canonicalUrl = craft.app.request.absoluteUrl %}
@@ -44,7 +44,7 @@
 
 		{# Favicon #}
 		<link rel="icon" href="/favicon.png" type="image/png" />
-		<link rel="apple-touch-icon" href="/SWU.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="theme-color" content="#171c26" />
 	</head>
 

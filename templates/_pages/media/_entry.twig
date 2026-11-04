@@ -110,35 +110,11 @@
 
 	{# Image Gallery with lightbox #}
 	{% if gallery|length %}
-		<section
-			class="bg-bg py-12 text-white lg:py-20"
-			x-data="{
-				lightbox: false,
-				images: [
-					{% for img in gallery %}
-						{ src: '{{
-			img.url({
-				width: 1600
-			})
-			}}', alt: '{{ img.alt|e('js') }}' }{{
-			not loop.last
-				? ','
-				: ''
-			}}
-					{% endfor %}
-				],
-				index: 0,
-
-				open(i) { this.index = i; this.lightbox = true },
-				close() { this.lightbox = false },
-				prev() { this.index = (this.index - 1 + this.images.length) % this.images.length },
-				next() { this.index = (this.index + 1) % this.images.length },
-				get current() { return this.images[this.index] || {} }
-			}"
-			@keydown.escape.window="close()"
-			@keydown.left.window="lightbox && prev()"
-			@keydown.right.window="lightbox && next()"
-		>
+		{% set lightboxImages = gallery|map(img => {
+			src: img.getUrl({ width: 1600 }),
+			alt: img.alt ?? img.title
+		}) %}
+		<section class="bg-bg py-12 text-white lg:py-20" x-data="lightbox({{ lightboxImages|json_encode }})">
 			<div class="grid-container">
 				{% if (gallery|length) > 1 %}
 					<h2 class="h3 mb-8 uppercase">Galerie</h2>
@@ -186,77 +162,7 @@
 				</div>
 			</div>
 
-			{# Lightbox #}
-			<template x-teleport="body">
-				<div
-					x-show="lightbox"
-					x-transition:enter="transition ease-out duration-200"
-					x-transition:enter-start="opacity-0"
-					x-transition:enter-end="opacity-100"
-					x-transition:leave="transition ease-in duration-150"
-					x-transition:leave-start="opacity-100"
-					x-transition:leave-end="opacity-0"
-					class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
-					@click.self="close()"
-				>
-					<button @click="close()" class="absolute top-4 right-4 text-white/70 transition-colors hover:text-white">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-8 w-8"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-						</svg>
-					</button>
-
-					<button
-						x-show="images.length > 1"
-						@click="prev()"
-						class="absolute left-4 text-white/70 transition-colors hover:text-white"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-10 w-10"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-						</svg>
-					</button>
-
-					<img
-						:src="current.src"
-						:alt="current.alt"
-						class="max-h-[85vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
-					/>
-
-					<button
-						x-show="images.length > 1"
-						@click="next()"
-						class="absolute right-4 text-white/70 transition-colors hover:text-white"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-10 w-10"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-						</svg>
-					</button>
-
-					<div
-						x-show="images.length > 1"
-						class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-3 py-1 text-sm text-white/70"
-					>
-						<span x-text="(index + 1) + ' / ' + images.length"></span>
-					</div>
-				</div>
-			</template>
+			{% include '_includes/_lightbox' %}
 		</section>
 	{% endif %}
 

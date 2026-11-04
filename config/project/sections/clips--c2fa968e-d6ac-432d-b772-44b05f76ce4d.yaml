@@ -5,6 +5,7 @@ entryTypes:
     uid: 698fdd99-cfe7-4e4c-a16f-dafe95a1953e # Clip
 handle: clips
 maxAuthors: 1
+minAuthors: 1
 name: Clips
 previewTargets:
   -
@@ -13,7 +14,7 @@ previewTargets:
     urlFormat: '{url}'
 propagationMethod: all
 siteSettings:
-  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wrestling Universe
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Chimera Wrestling Entertainment
     enabledByDefault: true
     hasUrls: true
     template: _pages/clips/_entry.twig

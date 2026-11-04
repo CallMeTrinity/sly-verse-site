@@ -1,0 +1,26 @@
+{# Encart CP (lecture seule) sur les fiches superstar / tag team : rendu par un élément "Template" du field layout #}
+{% if element is defined and element.id %}
+	{% set palmares = craft.cwe.palmares(element) %}
+	<div class="field">
+		<div class="heading">
+			<label>Palmarès</label>
+		</div>
+		<div class="instructions">
+			<p>
+				Lecture seule. L'historique se saisit sur chaque ceinture (<a href="{{ cpUrl('entries/ceintures') }}">Entrées → Ceinture</a>) : une ligne par changement de titre.
+			</p>
+		</div>
+		{% if palmares|length %}
+			<ul style="margin-top: 8px;">
+				{% for item in palmares %}
+					<li style="padding: 4px 0;">
+						<a href="{{ item.belt.cpEditUrl }}">{{ item.belt.title }}</a>
+						× {{ item.count }}{{ item.current ? ' · champion en titre' }}
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p class="light">Aucun titre pour le moment.</p>
+		{% endif %}
+	</div>
+{% endif %}

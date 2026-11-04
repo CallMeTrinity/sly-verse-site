@@ -1,50 +1,104 @@
 {% extends '_layout' %}
 
 {% set pageTitle = 'Superstars' %}
-{% set pageDescription = 'Le roster complet des superstars de la Sly Wrestling Universe.' %}
+{% set pageDescription = 'Les superstars, tag teams et le personnel de la Chimera Wrestling Entertainment.' %}
 
 {% block content %}
-	{% set superstars = craft.entries.section('superstars').orderBy('title asc').all() %}
-	{# Current champions: superstars owning a reign without a loss date #}
-	{% set championIds = craft.entries.type('championships').datePerte(':empty:').all()|map(r => r.ownerId) %}
+	{% import '_includes/macros' as macros %}
+
+	{# Lutteurs (superstars + tag teams) et personnel #}
+	{% set wrestlers = craft.entries.section('superstars').orderBy('title asc').all() %}
+	{% set staff = craft.entries.section('personnel').orderBy('title asc').all() %}
+	{% set championIds = craft.cwe.currentChampionIds() %}
+	{% set rosterOptions = craft.app.fields.getFieldByHandle('roster').options %}
+
+	{% set tabs = [
+		{
+			key: 'cwe',
+			label: 'Superstars CWE',
+			count: wrestlers|filter(w => craft.cwe.wrestlerCategory(w) == 'cwe')|length
+		},
+		{
+			key: 'wwe',
+			label: 'Superstars WWE',
+			count: wrestlers|filter(w => craft.cwe.wrestlerCategory(w) == 'wwe')|length
+		},
+		{
+			key: 'tagTeams',
+			label: 'Tag Teams',
+			count: wrestlers|filter(w => craft.cwe.wrestlerCategory(w) == 'tagTeams')|length
+		},
+		{
+			key: 'personnel',
+			label: 'Personnel',
+			count: staff|length
+		}
+	] %}
 
 	{# Page Header #}
 	<section class="bg-surface py-16 text-white lg:py-24">
 		<div class="grid-container">
 			<h1 class="h1 text-center tracking-tight uppercase">Superstars</h1>
+			<p class="text-ink-muted mt-4 text-center">
+				Les personnages de la CWE, les superstars WWE 2K, les tag teams et le personnel.
+			</p>
 		</div>
 	</section>
 
-	{# Superstars Grid with Search & Sort #}
 	<section
 		class="bg-bg py-12 lg:py-20"
 		x-data="{
+			tabs: {{ tabs|map(t => t.key)|json_encode }},
+			tab: 'cwe',
 			search: '',
-			roster: new URLSearchParams(window.location.search).get('roster') ?? '',
+			roster: '',
 			sortBy: 'name-asc',
 
+			init() {
+				const params = new URLSearchParams(window.location.search)
+				const tab = params.get('tab')
+				const roster = params.get('roster') ?? ''
+				// Compatibilité avec les anciens liens ?roster=tagTeams / ?roster=raw
+				if (roster === 'tagTeams') {
+					this.tab = 'tagTeams'
+				} else {
+					this.roster = roster
+				}
+				if (this.tabs.includes(tab)) this.tab = tab
+				// Mobile : ramène l'onglet actif dans la zone visible de la barre d'onglets
+				this.$nextTick(() => {
+					const active = this.$refs.tablist.querySelector('[aria-selected=true]')
+					if (active) this.$refs.tablist.scrollLeft = active.offsetLeft - 16
+				})
+				this.$watch('tab', () => this.syncUrl())
+				this.$watch('roster', () => this.syncUrl())
+			},
+
+			syncUrl() {
+				const params = new URLSearchParams()
+				if (this.tab !== 'cwe') params.set('tab', this.tab)
+				if (this.roster && this.tab !== 'personnel') params.set('roster', this.roster)
+				const query = params.toString()
+				history.replaceState(null, '', window.location.pathname + (query ? '?' + query : ''))
+			},
+
 			isVisible(el) {
-				const name = el.dataset.name
-				const roster = el.dataset.roster
-				const searchMatch = !this.search || name.includes(this.search.toLowerCase())
+				if (el.dataset.tab !== this.tab) return false
+				const searchMatch = !this.search || el.dataset.name.includes(this.search.toLowerCase())
+				if (this.tab === 'personnel') return searchMatch
 				const rosterMatch =
 					!this.roster ||
-					(this.roster === 'champions'
-						? el.dataset.champion === '1'
-						: this.roster === 'tagTeams'
-							? el.dataset.type === 'tagTeam'
-							: roster === this.roster)
+					(this.roster === 'champions' ? el.dataset.champion === '1' : el.dataset.roster === this.roster)
 				return searchMatch && rosterMatch
 			},
 
 			getOrder(el) {
 				const items = [...this.$refs.grid.querySelectorAll('[data-name]')]
 				const sorted = items.slice().sort((a, b) => {
-					if (this.sortBy === 'name-asc') return a.dataset.name.localeCompare(b.dataset.name)
 					if (this.sortBy === 'name-desc') return b.dataset.name.localeCompare(a.dataset.name)
 					if (this.sortBy === 'note-desc') return Number(b.dataset.note) - Number(a.dataset.note)
 					if (this.sortBy === 'note-asc') return Number(a.dataset.note) - Number(b.dataset.note)
-					return 0
+					return a.dataset.name.localeCompare(b.dataset.name)
 				})
 				return sorted.indexOf(el)
 			},
@@ -52,131 +106,135 @@
 			get visibleCount() {
 				if (!this.$refs.grid) return 0
 				return [...this.$refs.grid.querySelectorAll('[data-name]')].filter(el => this.isVisible(el)).length
+			},
+
+			get countLabel() {
+				const n = this.visibleCount
+				const word = this.tab === 'personnel' ? 'membre' : this.tab === 'tagTeams' ? 'équipe' : 'superstar'
+				return n + ' ' + word + (n !== 1 ? 's' : '')
 			}
 		}"
 	>
 		<div class="grid-container">
-			{% if superstars|length %}
-				{# Search & Filters Bar #}
-				<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-					{# Search #}
-					<div class="relative w-full sm:max-w-xs">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="text-ink-faint pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-							/>
-						</svg>
-						<input
-							type="text"
-							x-model.debounce.200ms="search"
-							placeholder="Rechercher une superstar..."
-							class="border-line bg-surface-2 placeholder-ink-faint w-full rounded-lg border py-2 pr-4 pl-10 text-sm text-white transition-colors outline-none focus:border-white/30"
+			{# Onglets #}
+			<div
+				class="border-line relative mb-8 flex gap-1 overflow-x-auto border-b"
+				x-ref="tablist"
+				role="tablist"
+				aria-label="Catégories"
+			>
+				{% for t in tabs %}
+					<button
+						type="button"
+						role="tab"
+						x-on:click="tab = '{{ t.key }}'"
+						x-bind:aria-selected="tab === '{{ t.key }}'"
+						x-bind:class="tab === '{{ t.key }}' ? 'border-gold text-white' : 'border-transparent text-ink-muted hover:text-white'"
+						class="-mb-px flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-bold tracking-wide whitespace-nowrap uppercase transition-colors"
+					>
+						{{ t.label }}
+						<span class="bg-surface-3 text-ink-muted rounded-full px-2 py-0.5 text-[11px]">{{ t.count }}</span>
+					</button>
+				{% endfor %}
+			</div>
+
+			{# Search & Filters Bar #}
+			<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+				<div class="relative w-full sm:max-w-xs">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="text-ink-faint pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 						/>
-					</div>
-
-					<div class="flex flex-wrap items-center gap-3">
-						{# Roster Filter #}
-						<select
-							x-model="roster"
-							class="border-line bg-surface-2 rounded-lg border px-3 py-2 text-sm text-white transition-colors outline-none focus:border-white/30"
-						>
-							<option value="">
-								Tous les rosters
-							</option>
-							<option value="champions">
-								Champions
-							</option>
-							<option value="tagTeams">
-								Tag Teams
-							</option>
-							<option value="raw">
-								Raw
-							</option>
-							<option value="smackdown">
-								SmackDown
-							</option>
-							<option value="nxt">
-								NXT
-							</option>
-							<option value="bcw">
-								BCW
-							</option>
-							<option value="aew">
-								AEW
-							</option>
-							<option value="freeAgent">
-								Free Agent
-							</option>
-							<option value="hallOfFamer">
-								Hall Of Famer
-							</option>
-						</select>
-
-						{# Sort #}
-						<select
-							x-model="sortBy"
-							class="border-line bg-surface-2 rounded-lg border px-3 py-2 text-sm text-white transition-colors outline-none focus:border-white/30"
-						>
-							<option value="name-asc">
-								Nom A-Z
-							</option>
-							<option value="name-desc">
-								Nom Z-A
-							</option>
-							<option value="note-desc">
-								Note &#8595;
-							</option>
-							<option value="note-asc">
-								Note &#8593;
-							</option>
-						</select>
-					</div>
+					</svg>
+					<input
+						type="text"
+						x-model.debounce.200ms="search"
+						placeholder="Rechercher..."
+						aria-label="Rechercher"
+						class="border-line bg-surface-2 placeholder-ink-faint w-full rounded-lg border py-2 pr-4 pl-10 text-sm text-white transition-colors outline-none focus:border-white/30"
+					/>
 				</div>
 
-				{# Results count #}
-				<p
-					class="text-ink-faint mb-4 text-sm"
-					x-text="visibleCount + ' superstar' + (visibleCount !== 1 ? 's' : '')"
-				></p>
+				<div class="flex flex-wrap items-center gap-3" x-show="tab !== 'personnel'">
+					{# Roster Filter #}
+					<select
+						x-model="roster"
+						aria-label="Filtrer par roster"
+						class="border-line bg-surface-2 rounded-lg border px-3 py-2 text-sm text-white transition-colors outline-none focus:border-white/30"
+					>
+						<option value="">Tous les rosters</option>
+						<option value="champions">Champions</option>
+						{% for option in rosterOptions %}
+							<option value="{{ option.value }}">{{ option.label }}</option>
+						{% endfor %}
+					</select>
 
-				{# Grid #}
-				<div class="grid-row" x-ref="grid">
-					{% for superstar in superstars %}
-						<div
-							class="grid-col mb-4 w-full transition-opacity duration-200 sm:w-1/2 md:w-1/3 lg:mb-6 lg:w-1/4"
-							data-name="{{ superstar.title|lower }}"
-							data-roster="{{ superstar.roster.value ?? '' }}"
-							data-type="{{ superstar.type.handle }}"
-							data-champion="{{ superstar.id in championIds ? 1 : 0 }}"
-							data-note="{{ superstar.general ?? 0 }}"
-							x-show="isVisible($el)"
-							x-bind:style="'order: ' + getOrder($el)"
-						>
-							{% include '_includes/_superstar-card' with {
-								superstar: superstar
-							} only %}
-						</div>
-					{% endfor %}
+					{# Sort #}
+					<select
+						x-model="sortBy"
+						aria-label="Trier"
+						class="border-line bg-surface-2 rounded-lg border px-3 py-2 text-sm text-white transition-colors outline-none focus:border-white/30"
+					>
+						<option value="name-asc">Nom A-Z</option>
+						<option value="name-desc">Nom Z-A</option>
+						<option value="note-desc">Note &#8595;</option>
+						<option value="note-asc">Note &#8593;</option>
+					</select>
 				</div>
+			</div>
 
-				{# Empty search state #}
-				<p class="text-ink-faint py-12 text-center" x-show="visibleCount === 0" x-cloak>
-					Aucune superstar ne correspond &agrave; votre recherche.
-				</p>
-			{% else %}
-				<p class="text-ink-faint text-center">
-					Aucune superstar pour le moment.
-				</p>
-			{% endif %}
+			<p class="text-ink-faint mb-4 text-sm" x-text="countLabel"></p>
+
+			{# Grid #}
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6" x-ref="grid">
+				{% for superstar in wrestlers %}
+					<div
+						class="transition-opacity duration-200"
+						data-name="{{ superstar.title|lower }}"
+						data-tab="{{ craft.cwe.wrestlerCategory(superstar) }}"
+						data-roster="{{ superstar.roster.value ?? '' }}"
+						data-champion="{{ superstar.id in championIds ? 1 : 0 }}"
+						data-note="{{ superstar.general ?? 0 }}"
+						x-show="isVisible($el)"
+						x-cloak
+						x-bind:style="'order: ' + getOrder($el)"
+					>
+						{% include '_includes/_superstar-card' with {
+							superstar: superstar
+						} only %}
+					</div>
+				{% endfor %}
+				{% for member in staff %}
+					<div
+						class="transition-opacity duration-200"
+						data-name="{{ member.title|lower }}"
+						data-tab="personnel"
+						data-note="0"
+						x-show="isVisible($el)"
+						x-cloak
+						x-bind:style="'order: ' + getOrder($el)"
+					>
+						{% include '_includes/_staff-card' with {
+							member: member
+						} only %}
+					</div>
+				{% endfor %}
+			</div>
+
+			{# Empty state #}
+			<p class="text-ink-faint py-12 text-center" x-show="visibleCount === 0" x-cloak>
+				<span x-show="search || roster">Aucun résultat ne correspond à votre recherche.</span>
+				<span x-show="!search && !roster">Rien à afficher dans cette catégorie pour le moment.</span>
+			</p>
 		</div>
 	</section>
 {% endblock %}

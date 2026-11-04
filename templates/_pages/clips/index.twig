@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
 {% set pageTitle = 'Clips' %}
-{% set pageDescription = 'Les meilleurs moments de la Sly Wrestling Universe en vidéo.' %}
+{% set pageDescription = 'Les meilleurs moments de la Chimera Wrestling Entertainment en vidéo.' %}
 
 {% block content %}
 	{% set clips = craft.entries.section('clips').orderBy('postDate desc').all() %}

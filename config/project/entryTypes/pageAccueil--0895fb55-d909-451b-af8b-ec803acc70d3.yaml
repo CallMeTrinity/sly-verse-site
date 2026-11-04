@@ -173,6 +173,44 @@ fieldLayouts:
         name: 'Article et clips'
         uid: 8a8bf853-fe03-4d52-b14b-323ed967b94b
         userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-11-04T12:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 79d1124a-ea04-46a8-a761-c350934c49f6 # Pictures of the week
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 26b69f07-fb31-49c1-b765-86141275b75c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-11-04T12:30:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 411d0cda-0059-4565-aeb6-73503b93ec37 # Dernière galerie automatique
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 28c5b35d-e2e1-4ea1-ae6e-05f88f730a31
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Pictures of the week'
+        uid: b58734eb-b9f0-4441-abbf-181fe0394338
+        userCondition: null
     thumbFieldKey: null
 handle: pageAccueil
 hasTitleField: true

@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: picturesOfTheWeek
+instructions: "Galerie de la médiathèque mise en avant sur l'accueil. Si vide (et « Dernière galerie automatique » activé), la dernière galerie publiée est utilisée."
+name: 'Pictures of the week'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  selectionLabel: 'Choisir une galerie'
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:de005802-be42-430e-bf28-c16c101a5807' # Mediathèque
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

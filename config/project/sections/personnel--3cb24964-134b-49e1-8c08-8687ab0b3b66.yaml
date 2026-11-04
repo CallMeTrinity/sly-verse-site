@@ -1,0 +1,22 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 4e1ec470-7a9b-47a8-838c-83aadad645bd # Membre du personnel
+handle: personnel
+maxAuthors: 1
+minAuthors: 1
+name: Personnel
+previewTargets:
+  -
+    label: 'Page d‘entrée primaire'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Chimera Wrestling Entertainment
+    enabledByDefault: true
+    hasUrls: true
+    template: _pages/personnel/_entry.twig
+    uriFormat: 'personnel/{slug}'
+type: channel

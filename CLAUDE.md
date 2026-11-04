@@ -164,6 +164,15 @@ Note: SEO (title/meta description/canonical/Open Graph) is handled natively in `
 
 ## Important Notes
 
+### CWE : conventions spécifiques
+- **Content migrations** (`migrations/`, `ddev craft migrate/create <nom>`) : seul moyen de faire évoluer des *données* jusqu'en prod (Project Config ne transporte que la structure). `craft up` applique la Project Config **avant** les content migrations. Le dossier est inclus dans l'archive de `.github/workflows/deploy.yml` (les fichiers de `web/` y sont listés un par un).
+- **`craft.cwe`** (`modules/variables/CweVariable.php`) : catégorie d'un lutteur (cwe/wwe/tagTeams), palmarès, lignée d'une ceinture, champions actuels.
+- **Palmarès** : l'historique vit sur la ceinture (Matrix `reigns`, entry type `reign` : `champions` + `reignDate` facultative). L'ordre de la liste fait foi, la fin d'un règne = début du suivant, dernier règne = champion actuel, ligne sans champion = vacant. L'ancien Matrix `championships` des superstars n'est plus dans les layouts (données conservées).
+- **Ceintures par show** : Dropdown `brand` (Raw, SmackDown, NXT, BCW, AEW) sur la ceinture, distinct de la section Shows qui contient des épisodes. Les sources CP « Ceintures par show » sont des sources custom dans `elementSources` (`project.yaml`) : ajouter un show = ajouter l'option au champ **et** une source (CP → Entrées → Personnaliser les sources).
+- **Générateur de show** : page CP `/admin/show-generator` (contrôleur + service dans `modules/`, template `modules/templates/show-generator/`, moteur JS pur `src/js/show-generator/engine.js`, entrée Vite `showGenerator`).
+- **Accepter une proposition** : bouton « Accepter la proposition » sur la fiche + action d'index dans la section Propositions (`modules/services/ProposalAcceptor.php`, contrôleur `my-module/proposals/accept`, action `modules/elements/actions/AcceptProposals.php`). Crée la superstar en brouillon non publié (origin=cwe) et passe `proposalStatus` à `accepted`, ce qui bloque une 2e acceptation.
+- **Prettier sur Twig** : à éviter sur les templates existants, le plugin Twig peut casser la syntaxe (`is defined`) ou changer la précédence de `??`.
+
 ### Asset Syncing
 Use rsync to sync uploads from staging/production:
 ```bash

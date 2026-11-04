@@ -56,8 +56,8 @@ jobs:
           tar -czf deploy.tar.gz \
             vendor \
             web/dist \
-            web/index.php web/.htaccess web/favicon.png web/SWU.jpg web/SWU.png \
-            config modules templates \
+            web/index.php web/.htaccess web/favicon.png web/apple-touch-icon.png web/cwe-logo.png web/cwe-logo-text.png web/og-cwe.jpg \
+            config migrations modules templates \
             bootstrap.php craft composer.json composer.lock deploy.sh
 
       - name: Upload release

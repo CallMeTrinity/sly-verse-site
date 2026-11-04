@@ -1,0 +1,15 @@
+columnSuffix: null
+handle: reignDate
+instructions: 'Facultative. La fin du règne est déduite du règne suivant.'
+name: 'Date de victoire'
+searchable: false
+settings:
+  max: null
+  min: null
+  minuteIncrement: 30
+  showDate: true
+  showTime: false
+  showTimeZone: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Date

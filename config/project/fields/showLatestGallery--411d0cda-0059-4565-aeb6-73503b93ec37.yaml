@@ -1,0 +1,12 @@
+columnSuffix: null
+handle: showLatestGallery
+instructions: "Si aucune galerie n'est choisie, afficher automatiquement la dernière galerie de la médiathèque."
+name: 'Dernière galerie automatique'
+searchable: false
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

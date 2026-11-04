@@ -5,6 +5,7 @@ entryTypes:
     uid: 394ef542-7e6c-467e-a8b2-c825583a7602 # Médiathèque
 handle: media
 maxAuthors: 1
+minAuthors: 1
 name: Mediathèque
 previewTargets:
   -
@@ -13,7 +14,7 @@ previewTargets:
     urlFormat: '{url}'
 propagationMethod: all
 siteSettings:
-  571ebbef-2a72-4f6b-84d1-6efecad99596: # Sly Wrestling Universe
+  571ebbef-2a72-4f6b-84d1-6efecad99596: # Chimera Wrestling Entertainment
     enabledByDefault: true
     hasUrls: true
     template: _pages/media/_entry.twig

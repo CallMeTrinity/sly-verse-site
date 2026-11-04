@@ -61,7 +61,78 @@
 		</div>
 	</section>
 
-	{# SWU News #}
+	{# Pictures of the week : galerie choisie, sinon dernière galerie photo de la médiathèque #}
+	{% set potw = entry.picturesOfTheWeek.one() ?? null %}
+	{% if not potw and (entry.showLatestGallery ?? true) %}
+		{% set potw =
+			craft.entries.section('media').mediaType(['photo', 'galerie']).imageGallery(':notempty:').orderBy(
+				'postDate desc'
+			).one()
+		%}
+	{% endif %}
+	{% set potwImages = potw ? potw.imageGallery.all() : [] %}
+	{% if potwImages|length %}
+		{% set potwShown = potwImages|slice(0, 5) %}
+		{% set lightboxImages = potwImages|map(img => {
+			src: img.getUrl({ width: 1600 }),
+			alt: img.alt ?? img.title
+		}) %}
+		<section id="pictures-of-the-week" class="scroll-mt-16 py-14 lg:py-20" x-data="lightbox({{ lightboxImages|json_encode }})">
+			<div class="grid-container">
+				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
+					<div>
+						<span class="eyebrow">Pictures of the week</span>
+						<h2 class="h2 mb-0">{{ potw.title }}</h2>
+					</div>
+					<a
+						href="{{ potw.url }}"
+						class="border-gold hover:text-gold border-b-2 pb-0.5 text-sm font-bold uppercase transition-colors"
+					>
+						Voir la galerie &rarr;
+					</a>
+				</div>
+				<div class="grid auto-rows-[140px] grid-cols-2 gap-3 sm:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
+					{% for image in potwShown %}
+						{% set isFirst = loop.first and potwShown|length > 2 %}
+						{% set remaining = potwImages|length - potwShown|length %}
+						<button
+							type="button"
+							x-on:click="open({{ loop.index0 }})"
+							class="group bg-surface-3 focus-visible:ring-gold relative overflow-hidden rounded-lg focus-visible:ring-2 focus-visible:outline-hidden {{ isFirst ? 'col-span-2 row-span-2' : '' }}"
+							aria-label="Agrandir l'image {{ loop.index }} sur {{ potwImages|length }}"
+						>
+							{{
+								macros.image(
+									image,
+									isFirst
+										? {
+											width: 1000,
+											height: 760
+										}
+										: {
+											width: 500,
+											height: 380
+										},
+									'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
+								)
+							}}
+							<span class="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/25"></span>
+							{% if loop.last and remaining > 0 %}
+								<span
+									class="font-display absolute inset-0 flex items-center justify-center bg-black/60 text-2xl font-bold text-white"
+								>
+									+{{ remaining }}
+								</span>
+							{% endif %}
+						</button>
+					{% endfor %}
+				</div>
+			</div>
+			{% include '_includes/_lightbox' %}
+		</section>
+	{% endif %}
+
+	{# CWE News #}
 	{% set featuredArticles = entry.featuredArticles.all() ?? [] %}
 	{% if not featuredArticles|length and entry.showLatestArticles ?? false %}
 		{% set featuredArticles = craft.entries.section('articles').orderBy('postDate desc').limit(3).all() %}
@@ -72,7 +143,7 @@
 				<div class="mb-10 flex flex-wrap items-end justify-between gap-4" x-data x-reveal>
 					<div>
 						<span class="eyebrow">Actualités</span>
-						<h2 class="h2 mb-0">SWU News</h2>
+						<h2 class="h2 mb-0">CWE News</h2>
 					</div>
 					<a
 						href="/articles"
@@ -95,7 +166,7 @@
 	{% endif %}
 
 	{# Superstars #}
-	{% set superstars = craft.entries.section('superstars').limit(4).orderBy('RAND()').all() %}
+	{% set superstars = craft.entries.section('superstars').type('superstar').origin('cwe').limit(4).orderBy('RAND()').all() %}
 	{% if superstars|length %}
 		<section class="py-14 lg:py-24">
 			<div class="grid-container">

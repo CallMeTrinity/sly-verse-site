@@ -1,7 +1,301 @@
-dateModified: 1793391987
+dateModified: 1793801169
+elementSources:
+  craft\elements\Entry:
+    -
+      key: '*'
+      page: Entries
+      type: native
+    -
+      key: singles
+      page: Entries
+      type: native
+    -
+      heading: 'Ceintures par show'
+      key: 'heading:8613ea92-f34b-44c6-8474-859c2cecdb74'
+      page: Entries
+      type: heading
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:228e300a-4071-419a-b8ca-635beb87a64a' # Ceinture
+      page: Entries
+      tableAttributes:
+        - 'field:dedb2608-0499-4e95-a95e-bc04dcb3d983' # Show
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: native
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 6d9301c9-a79d-47ac-8e68-31c036b670f6
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: d31b90bf-abe7-4f35-abbd-116804032e7d
+            values:
+              - raw
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:c3d5d6da-460b-47ab-a7a8-44c86fc6f516'
+      label: Raw
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 76f633ee-c68a-436f-9a37-d2d5d9e6e381
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 4e55a31a-f24f-4a8e-88b8-ac3d703ec466
+            values:
+              - smackdown
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:71e8eecf-44cf-455f-a934-06ceb49cf1e1'
+      label: SmackDown
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: ac0038b3-0d65-4993-8911-9bb2f06104d5
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 75db50f4-d804-4616-9d81-a0ffd9e387c4
+            values:
+              - nxt
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:7f60d1de-b9f8-43a3-ba0b-aae4a34a1c9d'
+      label: NXT
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 4a60695f-e992-4451-b8e0-96ad5c7a55dd
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: c05d4c7b-7796-4292-a8f9-150fa5471713
+            values:
+              - bcw
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:f7d47e4b-ad45-46ef-9ea9-748af88ba521'
+      label: BCW
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 4e6f3e03-6a05-4137-a23b-56736afb77fa
+            values:
+              - 228e300a-4071-419a-b8ca-635beb87a64a # Ceinture
+          -
+            class: craft\fields\conditions\OptionsFieldConditionRule
+            fieldUid: dedb2608-0499-4e95-a95e-bc04dcb3d983 # Show
+            layoutElementUid: 99e11199-f954-4d76-a022-7978f2ce1214
+            operator: in
+            uid: 0983e964-ebcc-408d-b859-dea35846a82e
+            values:
+              - aew
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:23fa777e-3b72-4ed7-bfe1-30b47fcf48f6'
+      label: AEW
+      page: Entries
+      tableAttributes:
+        - 'field:0a309741-d071-40a8-96d8-0d27616f63d6' # Image ceinture
+        - status
+        - postDate
+        - link
+      type: custom
+    -
+      heading: People
+      key: 'heading:3b6fe60d-825e-47e4-a218-65a18b621350'
+      page: Entries
+      type: heading
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\TypeConditionRule
+            operator: in
+            uid: 38fc51c7-f353-4a34-82a6-fb477093d775
+            values:
+              - 4479b21e-82c5-4ad9-b095-a75b4b1e09a3 # Superstar
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - id
+        - asc
+      defaultViewMode: ''
+      key: 'custom:b3bf5601-e911-4cd4-8c6a-1bb45dc7bc10'
+      label: Superstar
+      page: Entries
+      tableAttributes:
+        - dateUpdated
+        - 'field:b786d593-d6e5-4df6-8f84-d6b51b741daa' # Finisher
+        - 'field:c469f72b-bb7d-4fb3-b855-ed34ccd6f73b' # Image de profil
+        - 'field:4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3' # Roster
+      type: custom
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\TypeConditionRule
+            operator: in
+            uid: 3e591bbb-262e-4c86-9243-79fe75ad41b7
+            values:
+              - ef72edb8-dec6-4a6c-b033-4c9bc542853b # Tag Team
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - dateUpdated
+        - desc
+      defaultViewMode: ''
+      key: 'custom:fbced5a7-171a-4461-9587-6529f1d7c67e'
+      label: 'Tag Team'
+      page: Entries
+      tableAttributes:
+        - dateUpdated
+        - 'field:b786d593-d6e5-4df6-8f84-d6b51b741daa' # Finisher
+        - 'field:c469f72b-bb7d-4fb3-b855-ed34ccd6f73b' # Image de profil
+        - 'field:d24ae61a-0fab-418c-bd29-3c9e40d6a184' # Membres
+        - 'field:4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3' # Roster
+      type: custom
+    -
+      key: 'section:3cb24964-134b-49e1-8c08-8687ab0b3b66' # Personnel
+      page: Entries
+      type: native
+    -
+      key: 'section:2b080f0a-aee1-44b5-ba77-35402e39a787' # Propositions de personnages
+      page: Entries
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: 'section:6da1a3b6-9cc2-475e-b48e-c326a587677e' # Superstars
+      page: Entries
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Shows
+      key: 'heading:c209e549-edfe-4345-8593-8013ff48b538'
+      page: Entries
+      type: heading
+    -
+      key: 'section:9c4b88e0-4999-445c-b5cf-1ff8fcf50d22' # Shows
+      page: Entries
+      type: native
+    -
+      heading: Contenu
+      key: 'heading:6c527bca-40e5-4494-8302-7c534049656a'
+      page: Entries
+      type: heading
+    -
+      key: 'section:de005802-be42-430e-bf28-c16c101a5807' # Mediathèque
+      page: Entries
+      type: native
+    -
+      key: 'section:9325512e-8f12-4ade-abc9-c869c5c14c09' # Articles
+      page: Entries
+      type: native
+    -
+      key: 'section:c2fa968e-d6ac-432d-b772-44b05f76ce4d' # Clips
+      page: Entries
+      type: native
 email:
   fromEmail: anteur.ap@gmail.com
-  fromName: sly-verse
+  fromName: 'Chimera Wrestling Entertainment'
   transportType: craft\mail\transportadapters\Sendmail
 fs:
   uploads:
@@ -11,20 +305,60 @@ fs:
       path: '@webroot/uploads'
     type: craft\fs\Local
     url: '@web/uploads'
+mcp:
+  authorizationRoute: /admin/mcp/auth
+  enabled: true
+  publicAllowDrafts: false
+  publicAllowInactive: false
+  publicAllowRevisions: false
+  publicElementTypes:
+    - craft\elements\Address
+    - user
+  publicEnabled: true
+  publicNestedEntryFieldHandles:
+    - matchCard
+    - richContent
+    - heroDescription
+    - mainMenu
+    - championships
+    - upcomingStreams
+    - socialMedia
+    - results
+  publicRoute: /mcp
+  publicSectionHandles:
+    - articles
+    - ceintures
+    - clips
+    - howToParticipate
+    - media
+    - pageAccueil
+    - streamSchedule
+    - propositionsPersonnages
+    - shows
+    - superstars
+  publicSiteHandles:
+    - default
+  publicTools:
+    - craft-context-get
+    - craft-query
+  publicVolumeHandles:
+    - images
+  route: /admin/mcp
 meta:
   __names__:
     0a309741-d071-40a8-96d8-0d27616f63d6: 'Image ceinture' # Image ceinture
-    d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
-    ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     0b13dee1-11a9-4890-9396-d9d8ebabaeb1: 'Planning de stream' # Planning de stream
+    00ee00f9-aa3b-4da7-a23c-b28cf3660cd7: 'Historique des règnes' # Historique des règnes
     1d063901-7cb3-4c79-915e-22ba059582e9: 'Show associé' # Show associé
     2b080f0a-aee1-44b5-ba77-35402e39a787: 'Propositions de personnages' # Propositions de personnages
     2ed97ddf-9e6c-40ff-91bc-edeaaaff1dcf: 'Contenu riche' # Contenu riche
     3a16fde8-1283-4270-9152-47a67599c43b: Images # Images
+    3cb24964-134b-49e1-8c08-8687ab0b3b66: Personnel # Personnel
     3d7f00c7-52ff-4d8d-9751-516d1d2031e3: Shows # Shows
     3da03560-0cdd-49dd-841c-1f93fed92c25: 'Titre du match' # Titre du match
     3e1c5ada-e455-476e-a1c9-8f739eeb9dce: 'Nom de ring' # Nom de ring
     4a2cfaaa-355b-411a-bffa-203af6572122: 'Bio proposée' # Bio proposée
+    4e1ec470-7a9b-47a8-838c-83aadad645bd: 'Membre du personnel' # Membre du personnel
     4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3: Roster # Roster
     5dd8b7cd-49eb-45ee-8908-71aa8d1af97b: 'Type de media' # Type de media
     5f2cb259-f127-4914-9959-1be5198ce79c: Resultat # Resultat
@@ -38,11 +372,11 @@ meta:
     9d4ead9a-be68-4068-8951-d44d1242f7f6: "Ville d'origine" # Ville d'origine
     9d821b57-8cd2-4cac-8997-29b5d7fe1d72: 'Lien interne' # Lien interne
     9ed251ed-f16f-42d7-8807-5ad4e2143b12: 'Type de match' # Type de match
-    17d2cdef-6126-4860-b9b7-efd2fd907c7c: Simple # Simple
     23f8f2ea-3312-4fde-b78f-91af2c6b4d08: Lien # Lien
     36f6ab6e-3dba-42ce-8dc5-f767b1e3e70e: 'Image Lien' # Image Lien
     43f6fe78-d1df-49c6-92cc-4e3fecb73e26: 'Durée estimée' # Durée estimée
     46fbcf79-d0f1-4aad-a7c9-b699f446122c: 'Type de lien' # Type de lien
+    79d1124a-ea04-46a8-a761-c350934c49f6: 'Pictures of the week' # Pictures of the week
     83c8b547-d334-479b-8790-6073227cf239: 'Date et heure' # Date et heure
     91fcfd3c-d8aa-45f9-8ee6-3620c987dd12: 'Menu principal' # Menu principal
     137b7ddb-c95b-4e06-8cfc-1aa66be68441: 'Reseaux Sociaux' # Reseaux Sociaux
@@ -50,15 +384,17 @@ meta:
     320b0998-4777-4f7d-a3cf-657b89946d28: 'Type de show' # Type de show
     366c32c9-979f-479c-a308-e9c462d68c15: 'Image du match' # Image du match
     394ef542-7e6c-467e-a8b2-c825583a7602: Médiathèque # Médiathèque
+    411d0cda-0059-4565-aeb6-73503b93ec37: 'Dernière galerie automatique' # Dernière galerie automatique
     421b99f8-110b-4e5f-9fcb-dd00a1b61d41: Genre # Genre
     435eaa9f-6b5b-4f4d-84eb-d1504c07dd73: Note # Note
     455a1610-d31f-4a00-8929-3a430acab4a1: 'Clips à la une' # Clips à la une
-    571ebbef-2a72-4f6b-84d1-6efecad99596: 'Sly Wrestling Universe' # Sly Wrestling Universe
+    571ebbef-2a72-4f6b-84d1-6efecad99596: 'Chimera Wrestling Entertainment' # Chimera Wrestling Entertainment
     698c46e3-2baa-4914-9a5b-0c7f94fdc345: 'Description Hero' # Description Hero
     698fdd99-cfe7-4e4c-a16f-dafe95a1953e: Clip # Clip
     841b05cb-aaca-4ce8-91d0-c7e1a4ed809d: Ceinture # Ceinture
     0895fb55-d909-451b-af8b-ec803acc70d3: 'Page Accueil' # Page Accueil
     950e9bc0-fd03-413f-a144-64e282958f13: Vainqueur # Vainqueur
+    1243aea1-defe-4b81-a4da-f41f7ab7efc4: 'Date de victoire' # Date de victoire
     3835ca37-9fef-4fd0-b183-3837223d3c71: "Pays d'origine" # Pays d'origine
     3968a9ee-b747-4ac5-8dc3-92d1e382da48: 'Afficher derniers articles' # Afficher derniers articles
     03997ee4-22b0-493c-a976-adce138d48aa: 'Prochain streams' # Prochain streams
@@ -86,21 +422,29 @@ meta:
     bf143ee5-10fb-4cca-8890-1e5ba59c0220: Article # Article
     c2fa968e-d6ac-432d-b772-44b05f76ce4d: Clips # Clips
     c469f72b-bb7d-4fb3-b855-ed34ccd6f73b: 'Image de profil' # Image de profil
+    c938d8b9-8b0c-4c50-af82-c9ef47c19ae9: Champion(s) # Champion(s)
     c3293a68-e449-4a40-8873-d420aa1561f3: 'Email du membre' # Email du membre
     cf8271af-e15e-4b59-b37f-6067d46f7d7c: Poids # Poids
+    cfc3c3c2-dffa-43f5-85e4-7021f5cfdfd7: 'Statut de la proposition' # Statut de la proposition
+    d2efc507-7128-42cf-92ba-30f7b9e83015: Rôle # Rôle
+    d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
     d34dead9-c601-418a-b86a-9becaab8b175: howTo # howTo
     d84ac3fa-7b19-4233-8929-20ca20accc37: 'Carte des matchs' # Carte des matchs
+    d90c070e-b52d-4500-b783-1a1c07b14626: Origine # Origine
     d135e597-391a-47a4-a188-9f9a0ae11542: 'Lien vidéo externe' # Lien vidéo externe
     d3567cd9-d874-4dcf-a4ad-9a2745ddee1a: 'Nom du titre' # Nom du titre
     d4597144-81d0-4a72-af9c-d7a544da4ee2: 'Réseaux Sociaux' # Réseaux Sociaux
     de005802-be42-430e-bf28-c16c101a5807: Mediathèque # Mediathèque
     de1cb108-8395-45f0-9a7e-8648a6b295b1: 'Date de perte' # Date de perte
+    dedb2608-0499-4e95-a95e-bc04dcb3d983: Show # Show
     e04677af-3be7-4c6e-9e90-a8d20033b7db: Palmarès # Palmarès
     e4ab6bc4-aab9-4263-815b-238aba267fb5: Participants # Participants
     e775c6ec-5d74-4213-8643-cac989a5fd98: Taille # Taille
     e6222976-8d28-4eb9-9eb4-ebcdc2f3d586: Navigation # Navigation
+    ef72edb8-dec6-4a6c-b033-4c9bc542853b: 'Tag Team' # Tag Team
     f64ff3d8-6f22-469f-8fa2-5309be018a24: 'Note du match' # Note du match
     f86e6bc1-0aef-44f6-a0c1-83f69929d250: Stipulation # Stipulation
+    f3510671-d049-4714-8238-8368185b45b2: Règne # Règne
     f4857798-fbf9-40c6-9e25-be024d571f66: 'Photo Principale' # Photo Principale
     ff2f36b2-53d4-4ffa-94bc-dafac093ba77: 'Titre Hero' # Titre Hero
 plugins:
@@ -111,7 +455,7 @@ plugins:
   ckeditor:
     edition: standard
     enabled: true
-    schemaVersion: 3.0.0.0
+    schemaVersion: 5.6.0.0
   feed-me:
     edition: standard
     enabled: true
@@ -151,8 +495,8 @@ plugins:
 system:
   edition: solo
   live: true
-  name: sly-verse
-  schemaVersion: 5.9.0.8
+  name: CWE
+  schemaVersion: 5.12.0.1
   timeZone: Europe/Paris
 users:
   allowPublicRegistration: false

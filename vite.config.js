@@ -21,6 +21,8 @@ export default defineConfig(({ command, mode }) => {
 			rollupOptions: {
 				input: {
 					app: 'src/js/app.js',
+					// Générateur de show (page CP du module)
+					showGenerator: 'src/js/show-generator/index.js',
 				},
 			},
 		},

@@ -29,51 +29,65 @@
 				{% endif %}
 				<div class="grid-col w-full {{ beltImage ? 'lg:w-7/12' : '' }}" x-data x-reveal.delay style="--i: 2">
 					<h1 class="h1 mb-4 tracking-tight uppercase">{{ entry.title }}</h1>
+					{% set currentChampions = craft.cwe.currentChampions(entry) %}
+					<p class="text-ink-faint mb-1 text-xs font-bold tracking-wider uppercase">Champion actuel</p>
+					{% if currentChampions|length %}
+						<p class="text-gold font-display text-2xl font-bold uppercase">
+							{% for champion in currentChampions %}
+								<a href="{{ champion.url }}" class="hover:text-gold-bright transition-colors">{{ champion.title }}</a>{{ not loop.last ? ' & ' }}
+							{% endfor %}
+						</p>
+					{% else %}
+						<p class="text-ink-muted text-lg italic">Titre vacant</p>
+					{% endif %}
 				</div>
 			</div>
 		</div>
 	</section>
 
-	{# Historique des règnes #}
-	{% set reigns = craft.entries().type('championships').ceinture(entry.id).orderBy('eventDateTime asc').all() %}
+	{# Historique des règnes (lignée portée par la ceinture) #}
+	{% set history = craft.cwe.beltHistory(entry) %}
 
-	{% if reigns|length %}
-		<section class="bg-surface py-12 text-white lg:py-20">
+	{% if history|length %}
+		<section class="bg-bg py-12 text-white lg:py-20">
 			<div class="grid-container" x-data x-reveal>
 				<h2 class="h3 mb-8 uppercase">Historique des r&egrave;gnes</h2>
-				<div class="border-line overflow-hidden rounded-lg border">
-					<table class="w-full text-sm">
+				<div class="border-line overflow-x-auto rounded-lg border">
+					<table class="w-full min-w-[560px] text-sm">
 						<thead class="text-ink-muted bg-white/5 text-xs font-semibold tracking-wider uppercase">
 							<tr>
-								<th class="px-6 py-3 text-left">Superstar</th>
-								<th class="px-6 py-3 text-left">Date de victoire</th>
-								<th class="px-6 py-3 text-left">Date de perte</th>
+								<th class="w-12 px-4 py-3 text-left">#</th>
+								<th class="px-4 py-3 text-left">Champion</th>
+								<th class="px-4 py-3 text-left">Victoire</th>
+								<th class="px-4 py-3 text-left">Fin</th>
+								<th class="px-4 py-3 text-right">Durée</th>
 							</tr>
 						</thead>
 						<tbody class="divide-y divide-white/5">
-							{% for reign in reigns %}
-								{% set superstar = reign.owner %}
-								<tr class="bg-surface-2 hover:bg-surface-3 transition-colors">
-									<td class="px-6 py-4">
-										{% if superstar %}
-											<a href="{{ superstar.url }}" class="hover:text-gold font-semibold text-white">
-												{{ superstar.title }}
-											</a>
+							{% for reign in history|reverse %}
+								<tr class="{{ reign.current ? 'bg-gold/10' : 'bg-surface-2' }} hover:bg-surface-3 transition-colors">
+									<td class="text-ink-faint px-4 py-4">{{ reign.number }}</td>
+									<td class="px-4 py-4">
+										{% if reign.vacant %}
+											<span class="text-ink-faint italic">Vacant</span>
+										{% else %}
+											{% for champion in reign.champions %}
+												<a href="{{ champion.url }}" class="hover:text-gold font-semibold text-white">{{ champion.title }}</a>{{ not loop.last ? ' & ' }}
+											{% endfor %}
 										{% endif %}
 									</td>
-									<td class="text-ink-muted px-6 py-4">
-										{{ reign.eventDateTime ? reign.eventDateTime|date('d/m/Y') : '—' }}
-									</td>
-									<td class="px-6 py-4">
-										{% if reign.datePerte %}
-											<span class="text-ink-muted">{{ reign.datePerte|date('d/m/Y') }}</span>
-										{% else %}
-											<span
-												class="text-gold rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold uppercase"
-											>
+									<td class="text-ink-muted px-4 py-4">{{ reign.start ? reign.start|date('d/m/Y') : '—' }}</td>
+									<td class="px-4 py-4">
+										{% if reign.current %}
+											<span class="text-gold rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs font-semibold uppercase">
 												En cours
 											</span>
+										{% else %}
+											<span class="text-ink-muted">{{ reign.end ? reign.end|date('d/m/Y') : '—' }}</span>
 										{% endif %}
+									</td>
+									<td class="text-ink-muted px-4 py-4 text-right">
+										{{ reign.days is not null ? reign.days ~ ' j' : '—' }}
 									</td>
 								</tr>
 							{% endfor %}

@@ -362,6 +362,7 @@ meta:
     4f2c6aeb-7270-46d9-9cc2-4c61dff9cfb3: Roster # Roster
     5dd8b7cd-49eb-45ee-8908-71aa8d1af97b: 'Type de media' # Type de media
     5f2cb259-f127-4914-9959-1be5198ce79c: Resultat # Resultat
+    6cfa2e27-e044-4e97-960a-b5c830ac2ca7: 'Ceinture(s) en jeu' # Ceinture(s) en jeu
     6da1a3b6-9cc2-475e-b48e-c326a587677e: Superstars # Superstars
     6ee001c3-016d-4f6e-af69-22fcf05a862a: 'Cartes des matchs' # Cartes des matchs
     7a5940b8-874a-46b3-828d-0b57d2795971: 'Articles à la une' # Articles à la une
@@ -406,6 +407,7 @@ meta:
     9981bc2e-03e8-4889-ab40-96ddc496edd2: 'Lien externe' # Lien externe
     58492aea-1965-4454-a046-cd0abbafab76: 'Menu principal' # Menu principal
     59474f27-c591-4c21-8a13-c28330d316fe: 'Planning Streams' # Planning Streams
+    67374eb6-0395-4810-9715-47e98618a0a5: 'Show de la victoire' # Show de la victoire
     156177ef-b718-4dfe-9d8b-dcd8eb5f98af: 'Description Courte' # Description Courte
     235945f3-c99a-4e44-972a-2e56c18f7843: 'Status (Face/Heel)' # Status (Face/Heel)
     2268121f-f160-477f-a8dd-097ac58ac120: 'Nombre de règnes' # Nombre de règnes
@@ -429,6 +431,7 @@ meta:
     d2efc507-7128-42cf-92ba-30f7b9e83015: Rôle # Rôle
     d24ae61a-0fab-418c-bd29-3c9e40d6a184: Membres # Membres
     d34dead9-c601-418a-b86a-9becaab8b175: howTo # howTo
+    d64b145c-6b39-4ed2-8a8a-a83653d72676: 'Match pour le titre' # Match pour le titre
     d84ac3fa-7b19-4233-8929-20ca20accc37: 'Carte des matchs' # Carte des matchs
     d90c070e-b52d-4500-b783-1a1c07b14626: Origine # Origine
     d135e597-391a-47a4-a188-9f9a0ae11542: 'Lien vidéo externe' # Lien vidéo externe

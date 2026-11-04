@@ -1,16 +1,164 @@
 columnSuffix: null
 handle: matchType
-instructions: null
+instructions: 'Format du match. « Autre » pour saisir un type libre (les anciens matchs y gardent leur texte).'
 name: 'Type de match'
 searchable: false
 settings:
-  byteLimit: null
-  charLimit: null
-  code: false
-  initialRows: 4
-  multiline: false
-  placeholder: null
-  uiMode: normal
+  customOptions: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Match simple'
+        -
+          - value
+          - singles
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Tag Team'
+        -
+          - value
+          - tag
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Tag Team mixte'
+        -
+          - value
+          - mixedTag
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Triple Threat'
+        -
+          - value
+          - triple
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Fatal 4-Way'
+        -
+          - value
+          - fatal4
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Six-Man Tag Team'
+        -
+          - value
+          - sixMan
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Handicap
+        -
+          - value
+          - handicap
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Battle Royal'
+        -
+          - value
+          - battleRoyal
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Royal Rumble'
+        -
+          - value
+          - royalRumble
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
 translationKeyFormat: null
 translationMethod: none
-type: craft\fields\PlainText
+type: craft\fields\RadioButtons

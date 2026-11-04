@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: titleBelts
+instructions: "Facultatif si un seul titre est possible : la ceinture du champion participant est choisie à l'enregistrement. À remplir si plusieurs ceintures sont possibles, ou si le titre est vacant."
+name: 'Ceinture(s) en jeu'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  selectionLabel: 'Choisir la ceinture'
+  showCardsInGrid: false
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:228e300a-4071-419a-b8ca-635beb87a64a' # Ceinture
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

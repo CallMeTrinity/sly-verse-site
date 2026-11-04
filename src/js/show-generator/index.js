@@ -334,7 +334,8 @@ Alpine.data('showGenerator', () => ({
 				matches: this.matches.map((m) => ({
 					label: this.label(m),
 					fighterIds: m.sides.flat().map((t) => t.id),
-					stake: m.stake,
+					format: m.format,
+					titleIds: m.titleIds,
 					stipulation: m.stipulation,
 				})),
 			}

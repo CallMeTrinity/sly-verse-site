@@ -73,6 +73,69 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: '2026-11-04T16:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d64b145c-6b39-4ed2-8a8a-a83653d72676 # Match pour le titre
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa47c472-716a-4d6d-a404-217e47e0b029
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-11-04T16:00:00+00:00'
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\LightswitchFieldConditionRule
+                  fieldUid: d64b145c-6b39-4ed2-8a8a-a83653d72676 # Match pour le titre
+                  layoutElementUid: aa47c472-716a-4d6d-a404-217e47e0b029
+                  operator: null
+                  uid: 42b8c44d-92eb-4e61-af10-5e303ffa4504
+                  value: true
+              elementType: craft\elements\Entry
+              fieldContext: global
+            template: _cp/match-title
+            templateMode: site
+            type: craft\fieldlayoutelements\Template
+            uid: d12e46e6-c1a5-43e8-ad48-f98a0340c6ee
+            userCondition: null
+            width: 100
+          -
+            dateAdded: '2026-11-04T16:00:00+00:00'
+            editCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\LightswitchFieldConditionRule
+                  fieldUid: d64b145c-6b39-4ed2-8a8a-a83653d72676 # Match pour le titre
+                  layoutElementUid: aa47c472-716a-4d6d-a404-217e47e0b029
+                  operator: null
+                  uid: a8d6a983-3166-4e97-be13-6b2c6f06d581
+                  value: true
+              elementType: craft\elements\Entry
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 6cfa2e27-e044-4e97-960a-b5c830ac2ca7 # Ceinture(s) en jeu
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1a340a4d-45df-4200-9a02-2885fa0c5c87
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-01-12T14:50:29+00:00'
             editCondition: null
             elementCondition: null

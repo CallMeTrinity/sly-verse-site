@@ -1,16 +1,266 @@
 columnSuffix: null
 handle: stipulation
-instructions: null
+instructions: 'Condition de victoire. « Autre » pour saisir une stipulation libre (les anciens matchs y gardent leur texte).'
 name: Stipulation
 searchable: false
 settings:
-  byteLimit: null
-  charLimit: null
-  code: false
-  initialRows: 4
-  multiline: false
-  placeholder: null
-  uiMode: normal
+  customOptions: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Par tombé ou soumission'
+        -
+          - value
+          - standard
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Extreme Rules Match'
+        -
+          - value
+          - extremeRules
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'No Holds Barred Match'
+        -
+          - value
+          - noHoldsBarred
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Last Man Standing Match'
+        -
+          - value
+          - lastManStanding
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Falls Count Anywhere Match'
+        -
+          - value
+          - fallsCountAnywhere
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Street Fight'
+        -
+          - value
+          - streetFight
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Steel Cage Match'
+        -
+          - value
+          - steelCage
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Ladder Match'
+        -
+          - value
+          - ladder
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'TLC Match'
+        -
+          - value
+          - tlc
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Hell in a Cell Match'
+        -
+          - value
+          - hellInACell
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'I Quit Match'
+        -
+          - value
+          - iQuit
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Elimination Chamber Match'
+        -
+          - value
+          - eliminationChamber
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Tornado Tag Team Match'
+        -
+          - value
+          - tornadoTag
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Match du cercueil'
+        -
+          - value
+          - casket
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Par-dessus la troisième corde'
+        -
+          - value
+          - overTheTopRope
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
 translationKeyFormat: null
 translationMethod: none
-type: craft\fields\PlainText
+type: craft\fields\RadioButtons

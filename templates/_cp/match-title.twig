@@ -1,0 +1,47 @@
+{# Encart CP d'un match pour le titre (élément "Template" du layout matchCard, visible si « Match pour le titre » est activé) :
+   ceinture en jeu, détectée d'après les participants ou choisie à la main, et son champion actuel #}
+{% if element is defined %}
+	{% set selected = craft.cwe.selectedTitleBelts(element) %}
+	{% set belts = selected|length ? selected : craft.cwe.titleCandidates(element) %}
+	<div class="field">
+		<div class="heading">
+			<label>Ceinture en jeu</label>
+		</div>
+		<div class="instructions">
+			<p>
+				{% if selected|length %}
+					Ceinture choisie à la main.
+				{% elseif (belts|length) == 1 %}
+					Détectée d'après les participants : elle sera enregistrée avec le match.
+				{% elseif belts|length %}
+					Plusieurs ceintures possibles : choisissez celle du match ci-dessous.
+				{% else %}
+					Aucun participant ne détient de ceinture : choisissez la ceinture ci-dessous (titre vacant, nouveau challenger...).
+				{% endif %}
+				Quand le show passe à « Terminé », un vainqueur différent du champion devient le nouveau champion dans le palmarès.
+			</p>
+		</div>
+		{% if belts|length %}
+			<ul style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+				{% for belt in belts %}
+					{% set image = belt.beltImage.one() %}
+					{% set champions = craft.cwe.currentChampions(belt) %}
+					<li style="display: flex; align-items: center; gap: 10px;">
+						{% if image %}
+							<img
+								src="{{ image.getUrl({ width: 120, height: 60, mode: 'fit' }) }}"
+								alt=""
+								style="width: 60px; height: 30px; object-fit: contain;"
+							/>
+						{% endif %}
+						<span>
+							<a href="{{ belt.cpEditUrl }}" target="_blank"><strong>{{ belt.title }}</strong></a>
+							·
+							{{ champions|length ? 'champion actuel : ' ~ champions|map(c => c.title)|join(' & ') : 'vacant' }}
+						</span>
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+{% endif %}

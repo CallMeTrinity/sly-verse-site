@@ -4,7 +4,13 @@ namespace modules;
 use Craft;
 use craft\guestentries\controllers\SaveController;
 use craft\guestentries\events\SaveEvent;
+use craft\events\RegisterCpNavItemsEvent;
+use craft\events\RegisterTemplateRootsEvent;
+use craft\events\RegisterUrlRulesEvent;
+use craft\web\twig\variables\Cp;
 use craft\web\twig\variables\CraftVariable;
+use craft\web\UrlManager;
+use craft\web\View;
 use modules\variables\CweVariable;
 use yii\base\Event;
 
@@ -44,6 +50,8 @@ class Module extends \yii\base\Module
 
         parent::init();
 
+        $this->registerShowGenerator();
+
         // craft.cwe : helpers Twig du site (catégories de lutteurs, champions actuels...)
         Event::on(
             CraftVariable::class,
@@ -67,5 +75,55 @@ class Module extends \yii\base\Module
                 }
             );
         }
+    }
+
+    /**
+     * Générateur de show : page CP /admin/show-generator + entrée de menu sous « Entrées ».
+     */
+    private function registerShowGenerator(): void
+    {
+        Event::on(
+            View::class,
+            View::EVENT_REGISTER_CP_TEMPLATE_ROOTS,
+            function(RegisterTemplateRootsEvent $event) {
+                $event->roots['cwe'] = __DIR__ . '/templates';
+            }
+        );
+
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function(RegisterUrlRulesEvent $event) {
+                $event->rules['show-generator'] = 'my-module/show-generator/index';
+            }
+        );
+
+        Event::on(
+            Cp::class,
+            Cp::EVENT_REGISTER_CP_NAV_ITEMS,
+            function(RegisterCpNavItemsEvent $event) {
+                $section = Craft::$app->getEntries()->getSectionByHandle('shows');
+                $user = Craft::$app->getUser()->getIdentity();
+                if (!$section || !$user || !$user->can("saveEntries:{$section->uid}")) {
+                    return;
+                }
+
+                $item = [
+                    'url' => 'show-generator',
+                    'label' => 'Générateur de show',
+                    'icon' => 'wand-magic-sparkles',
+                ];
+
+                // Juste après « Entrées » (url content/… en Craft 5) : c'est là qu'on gère les shows
+                $position = count($event->navItems);
+                foreach ($event->navItems as $i => $navItem) {
+                    $url = $navItem['url'] ?? '';
+                    if ($url === 'entries' || str_starts_with($url, 'content/')) {
+                        $position = $i + 1;
+                    }
+                }
+                array_splice($event->navItems, $position, 0, [$item]);
+            }
+        );
     }
 }

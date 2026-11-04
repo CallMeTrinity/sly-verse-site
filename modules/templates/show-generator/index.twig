@@ -1,0 +1,514 @@
+{% extends '_layouts/cp' %}
+
+{% set title = 'Générateur de show' %}
+{% set selectedSubnavItem = null %}
+
+{% block content %}
+	<script type="application/json" id="show-generator-data">
+		{{ generatorData|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_AMP'))|raw }}
+	</script>
+
+	<div id="show-generator" x-data="showGenerator" x-cloak>
+		<div class="sg-layout">
+			{# ================================================================ #}
+			{# Paramètres #}
+			{# ================================================================ #}
+			<aside class="sg-panel sg-params" aria-label="Paramètres du show">
+				<div class="sg-section">
+					<h2>Le show</h2>
+					<label class="sg-label" for="sg-title">Nom du show</label>
+					<input
+						id="sg-title"
+						x-ref="title"
+						type="text"
+						class="text fullwidth"
+						x-model="params.title"
+						placeholder="Ex. CWE Raw #12"
+					/>
+
+					<div class="sg-row" style="margin-top: 10px">
+						<div>
+							<label class="sg-label" for="sg-date">Date</label>
+							<input id="sg-date" type="date" class="text" x-model="params.date" />
+						</div>
+						<div>
+							<label class="sg-label" for="sg-time">Heure</label>
+							<input id="sg-time" type="time" class="text" x-model="params.time" />
+						</div>
+					</div>
+
+					<label class="sg-label" for="sg-type">Type de show</label>
+					<select id="sg-type" class="sg-select" x-model="params.showType" x-on:change="applyPreset()">
+						<template x-for="type in data.showTypes" :key="type.value">
+							<option
+								:value="type.value"
+								x-text="type.label"
+								:selected="type.value === params.showType"
+							></option>
+						</template>
+					</select>
+					<p class="sg-hint">
+						Changer de type applique des réglages par défaut (nombre de matchs, stipulations).
+					</p>
+				</div>
+
+				<div class="sg-section">
+					<h2>La carte</h2>
+					<div class="sg-row sg-row-3">
+						<div>
+							<label class="sg-label" for="sg-count">Matchs</label>
+							<input
+								id="sg-count"
+								type="number"
+								min="1"
+								max="20"
+								class="text"
+								x-model.number="params.matchCount"
+							/>
+						</div>
+						<div>
+							<label class="sg-label" for="sg-tag">Dont par équipe</label>
+							<input
+								id="sg-tag"
+								type="number"
+								min="0"
+								max="20"
+								class="text"
+								x-model.number="params.tagMatchCount"
+							/>
+						</div>
+						<div>
+							<label class="sg-label" for="sg-women">Dont féminins</label>
+							<input
+								id="sg-women"
+								type="number"
+								min="0"
+								max="20"
+								class="text"
+								x-model.number="params.womenMatchCount"
+							/>
+						</div>
+					</div>
+
+					<label class="sg-label" for="sg-mix">Autres matchs</label>
+					<select id="sg-mix" class="sg-select" x-model="params.genderMix">
+						<option value="mixed">
+							Masculins et féminins
+						</option>
+						<option value="male">
+							Masculins uniquement
+						</option>
+						<option value="female">
+							Féminins uniquement
+						</option>
+					</select>
+
+					<div class="sg-check-list" style="margin-top: 10px">
+						<label class="sg-check">
+							<input type="checkbox" x-model="params.allowMultiMan" />Autoriser Triple Threat / Fatal 4-Way
+						</label>
+						<label class="sg-check">
+							<input type="checkbox" x-model="params.preferFaceHeel" />Privilégier Face contre Heel
+						</label>
+						<label class="sg-check">
+							<input type="checkbox" x-model="params.preferSameRoster" />Privilégier les adversaires du même
+							roster
+						</label>
+					</div>
+				</div>
+
+				<div class="sg-section">
+					<h2>Titres défendus</h2>
+					<div class="sg-check-list">
+						<template x-for="title in data.titles" :key="title.id">
+							<label class="sg-title-option">
+								<input
+									type="checkbox"
+									:checked="params.titleIds.includes(title.id)"
+									x-on:change="toggle('titleIds', title.id)"
+								/>
+								<span>
+									<span x-text="title.name"></span>
+									<small x-text="championsLabel(title) + (title.isTag ? ' · par équipe' : '')"></small>
+								</span>
+							</label>
+						</template>
+						<p class="sg-hint" x-show="!data.titles.length">
+							Aucune ceinture avec un historique de règnes.
+						</p>
+					</div>
+				</div>
+
+				<div class="sg-section">
+					<h2>Qui participe</h2>
+					<label class="sg-label">Rosters</label>
+					<div class="sg-checks">
+						<template x-for="roster in data.rosters" :key="roster.value">
+							<label class="sg-check">
+								<input
+									type="checkbox"
+									:checked="params.rosters.includes(roster.value)"
+									x-on:change="toggle('rosters', roster.value)"
+								/>
+								<span x-text="roster.label"></span>
+							</label>
+						</template>
+					</div>
+					<p class="sg-hint">
+						Aucun roster coché = tous les rosters.
+					</p>
+
+					<div class="sg-check-list" style="margin-top: 10px">
+						<label class="sg-check">
+							<input type="checkbox" x-model="params.includeWwe" />Inclure les superstars WWE
+						</label>
+						<label class="sg-check">
+							<input type="checkbox" x-model="params.includeInactive" />Inclure les inactifs
+						</label>
+					</div>
+
+					{% for list, label in {
+						include: 'À voir dans le show',
+						exclude: 'À exclure'
+					} %}
+						<div
+							class="sg-picker"
+							style="margin-top: 14px"
+							x-data="{ open: false }"
+							x-on:click.outside="open = false"
+						>
+							<label class="sg-label" for="sg-picker-{{ list }}">{{ label }}</label>
+							<input
+								id="sg-picker-{{ list }}"
+								type="text"
+								class="text fullwidth"
+								autocomplete="off"
+								placeholder="Rechercher une superstar ou une équipe…"
+								x-model="picker.{{ list }}"
+								x-on:focus="open = true"
+								x-on:input="open = true"
+								x-on:keydown.enter.prevent="candidates('{{ list }}')[0] && addTo('{{ list }}', candidates('{{
+								list
+								}}')[0].key)"
+							/>
+							<ul x-show="open && candidates('{{ list }}').length" x-cloak>
+								<template x-for="c in candidates('{{ list }}')" :key="c.key">
+									<li>
+										<button type="button" x-on:click="addTo('{{ list }}', c.key)">
+											<span x-text="c.name"></span>
+											<span class="light" x-text="c.meta"></span>
+										</button>
+									</li>
+								</template>
+							</ul>
+							<div class="sg-chips">
+								<template x-for="key in params.{{ list }}" :key="key">
+									<span class="sg-chip {{ list == 'exclude' ? 'is-exclude' }}">
+										<span x-text="keyName(key)"></span>
+										<button
+											type="button"
+											x-on:click="removeFrom('{{ list }}', key)"
+											:aria-label="'Retirer ' + keyName(key)"
+										>
+											&times;
+										</button>
+									</span>
+								</template>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="sg-section">
+					<h2>Stipulations</h2>
+					<label class="sg-check">
+						<input type="checkbox" x-model="params.randomStipulations" />Ajouter des stipulations aléatoires
+					</label>
+					<div x-show="params.randomStipulations" style="margin-top: 8px">
+						<label class="sg-label" for="sg-stips">Stipulations possibles (une par ligne)</label>
+						<textarea id="sg-stips" class="text fullwidth" rows="5" x-model="params.stipulationsText"></textarea>
+					</div>
+				</div>
+
+				<div class="sg-actions">
+					<button type="button" class="btn submit" x-on:click="generate()">
+						<span
+							x-text="matches.some(m => m.locked) ? 'Regénérer (garder les verrouillés)' : 'Générer la carte'"
+						>
+
+						</span>
+					</button>
+					<button type="button" class="btn" x-on:click="resetParams()">Réinitialiser</button>
+				</div>
+			</aside>
+
+			{# ================================================================ #}
+			{# Carte #}
+			{# ================================================================ #}
+			<section aria-label="Carte du show">
+				<div class="sg-warnings" x-show="paramsChanged" x-cloak role="status">
+					Paramètres modifiés depuis la dernière génération : clique sur « Générer » pour les appliquer (les matchs
+					verrouillés sont conservés).
+				</div>
+
+				<div
+					class="sg-warnings"
+					x-show="paramWarnings.length || generationWarnings.length || liveWarnings.length"
+					role="status"
+				>
+					<h3>Avertissements</h3>
+					<ul>
+						<template
+							x-for="w in [...new Set([...paramWarnings, ...generationWarnings, ...liveWarnings])]"
+							:key="w"
+						>
+							<li x-text="w"></li>
+						</template>
+					</ul>
+				</div>
+
+				<div class="sg-panel">
+					<div class="sg-card-header">
+						<h2>
+							Carte
+							<span
+								class="light"
+								x-show="matches.length"
+								x-text="'· ' + matches.length + ' match' + (matches.length > 1 ? 's' : '')"
+							>
+
+							</span>
+						</h2>
+						<div class="flex">
+							<button type="button" class="btn" x-on:click="addMatch()">Ajouter un match</button>
+							<button type="button" class="btn" x-show="matches.length" x-on:click="clearCard()">Vider</button>
+						</div>
+					</div>
+
+					<div class="sg-empty" x-show="!matches.length">
+						<p>
+							Règle les paramètres puis clique sur <strong>Générer la carte</strong>.
+						</p>
+						<p class="sg-hint">
+							Tout reste modifiable ensuite : participants, ordre, titres, stipulations.
+						</p>
+					</div>
+
+					<ol class="sg-matches" x-show="matches.length">
+						<template x-for="(match, i) in matches" :key="match.uid">
+							<li
+								class="sg-match"
+								:class="{ 'is-locked': match.locked, 'is-dragging': dragFrom === i, 'is-main': i === matches.length - 1 }"
+								draggable="true"
+								x-on:dragstart="onDragStart(i, $event)"
+								x-on:dragend="dragFrom = null"
+								x-on:dragover.prevent
+								x-on:drop.prevent="onDrop(i)"
+							>
+								<div class="sg-handle" title="Glisser pour réordonner">
+									<button
+										type="button"
+										class="sg-icon-btn"
+										:disabled="i === 0"
+										x-on:click="move(i, i - 1)"
+										aria-label="Monter"
+									>
+										&#9650;
+									</button>
+									<strong x-text="i + 1"></strong>
+									<button
+										type="button"
+										class="sg-icon-btn"
+										:disabled="i === matches.length - 1"
+										x-on:click="move(i, i + 1)"
+										aria-label="Descendre"
+									>
+										&#9660;
+									</button>
+								</div>
+
+								<div>
+									<div class="sg-match-title">
+										<span class="sg-badge is-main" x-show="i === matches.length - 1">Main event</span>
+										<span class="sg-badge" x-show="i === 0 && matches.length > 2">Opener</span>
+										<span class="sg-badge" x-text="formats[match.format]?.label"></span>
+										<span class="sg-badge" x-show="genderLabel(match)" x-text="genderLabel(match)"></span>
+										<template x-for="id in match.titleIds" :key="id">
+											<span class="sg-badge is-title" x-text="titleName(id)"></span>
+										</template>
+									</div>
+
+									<div class="sg-sides">
+										<template x-for="(side, s) in match.sides" :key="s">
+											<div class="sg-sides">
+												<span class="sg-vs" x-show="s > 0">VS</span>
+												<div class="sg-side">
+													<template x-for="(token, t) in side" :key="t">
+														<span class="sg-chip" :title="tokenMeta(token)">
+															<span x-text="name(token)"></span>
+															<button
+																type="button"
+																x-on:click="removeToken(match, s, t)"
+																:aria-label="'Retirer ' + name(token)"
+															>
+																&times;
+															</button>
+														</span>
+													</template>
+													<select
+														class="sg-select"
+														x-on:change="addToken(match, s, $event.target.value); $event.target.value = ''"
+														aria-label="Ajouter un participant"
+													>
+														<option value="">
+															+ Ajouter
+														</option>
+														<optgroup label="Superstars">
+															<template x-for="w in data.wrestlers" :key="w.id">
+																<option
+																	:value="'w' + w.id"
+																	x-text="w.name + usedIn('w' + w.id)"
+																></option>
+															</template>
+														</optgroup>
+														<optgroup label="Tag teams" x-show="data.teams.length">
+															<template x-for="t in data.teams" :key="t.id">
+																<option
+																	:value="'t' + t.id"
+																	x-text="t.name + usedIn('t' + t.id)"
+																></option>
+															</template>
+														</optgroup>
+													</select>
+												</div>
+											</div>
+										</template>
+									</div>
+
+									<div class="sg-match-fields">
+										<div>
+											<label class="sg-label">Format</label>
+											<select
+												class="sg-select"
+												:value="match.format"
+												x-on:change="setFormat(match, $event.target.value)"
+											>
+												<template x-for="(f, key) in formats" :key="key">
+													<option :value="key" x-text="f.label" :selected="key === match.format"></option>
+												</template>
+											</select>
+										</div>
+										<div>
+											<label class="sg-label">Titre en jeu / enjeu</label>
+											<select class="sg-select" x-on:change="setTitle(match, $event.target.value)">
+												<option value="" :selected="!match.titleIds.length">
+													Aucun titre
+												</option>
+												<template x-for="title in data.titles" :key="title.id">
+													<option
+														:value="title.id"
+														x-text="title.name"
+														:selected="match.titleIds.includes(title.id)"
+													></option>
+												</template>
+											</select>
+											<input
+												type="text"
+												class="text fullwidth"
+												style="margin-top: 4px"
+												x-model="match.stake"
+												placeholder="Enjeu libre (ex. aspirant n°1)"
+											/>
+										</div>
+										<div>
+											<label class="sg-label">Stipulation</label>
+											<input
+												type="text"
+												class="text fullwidth"
+												x-model="match.stipulation"
+												list="sg-stipulations"
+												placeholder="Classic match"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div class="sg-match-tools">
+									<button
+										type="button"
+										class="sg-icon-btn"
+										:class="{ 'is-active': match.locked }"
+										x-on:click="match.locked = !match.locked"
+										:aria-pressed="match.locked"
+										:title="match.locked ? 'Déverrouiller' : 'Verrouiller (conservé à la regénération)'"
+										:aria-label="match.locked ? 'Déverrouiller' : 'Verrouiller'"
+									>
+										<svg
+											width="14"
+											height="14"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											aria-hidden="true"
+										>
+											<rect x="5" y="11" width="14" height="10" rx="2" />
+											<path x-show="match.locked" d="M8 11V7a4 4 0 0 1 8 0v4" />
+											<path x-show="!match.locked" d="M8 11V7a4 4 0 0 1 7.5-2" />
+										</svg>
+									</button>
+									<button
+										type="button"
+										class="sg-icon-btn"
+										x-on:click="regenerateMatch(i)"
+										title="Régénérer ce match"
+										aria-label="Régénérer ce match"
+									>
+										&#8635;
+									</button>
+									<button
+										type="button"
+										class="sg-icon-btn"
+										x-on:click="removeMatch(i)"
+										title="Supprimer ce match"
+										aria-label="Supprimer ce match"
+									>
+										&#10005;
+									</button>
+								</div>
+							</li>
+						</template>
+					</ol>
+
+					<datalist id="sg-stipulations">
+						<template x-for="s in params.stipulationsText.split('\n').filter(Boolean)" :key="s">
+							<option :value="s.trim()"></option>
+						</template>
+					</datalist>
+
+					<div class="sg-actions" x-show="matches.length">
+						<button
+							type="button"
+							class="btn submit"
+							x-on:click="createShow()"
+							:disabled="saving"
+							:class="{ disabled: saving }"
+						>
+							<span x-text="saving ? 'Création…' : 'Créer le show (brouillon)'"></span>
+						</button>
+						<p class="sg-hint" style="align-self: center">
+							Le show est créé désactivé, statut « À venir ». Les avertissements ne bloquent pas la création.
+						</p>
+					</div>
+
+					<div class="sg-success" x-show="created" x-cloak>
+						Show créé.
+						<a :href="created?.cpEditUrl">Ouvrir le show dans le CP &rarr;</a>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	{{ craft.vite.script('src/js/show-generator/index.js', false) }}
+{% endblock %}
